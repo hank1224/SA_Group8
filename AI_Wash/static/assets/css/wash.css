@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: 30px;
+}
+h1{
+    font-size: 2.7rem;
+    margin-bottom: 2.5rem;
+    color: #869d9d;
+    font-weight: 900;
+}
+h2{
+    font-size: 1.7rem;
+    margin-bottom: 0.5rem;
+    color: #869d9d;
+    font-weight: 900;
+}
+:root{
+    background: rgba(199,210,212);
+}
+
+/* 整個外框框 */
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.justify-center {
+    justify-content: center;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-cent{
+    justify-content: center;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 模式設定 */
+.set{
+    text-align: center;
+    line-height: 4rem;
+    color: rgba(134,157,157);
+    font-weight: 700;
+}
+h4{
+    font-size: 25px;
+    color: rgba(134,157,157);
+    font-weight: 700;
+}
+
+/* 下拉清單 */
+.set select{
+    font-size: 20px;
+    background-color: rgba(134,157,157);
+    height: 38px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+}
+
+label{
+    font-size: 20px;
+}
+
+/* 按鈕 */
+.btn-re{
+    font-size: 1.2rem;
+    padding: 0.5rem 0.5rem;
+    background-color: rgb(216,227,231);
+    cursor: pointer;
+    border: none;
+    color: rgba(134, 157, 157, 0.8);
+    border-radius: 0.5rem;   
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin-right: 1rem;
+    font-weight: 700;
+}
+.btn-next{
+    font-size: 1.2rem;
+    padding: 0.5rem 0.5rem;
+    background-color: rgb(134,157,157);
+    cursor: pointer;
+    border: none;
+    color: rgba(1255, 255, 255, 0.8);
+    border-radius: 0.5rem;   
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin-left: 1rem;
+    font-weight: 700;  
+}
+/* 返回鈕 */
+.title{
+    display: flex;
+    text-align:justify;
+}
+.modelname{
+    background-color: rgb(216,227,231);
+    font-size: 1rem;
+    border: none;
+    text-align: center;
+    color: rgba(134, 157, 157, 0.8);
+}

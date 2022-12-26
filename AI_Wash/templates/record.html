@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record</title>
+    <link rel="stylesheet" href="{% static 'assets/css/list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="flex-col flex-cent">
+            <h1>歷史紀錄</h1>
+            <table>
+                <tr>
+                    <td colspan="4">訂單編號 {{001}}</td>
+                </tr>
+                <tr>
+                    
+                </tr>
+                <tr>
+                    <td rowspan="3">模式細節</td>
+                    <td class="table-right" colspan="2">{{標準}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{日曬}}</td>
+                </tr>
+                    <td colspan="2">{{機器人}}</td>
+                </tr>
+                <tr>
+                    <td colspan="4">總計{{??}}元，獲取點數 {{??}}點</td>
+                </tr>
+            </table>
+            <input class="btn-problem" type="button" value="回報此單問題">
+            <a href="{{ 'index.html' }}"><input class="btn" type="button" value="返回"></a>
+        </div>
+    </div>
+</body>
+</html>

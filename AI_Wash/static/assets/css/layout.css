@@ -1,0 +1,185 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: 30px;
+    background: rgba(199,210,212); 
+    color: rgba(134,157,157); 
+}
+a {
+    text-decoration:none;
+    color: black;
+}
+h1{
+    font-size: 2.7rem;
+    margin-bottom: 2.5rem;
+}
+
+/* 整個外框框 */
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.justify-center {
+    justify-content: center;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-cent{
+    justify-content: center;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+/* 按鈕 */
+.btn-reset{
+    font-size: 20px;
+    background-color: rgba(216,227,231);
+    color: rgba(134, 157, 157, 0.8); 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border-radius: 1rem 1rem 1rem 1rem;  
+    border: none;
+    padding: 0.6rem 0.6rem;
+    margin: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-certain{
+    font-size: 20px;
+    background-color: rgba(134,157,157);
+    color: rgba(255, 255, 255, 0.8); 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border-radius: 1rem 1rem 1rem 1rem;  
+    border: none;
+    padding: 0.6rem 0.6rem;
+    margin: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-fail{
+    font-size: 20px;
+    background-color: rgba(216,227,231);
+    color: rgba(134, 157, 157, 0.8); 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border-radius: 1rem 1rem 1rem 1rem;  
+    border: none;
+    padding: 0.6rem 0.6rem;
+    margin: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-keep{
+    font-size: 20px;
+    background-color: rgba(134,157,157);
+    color: rgba(255, 255, 255, 0.8); 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border-radius: 1rem 1rem 1rem 1rem;  
+    border: none;
+    padding: 0.6rem 0.6rem;
+    margin: 10px;
+    font-weight: 700;
+    cursor: pointer;    
+}
+
+.btnbox{
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+p{
+    font-size: 20px;
+    color: rgb(134,157,157);
+    font-weight: 700;
+    text-align: right;
+}
+
+.word{
+    font-size: 20;
+}
+
+/* 條款視窗 */
+.dialog{
+    text-align: left;
+    position: fixed;
+    font-size: 1.1rem;
+    top: 5rem;
+    left: 18%;
+    transform: translate(-50px,0px);
+    width: 350px;
+    padding: 10px;
+    border: 2px solid;
+    display: none;
+    border-radius: 5px;
+}
+/* 關閉按鈕 */
+#close{
+    font-size: 20px;
+    background-color: rgba(216,227,231);
+    color: rgba(134, 157, 157, 0.8); 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    padding: 2.5px 10px;
+    margin-left: 7rem;
+}
+
+/* 條款按鈕 */
+
+.btn{
+    font-size: 20px;
+    background-color: rgba(216,227,231);
+    color: rgba(134, 157, 157, 0.8); 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border-radius: 1rem 1rem 1rem 1rem;  
+    border: none;
+    padding: 0.6rem 0.6rem;
+    margin: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#show{
+    font-size: 20px;
+    background-color: rgba(216,227,231);
+    color: rgba(134, 157, 157, 0.8); 
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+    border: none;
+    padding: 0.6rem 0.6rem;
+    margin: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#agree{
+    margin-bottom: 1rem;
+    cursor: pointer;
+    content: '';
+    width: 1em;
+    height: 1em;
+    margin-right: 5px;
+}
+
+.sth{
+    text-align: center;
+}

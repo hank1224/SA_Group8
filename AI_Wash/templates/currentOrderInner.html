@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CurrentOrder-StepProgress</title>
+    <link rel="stylesheet" href="{% static 'assets/css/list.css' %}">
+    <link rel="script" href="{% static 'assets/js/currentorder-inner.js' %}" type="text/javascript" />
+</head>
+<body>
+    <div class="container">
+        <div class="flex-col flex-cent">
+            <h1>
+                目前訂單詳情
+            </h1>
+            <div class="inside">
+                <ul class="progressbar" id="progress-bar">
+                    <li class="active">作業中<br>
+                    {{time}}
+                    </li>
+                    <li>可領取<br>
+                    {{time}}
+                    </li>
+                    <li>完成訂單<br>
+                    {{time}}
+                    </li>
+                </ul>
+                <div class="btn-place">
+                    <input type="button" class="btn" id="Next" value="Next" style="margin-right: 2rem;"> <!--js i give up give up give....up-->
+                    <input type="button" class="btn-reset" id="Reset" value="Reset"> <!--js give upppppppppppp-->                    
+                </div>
+
+            </div>
+            <div class="qrcode">
+                <p>
+                    QRcode－送洗 / 領取 <!--這要啥????圖片???網址????-->
+                </p>
+                <img src="">
+            </div>
+            <a href="{{'currentOrder.html'}}"><input class="btn" type="button" value="返回"></a>
+        </div>
+    </div>   
+</body>
+</html>
+

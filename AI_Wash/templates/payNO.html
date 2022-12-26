@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayFail</title>
+    <link rel="stylesheet" href="{% static 'assets/css/layout.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="flex-col flex-cent">
+            <h1>付款失敗</h1>
+            <h3>請重新交易，否則訂單無法成立。</h3>
+            <div style="margin-top: 2rem;">
+                <input class="btn-fail" type="button" value="取消付款"> 
+                <input class="btn-keep" type="button" value="進行付款"> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

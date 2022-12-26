@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: 30px;
+}
+a {
+    text-decoration:none;
+    color: black;
+}
+h1{
+    font-size: 2.7rem;
+    margin-bottom: 2.5rem;
+}
+
+/* 整個外框框 */
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.justify-center {
+    justify-content: center;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-cent{
+    justify-content: center;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+/* 按鈕 */
+.btn{
+    font-size: 25px;
+    background-color: #c7dee3;
+    height: 50px;
+    width: 100px;
+    border-radius: 5px;
+    border: none;
+    padding: 2.5px 10px;
+    margin: 5px;
+}
+
+/* 設定名稱 */
+.yesform{
+    margin-top: 5rem;
+    text-align: center;
+    display: none;
+}
+h2{
+    font-size:xx-large;
+}

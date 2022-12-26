@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start</title>
+    <link rel="stylesheet" href="{% static 'assets/css/layout.css' %}">
+</head>
+<script>
+    var dialog;
+    window.onload=function(){
+        dialog=document.getElementById("dialog");
+    };
+    function showDialog(){
+        dialog.style.display="block";
+    }
+    function closeDialog(){
+        dialog.style.display="none";
+    }
+
+    // let agree=getElementById("agree");
+    // let start=getElementById("start");
+    // if(agree.checked){
+    //     start.disabled==false;
+    // }
+</script>
+<body>
+    <div class="container">
+        <div class="flex-col flex-cent">
+            <h1>新手教學結束！</h1>
+            <h3 class="sth">閱讀完服務條款並按下同意後即可開始洗衣。</h3>
+            <img src="assets/image/congratuation.png" height="250px" style="margin: 30px;">
+
+            <button id="show" onclick="showDialog();">智慧喜服務條款</button>
+
+            <div class="agree"><input type="checkbox" id="agree" name="agree" value="yes" required>同意取用個人資料與智慧喜服務條款。</div>
+            <div id="dialog" class="dialog">
+                本商家致力於遵守保護個人資料的相關法令及本公司隱私保護政策，妥善管理和保護用戶的隱私權。<br>
+                <b>1. 以合法公正的方法取得個人資料。</b><br>
+                <b>2. 採取必要且適當的措施以安全管理取得之個人資料。</b><br>
+                <b>3. 除法律另有規定外，不會將個人資料提供給第三人：</b><br>
+                當您開始使用本服務時，即視為您已清楚瞭解並同意以下本網站蒐集、處理或利用您個人資料之目的及用途。<br>
+                <b>4. 衣物相關賠償：</b><br>
+                為保護本商家之利益，若您的衣物受到破損、髒汙、遺失等問題，不論衣物原有價值，本商家一律以一件衣物100元作為賠償。<br>
+                <button id="close" onclick="closeDialog();" class="btn">關閉</button>
+            </div>
+
+            <input id="start" class="btn" type="submit" value="開始洗衣">
+        </div>
+    </div>
+</body>
+</html>

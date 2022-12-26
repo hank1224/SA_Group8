@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAY</title>
+    <link rel="stylesheet" href="{%static 'assets/css/layout.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="flex-col flex-cent">
+            <h1>信用卡資訊</h1>
+            <form>
+                <p>信用卡卡號：<input id="creditcard" type="text" class="word"></p>
+                <div class="btnbox">
+                    <input class="btn-reset" type="reset" value="重設"> 
+                    <input class="btn-certain" type="submit" value="確定"> 
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

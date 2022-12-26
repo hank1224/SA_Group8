@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemberData</title>
+    <link rel="stylesheet" href="{% static 'assets/css/wash.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="flex-col flex-cent">
+            <div class="title"><a href="{{ 'index.html' }}"><img src="assets/image/back.png" height="30rem" style="margin: 0 0.5rem;"></a><h1>會員資料</h1></div>
+            <h2>常用洗衣模式清單</h2>
+            <form>
+                <div class="set">
+                    <select class="model">
+                        <option>{{預設洗衣模式1}}</option>
+                        <option>{{預設洗衣模式2}}</option>
+                        <option>{{預設洗衣模式3}}</option>
+                    </select>
+                    <br>
+                    <input class="modelname" id="modelname" type="text" required  placeholder="設定名稱📝" > 
+                    <h4>洗滌模式</h4>
+                    <input type="radio" id="standard" name="wash" value="standard" checked><label for="standard">標準</label>
+                    <input type="radio" id="delicate" name="wash" value="delicate" ><label for="delicate">精緻洗</label>
+                    <input type="radio" id="soft" name="wash" value="soft" ><label for="soft">柔洗</label>
+                    <input type="radio" id="fast" name="wash" value="fast" ><label for="fast">快洗</label>
+                    <h4>乾燥模式</h4>
+                    <input type="radio" id="sunny" name="dry" value="sunny" checked><label for="sunny">日曬</label>
+                    <input type="radio" id="low" name="dry" value="low" ><label for="low">低溫烘乾</label>
+                    <input type="radio" id="mid" name="dry" value="mid" ><label for="mid">中溫烘乾</label>
+                    <input type="radio" id="high" name="dry" value="high" ><label for="high">高溫烘乾</label>
+                    <h4>摺衣模式</h4>
+                    <input type="radio" id="no" name="fold" value="no" checked><label for="no">不折</label>
+                    <input type="radio" id="robot" name="fold" value="robot" ><label for="robot">機器人</label><br>
+                    <input class="btn-re" type="reset" value="重設">
+                    <input class="btn-next" type="submit" value="儲存">
+                </div> 
+            </form>
+        </div>
+    </div>
+</body>
+</html>

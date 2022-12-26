@@ -1,0 +1,214 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 50%;
+}
+
+a {
+    text-decoration:none;
+    color: black;
+}
+
+h1{
+    font-size: 5.4rem;
+    margin-bottom: 4rem;
+    color: rgba(134,157,157);
+    font-weight: 900;
+}
+
+:root{
+    background: rgba(199,210,212);
+}
+
+/* 整個外框框 */
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+.justify-center {
+    justify-content: center;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-cent{
+    justify-content: center;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 表格 */
+table{
+    text-align: center;
+    background-color: rgb(134,157,157);
+    border-radius: 0.5rem 0.5rem 0.2rem 0.2rem;
+    border: 0.2rem solid rgb(134,157,157);
+}
+
+th{
+    text-align: center;
+    font-size: 3.6rem;
+    background-color: rgb(134,157,157);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 1.5rem 1.5rem;
+}
+
+td{
+    text-align: center;
+    font-size: 2.4rem;
+    background-color: rgb(199,210,212);
+    color: rgb(134,157,157);
+    border: 3px solid rgb(199,210,212);
+    line-height: 4rem;
+    font-weight: 700;
+}
+
+p{
+    font-size: 2.4rem;
+    color: rgb(134,157,157);
+    font-weight: 700;
+    text-align: right;
+}
+
+.situation{
+    text-align: center;
+    border: 3px solid rgb(134,157,157);
+    font-size: 2rem;
+    background-color: rgb(134,157,157);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 1.5rem 1.5rem;
+}
+
+
+/* 按鈕 */
+.btn{
+    margin-top: 4rem;
+    font-size: 2.4rem;
+    padding: 1.5rem 1.5rem;
+    background-color: rgb(216,227,231);
+    cursor: pointer;
+    border: none;
+    color: rgba(134, 157, 157, 0.8);
+    border-radius: 1rem 1rem 1rem 1rem;   
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    font-weight: 700;
+}
+
+.btn-problem{
+    margin-top: 1rem;
+    font-size: 2.4rem;
+    padding: 1rem 1rem;
+    background-color: rgb(134,157,157);
+    cursor: pointer;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+}
+
+.btn-reset{
+    font-size: 2.4rem;
+    padding: 1.5rem 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    border: none;
+    background-color: rgb(134,157,157);
+    border-radius: 1rem 1rem 1rem 1rem;   
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    margin-left: 2rem;
+    font-weight: 700;    
+}
+
+.btn-place{
+    text-align: center;
+}
+
+/* 進度條 */
+
+.inside{
+    width: 100%;
+}
+
+.progressbar {
+    counter-reset: step;
+  }
+  .progressbar li {
+    list-style: none;
+    display: inline-block;
+    width: 30.33%;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    font-size: 2rem;
+    color: rgba(134,157,157);
+    font-weight: 700;
+  }
+  .progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    line-height : 30px;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    background-color: #fff;
+  }
+  .progressbar li:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    top: 15px;
+    left: -50%;
+    z-index : -1;
+  }
+  .progressbar li:first-child:after {
+    content: none;
+  }
+  .progressbar li.active {
+    color: rgb(21, 70, 70);
+  }
+  .progressbar li.active:before {
+    border-color: rgb(21, 70, 70);
+  } 
+  .progressbar li.active + li:after {
+    background-color: rgb(21, 70, 70);
+  }
+
+
+/* QRcode */
+.qrcode{
+    margin-top: 4rem;
+}
+
+.qrcode p{
+    text-align: center;
+}
+
+.qrcode img{
+    width: 200px;
+    height: 200px;
+    margin-top: 2rem;
+}
