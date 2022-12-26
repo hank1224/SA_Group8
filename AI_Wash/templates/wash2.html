@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="flex-col flex-cent">
-            <div class="title"><a href="{{ 'index.html' }}"><img src="assets/image/back.png" height="30rem" style="margin: 0 0.5rem;"></a><h1>寵物專屬洗衣</h1></div>
+            <div class="title"><a href="index.html"><img src="{% static 'assets/image/back.png' %}" height="30rem" style="margin: 0 0.5rem;"></a><h1>寵物專屬洗衣</h1></div>
             <form>
                 <div class="set">
                     <select class="model">
@@ -32,7 +32,7 @@
                     <input type="radio" id="no" name="fold" value="no" checked><label for="no">不折</label>
                     <input type="radio" id="robot" name="fold" value="robot" ><label for="robot">機器人</label><br>
                     <input class="btn-re" type="reset" value="重設">
-                    <a href="{{ 'orderdata.html' }}"><input class="btn-next" type="submit" value="下一步"></a>
+                    <a href="orderdata.html"><input class="btn-next" type="submit" value="下一步"></a>
                 </div>
             </form>
         </div>

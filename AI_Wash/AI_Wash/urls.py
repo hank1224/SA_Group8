@@ -33,12 +33,11 @@ urlpatterns = [
     path('payOK.html', views.payOK_page),
     path('plzLogin.html', views.plzLogin_page),
     path('record.html', views.record_page),
-    path('satisfacion.html', views.satisfacion_page),
+    path('satisfaction.html', views.satisfaction_page),
     path('wash1.html', views.wash1_page),
     path('wash2.html', views.wash2_page),
 
     path('S/', views.session_check),
     path('delS/', views.del_session),
-    path('login/', views.login),
 
 ]

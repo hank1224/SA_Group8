@@ -12,6 +12,10 @@ def currentOrderInner_page(requset):
     return render(requset, template_name='currentOrderInner.html')
 
 def index_page(requset):
+    try:
+        login_check(requset)
+    except:
+        return HttpResponse("err")
     return render(requset, template_name='index.html')
 
 def member_page(requset):
@@ -41,8 +45,8 @@ def plzLogin_page(request):
 def record_page(requset):
     return render(requset, template_name='record.html')
 
-def satisfacion_page(requset):
-    return render(requset, template_name='satisfacion.html')
+def satisfaction_page(requset):
+    return render(requset, template_name='satisfaction.html')
 
 def wash1_page(requset):
     return render(requset, template_name='wash1.html')
@@ -71,8 +75,8 @@ def del_session(requset):
 
 def login_check(request):
     if not 'AIwash' in request.session:
-        return HttpResponseRedirect('/plzLogin.html/')
+        return render(request, template_name='plzLogin.html') 
     else:
-        return HttpResponse("已登入")     
+        pass 
 
 # Create your views here.
