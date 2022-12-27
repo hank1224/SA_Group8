@@ -2,81 +2,88 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 
-def creditcard_page(requset):
-    return render(requset, template_name='creditcard.html')
+def creditcard_page(request):
+    return render(request, template_name='creditcard.html')
 
-def currentOrder_page(requset):
-    return render(requset, template_name='currentOrder.html')
+def currentOrder_page(request):
+    return render(request, template_name='currentOrder.html')
 
-def currentOrderInner_page(requset):
-    return render(requset, template_name='currentOrderInner.html')
+def currentOrderInner_page(request):
+    return render(request, template_name='currentOrderInner.html')
 
-def index_page(requset):
-    try:
-        login_check(requset)
-    except:
-        return HttpResponse("err")
-    return render(requset, template_name='index.html')
+def index_page(request):
+    page = render(request, template_name='index.html')
+    return page if login_check(request) == True else login_check(request)
 
-def member_page(requset):
-    return render(requset, template_name='member.html')
+def member_page(request):
+    return render(request, template_name='member.html')
 
-def new_page(requset):
-    return render(requset, template_name='new.html')
+def new_page(request):
+    return render(request, template_name='new.html')
 
-def order_finish_page(requset):
-    return render(requset, template_name='order_finish.html')
+def order_finish_page(request):
+    return render(request, template_name='order_finish.html')
 
-def orderdata_page(requset):
-    return render(requset, template_name='orderdata.html')
+def orderdata_page(request):
+    return render(request, template_name='orderdata.html')
 
-def pay_finish_page(requset):
-    return render(requset, template_name='pay_finish.html')
+def pay_finish_page(request):
+    return render(request, template_name='pay_finish.html')
 
-def payNO_page(requset):
-    return render(requset, template_name='payNO.html')
+def payNO_page(request):
+    return render(request, template_name='payNO.html')
 
-def payOK_page(requset):
-    return render(requset, template_name='payOK.html')
+def payOK_page(request):
+    return render(request, template_name='payOK.html')
 
 def plzLogin_page(request):
     return render(request, template_name='plzLogin.html')
 
-def record_page(requset):
-    return render(requset, template_name='record.html')
+def record_page(request):
+    return render(request, template_name='record.html')
 
-def satisfaction_page(requset):
-    return render(requset, template_name='satisfaction.html')
+def satisfaction_page(request):
+    return render(request, template_name='satisfaction.html')
 
-def wash1_page(requset):
-    return render(requset, template_name='wash1.html')
+def wash1_page(request):
+    return render(request, template_name='wash1.html')
 
-def wash2_page(requset):
-    return render(requset, template_name='wash2.html')
+def wash2_page(request):
+    return render(request, template_name='wash2.html')
 
 
-def session_check(requset):
-    if not "vote" in requset.session:
-        requset.session["vote"] = True
-        requset.session.set_expiry(60*20) #存在20分鐘
-        msg = "您第一次投票"
+
+
+
+
+
+
+
+def session_check(request):
+    if not "AIwash8" in request.session:
+        request.session["AIwash8"] = True
+        request.session.set_expiry(60*20) #存在20分鐘
+        msg = "掛入AIwash8 session 效期20分鐘"
         respone = HttpResponse(msg)
     else:
-        msg = "已投票"
+        msg = "已存在session"
         respone = HttpResponse(msg)
     return respone
 
-def del_session(requset):
+def del_session(request):
     try:
-        del requset.session["vote"]
-        return HttpResponse("Success")
+        del request.session["AIwash8"]
+        return HttpResponse("Success del session")
     except:
         return HttpResponse("err")
 
 def login_check(request):
-    if not 'AIwash' in request.session:
-        return render(request, template_name='plzLogin.html') 
+    if not 'AIwash8' in request.session:
+        check_return = render(request, template_name='plzLogin.html')
+    elif 'AIwash8' in request.session:
+        check_return = True
     else:
-        pass 
+        check_return = HttpResponse("check_login err")
+    return check_return
 
 # Create your views here.
