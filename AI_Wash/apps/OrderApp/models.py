@@ -8,16 +8,15 @@ class OrderRecord(models.Model):
     sPoint=models.FloatField(blank=False, null=False)
     sCreateTime=models.DateTimeField(default=datetime.now, blank=False, null=True)
     sFinishTime=models.DateTimeField(blank=False, null=True)
-    sStoreName=models.CharField(max_length=10,blank=False, null=False)
+    sStoreName=models.CharField(max_length=10,blank=True, null=False)
     
     class Meta:
         verbose_name = u"訂單記錄"
         verbose_name_plural = verbose_name
-
+    
     #def __str__(self):
         #return self.sLocationName
     #讓object預設回傳
-
 
 class UserData(models.Model):
     sUserID=models.CharField(max_length=32, null=False, primary_key=True)
@@ -50,7 +49,7 @@ class Mode(models.Model):
 
 class ModeMenu(models.Model):
     sModeID=models.CharField(max_length=32, null=False, primary_key=True)
-    sModeName=models.CharField(max_length=10,blank=False, null=False)
+    sModeName=models.CharField(max_length=10,blank=True, null=False)
     sTime=models.TimeField(blank=False, null=False)
     sAmount=models.FloatField(blank=False, null=False)
     sPPoint=models.FloatField(blank=False, null=False)
@@ -65,7 +64,7 @@ class ModeMenu(models.Model):
 
 class Common(models.Model):
     sCommonID=models.CharField(max_length=32, null=False, primary_key=True)
-    sListName=models.CharField(max_length=10,blank=False, null=False)
+    sListName=models.CharField(max_length=10,blank=True, null=False)
     sWash=models.PositiveIntegerField(blank=False, null=False)
     sDry=models.PositiveIntegerField(blank=False, null=False)
     sFold=models.PositiveIntegerField(blank=False, null=False)
@@ -81,8 +80,8 @@ class Common(models.Model):
 
 class Store(models.Model):
     sStoreID=models.CharField(max_length=32, null=False, primary_key=True)
-    sStoreName=models.CharField(max_length=10,blank=False, null=False)
-    sStoreAdd=models.CharField(max_length=100,blank=False, null=False)
+    sStoreName=models.CharField(max_length=10,blank=True, null=False)
+    sStoreAdd=models.CharField(max_length=100,blank=True, null=False)
 
     class Meta:
         verbose_name = u"店鋪"
@@ -94,8 +93,8 @@ class Store(models.Model):
 
 class QRcode(models.Model):
     sOrderID=models.CharField(max_length=32, null=False, primary_key=True)
-    sCodeA=models.CharField(max_length=20,blank=False, null=False)
-    sCodeB=models.CharField(max_length=20,blank=False, null=False)
+    sCodeA=models.CharField(max_length=20,blank=False, null=True)
+    sCodeB=models.CharField(max_length=20,blank=False, null=True)
 
     class Meta:
         verbose_name = u"QRcode"
@@ -108,8 +107,8 @@ class QRcode(models.Model):
 class Problem(models.Model):
     sProblemID=models.CharField(max_length=32, null=False, primary_key=True)
     sOrderID=models.CharField(max_length=32, null=False)
-    sSentTime=models.DateTimeField(default=datetime.now, blank=False, null=False)
-    sDirections=models.CharField(max_length=300,blank=False, null=False)
+    sSentTime=models.DateTimeField(default=datetime.now, blank=False, null=True)
+    sDirections=models.CharField(max_length=300,blank=True, null=False)
 
 
     class Meta:
@@ -122,9 +121,9 @@ class Problem(models.Model):
 
 class Satisfy(models.Model):
     sOrderID=models.CharField(max_length=32, null=False, primary_key=True)
-    sServe=models.BooleanField(blank=False, null=False)
-    sRate=models.BooleanField(blank=False, null=False)
-    sSatisfy=models.BooleanField(blank=False, null=False)
+    sServe=models.BooleanField(null=False)
+    sRate=models.BooleanField(null=False)
+    sSatisfy=models.BooleanField(null=False)
 
     class Meta:
         verbose_name = u"滿意度"
