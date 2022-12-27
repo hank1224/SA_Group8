@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from OrderApp.models import OrderRecord, UserData, Mode, ModeMenu, Common, Store, QRcode, Problem, Satisfy
 
 class OrderRecordMain(admin.ModelAdmin):

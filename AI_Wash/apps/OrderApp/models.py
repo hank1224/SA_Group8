@@ -134,5 +134,4 @@ class Satisfy(models.Model):
         #return self.sLocationName
     #讓object預設回傳
 
-
 # Create your models here.

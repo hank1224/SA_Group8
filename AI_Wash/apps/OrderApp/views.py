@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib import auth
+from OrderApp.models import UserData
 
 def creditcard_page(request):
     return render(request, template_name='creditcard.html')
@@ -13,6 +13,7 @@ def currentOrderInner_page(request):
 
 def index_page(request):
     page = render(request, template_name='index.html')
+    UserData.objects.create(sUserID = 'a2', sBag = 1, sUserMode = 1)
     return page if login_check(request) == True else login_check(request)
 
 def member_page(request):
