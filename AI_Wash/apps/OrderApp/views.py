@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from OrderApp.models import UserData
+
+from datetime import datetime, timedelta
+
+
 
 def creditcard_page(request):
     return render(request, template_name='creditcard.html')
@@ -86,5 +89,6 @@ def login_check(request):
     else:
         check_return = HttpResponse("check_login err")
     return check_return
+
 
 # Create your views here.
