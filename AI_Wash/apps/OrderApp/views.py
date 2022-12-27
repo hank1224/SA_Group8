@@ -13,7 +13,7 @@ def currentOrderInner_page(request):
 
 def index_page(request):
     page = render(request, template_name='index.html')
-    UserData.objects.create(sUserID = 'a2', sBag = 1, sUserMode = 1)
+    #UserData.objects.create(sUserID = 'a2', sBag = 1, sUserMode = 1)
     return page if login_check(request) == True else login_check(request)
 
 def member_page(request):

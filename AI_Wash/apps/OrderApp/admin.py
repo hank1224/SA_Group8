@@ -1,31 +1,23 @@
 from django.contrib import admin
 
-from OrderApp.models import OrderRecord, UserData, Mode, ModeMenu, Common, Store, QRcode, Problem, Satisfy
+from OrderApp.models import OrderRecord, UserData, ModeMenu, UserMode, Store, QRcode, Problem, Satisfy
 
 class OrderRecordMain(admin.ModelAdmin):
-    list_display=('sOrderID','sUserID','sSum','sPoint','sCreateTime','sFinishTime','sStoreName')
+    list_display=('sOrderID','sUserID','sSum','sPoint','sWash','sDry','sFold','sCreateTime','sFinishTime','sStoreName')
     search_fields=('sOrderID',)
     ordering=('sOrderID',)
 
 class UserDataMain(admin.ModelAdmin):
-    list_display=('sUserID','sBag','sUserMode')
+    list_display=('sUserID','sBag')
     search_fields=('sUserID',)
     ordering=('sUserID',)
 
-class ModeMain(admin.ModelAdmin):
-    list_display=('sOrderID','sWash','sDry','sFold')
-    search_fields=('sOrderID',)
-    ordering=('sOrderID',)
-
 class ModeMenuMain(admin.ModelAdmin):
-    list_display=('sModeID','sModeName','sTime','sAmount','sPPoint')
-    search_fields=('sModeID',)
-    ordering=('sModeID',)
+    list_display=('sModeName','sTime','sPrice','sPPoint')
 
-class CommonMain(admin.ModelAdmin):
-    list_display=('sCommonID','sListName','sWash','sDry','sFold')
-    search_fields=('sCommonID',)
-    ordering=('sCommonID',)
+class UserModeMain(admin.ModelAdmin):
+    list_display=('sUserID','sListName','sWash','sDry','sFold')
+    ordering=('sUserID',)
 
 class StoreMain(admin.ModelAdmin):
     list_display=('sStoreID','sStoreName','sStoreAdd')
@@ -38,9 +30,9 @@ class QRcodeMain(admin.ModelAdmin):
     ordering=('sOrderID',)
 
 class ProblemMain(admin.ModelAdmin):
-    list_display=('sProblemID','sOrderID','sSentTime','sDirections')
-    search_fields=('sProblemID',)
-    ordering=('sProblemID',)
+    list_display=('sOrderID','sSentTime','sDirections')
+    search_fields=('sOrderID',)
+    ordering=('sSentTime',)
 
 class SatisfyMain(admin.ModelAdmin):
     list_display=('sOrderID','sServe','sRate','sSatisfy')
@@ -51,9 +43,8 @@ class SatisfyMain(admin.ModelAdmin):
 
 admin.site.register(OrderRecord, OrderRecordMain)
 admin.site.register(UserData, UserDataMain)
-admin.site.register(Mode, ModeMain)
 admin.site.register(ModeMenu, ModeMenuMain)
-admin.site.register(Common, CommonMain)
+admin.site.register(UserMode, UserModeMain)
 admin.site.register(Store, StoreMain)
 admin.site.register(QRcode, QRcodeMain)
 admin.site.register(Problem, ProblemMain)
