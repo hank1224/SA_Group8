@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OrderData</title>
-    <link rel="stylesheet" href="{% static 'assets/css/syle.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/orderdata.css' %}">
 </head>
 <body>
@@ -20,13 +20,13 @@
                     <th colspan="3">洗衣模式</th>
                 </tr>
                 <tr>
-                    <td>{{??}}</td>
+                    <td>{{ Wash }}</td>
                 </tr>
                 <tr>
-                    <td>{{??}}</td>
+                    <td>{{ Dry }}</td>
                 </tr>
                 <tr>
-                    <td>{{??}}</td>
+                    <td>{{ Fold }}</td>
                 </tr>
             </table>
             <table>
@@ -34,12 +34,12 @@
                     <th colspan="3">所需時間</th>
                 </tr>
                 <tr>
-                    <td>{{??}}分鐘</td>
+                    <td>{{ sumTime }}分鐘</td>
                 </tr>
             </table>
             <div class="total-place">
-                <p>總計 {{??}}元</p>
-                <p>獲取點數 {{??}}點</p>
+                <p>總計 {{ sumPrice }}元</p>
+                <p>獲取點數 {{ sumPPoint }}點</p>
             </div>
             <div>
             <a href="index.html"><input type="button" class="button-cancel" value="取消"></a>

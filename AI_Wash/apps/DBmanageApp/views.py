@@ -50,7 +50,7 @@ def create_washMode(request):
             Price = mode['sPrice']
             PPoint = mode['sPPoint']
             ModeMenu.objects.create(sModeName=ModeName, sTime=Time, sPrice=Price, sPPoint=PPoint)
-        daya = datetime.now() + delta
+        daya = (datetime.now() + delta).strftime("%Y-%m-%d %H:%M:%S")
 
         return HttpResponse(daya)
     # except:
