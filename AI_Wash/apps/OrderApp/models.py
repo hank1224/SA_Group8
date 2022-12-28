@@ -81,9 +81,9 @@ class Problem(models.Model):
 
 class Satisfy(models.Model):
     sOrderID=models.CharField(max_length=32, null=False, primary_key=True)
-    sServe=models.BooleanField(blank=False, null=False)
-    sRate=models.BooleanField(blank=False, null=False)
-    sSatisfy=models.BooleanField(blank=False, null=False)
+    sServe=models.BooleanField(blank=False, null=True)
+    sRate=models.BooleanField(blank=False, null=True)
+    sSatisfy=models.BooleanField(blank=False, null=True)
 
     class Meta:
         verbose_name = u"滿意度"

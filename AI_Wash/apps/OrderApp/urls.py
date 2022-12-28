@@ -32,6 +32,7 @@ urlpatterns = [
     path('plzLogin.html', views.plzLogin_page),
     path('record.html', views.record_page),
     path('satisfaction.html', views.satisfaction_page),
+    path('upload_satisfaction.html', views.upload_satisfaction_page),
     path('wash1.html', views.wash1_page),
     path('wash2.html', views.wash2_page),
 

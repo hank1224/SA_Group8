@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from datetime import datetime, timedelta
 
-from OrderApp.models import UserData, UserMode
+from OrderApp.models import UserData, UserMode, Satisfy
 from DBmanageApp.models import ModeMenu
 
 
@@ -19,7 +19,6 @@ def currentOrderInner_page(request):
 
 def index_page(request):
     page = render(request, template_name='index.html')
-    #UserData.objects.create(sUserID = 'a2', sBag = 1, sUserMode = 1)
     return page if login_check(request) == True else login_check(request)
 
 def member_page(request):
@@ -34,9 +33,9 @@ def order_finish_page(request):
 def orderdata_page(request):
     if login_check(request) == True:
 
-        Wash = request.GET.get('wash', "標準")
-        Dry = request.GET.get('dry', "日曬")
-        Fold = request.GET.get('fold', "機器人")
+        Wash = request.GET.get('wash')
+        Dry = request.GET.get('dry')
+        Fold = request.GET.get('fold')
 
         ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
         Wash_time = ModeMenu_wash[0]['sTime']
@@ -56,7 +55,6 @@ def orderdata_page(request):
         sumTime = (Wash_time + Dry_time + Fold_time)
         sumPrice = int(Wash_price + Dry_price + Fold_price)
         sumPPoint = int(Wash_ppoint + Dry_ppoint + Fold_ppoint)
-
 
         page = render(request, 'orderdata.html', locals())
     else:
@@ -82,6 +80,36 @@ def record_page(request):
 def satisfaction_page(request):
     return render(request, template_name='satisfaction.html')
 
+def upload_satisfaction_page(request):
+
+    wServe = request.GET.get('radio')
+    wRate = request.GET.get('radio_2')
+    wSatisfy = request.GET.get('radio_3')
+
+    if wServe == "F":
+        wServe = False
+    elif wServe == "T":
+        wServe = True
+    else:
+        wServe = None
+
+    if wRate == "F":
+        wRate = False
+    elif wRate == "T":
+        wRate = True
+    else:
+        wRate = None
+
+    if wSatisfy == "F":
+        wSatisfy = False
+    elif wSatisfy == "T":
+        wSatisfy = True
+    else:
+        wSatisfy = None
+    
+    Satisfy.objects.create(sOrderID="a1", sServe= wServe, sRate= wRate, sSatisfy= wSatisfy)
+    return render(request, 'upload_satisfaction.html', locals())
+
 def wash1_page(request):
     
     if login_check(request) == True:
@@ -103,19 +131,15 @@ def wash2_page(request):
 
 
 
-
-
-
-
 def session_check(request):
     if not "AIwash8" in request.session:
         request.session["AIwash8"] = True
         request.session.set_expiry(60*20) #存在20分鐘
         msg = "掛入AIwash8 session 效期20分鐘"
-        respone = HttpResponse(msg)
+        respone = HttpResponse(msg + "<a href='/OrderApp/index.html'><h1>home</h1></a>")
     else:
         msg = "已存在session"
-        respone = HttpResponse(msg)
+        respone = HttpResponse(msg + "<a href='/OrderApp/index.html'><h1>home</h1></a>")
     return respone
 
 def del_session(request):
