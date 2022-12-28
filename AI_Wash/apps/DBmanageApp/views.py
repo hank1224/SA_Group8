@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from datetime import datetime, timedelta
 from DBmanageApp.models import ModeMenu, Store
 
-
+# 請幫我填上洗衣模式的 名稱、所需時間（timedelta）、價格、獲得點數
 
 def create_washMode(request):
-    # try:
+    try:
 
+        # 都是選填的， = 0 的可以去除
         delta = timedelta(
             days=0,
             seconds=0,
@@ -50,10 +51,12 @@ def create_washMode(request):
             Price = mode['sPrice']
             PPoint = mode['sPPoint']
             ModeMenu.objects.create(sModeName=ModeName, sTime=Time, sPrice=Price, sPPoint=PPoint)
-        daya = (datetime.now() + delta).strftime("%Y-%m-%d %H:%M:%S")
 
-        return HttpResponse(daya)
-    # except:
-       # return HttpResponse("create Data err")
+        # daya = (datetime.now() + delta).strftime("%Y-%m-%d %H:%M:%S")
+        # 時間加法範例，可預估完成時間
+
+        return HttpResponse("Success")
+    except:
+       return HttpResponse("create Data err")
 
 # Create your views here.
