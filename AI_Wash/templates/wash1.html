@@ -8,6 +8,21 @@
     <title>Wash-human</title>
     <link rel="stylesheet" href="{% static 'assets/css/wash.css' %}">
 </head>
+
+<script>
+    function changeRadioBtn(value){
+        switch(value){
+            {% for item in UserMode_items %}
+                case '{{ item.sListName }}':
+                    document.querySelector('input[name="wash"][value="'+'{{ item.sWash}}'+'"]').checked=true;
+                    document.querySelector('input[name="dry"][value="'+'{{ item.sDry}}'+'"]').checked=true;
+                    document.querySelector('input[name="fold"][value="'+'{{ item.sFold}}'+'"]').checked=true;
+                    break;
+            {% endfor %}
+        }
+    }
+</script>
+
 <body>
     <div class="container">
         <div class="flex-col flex-cent">
@@ -15,10 +30,10 @@
             <form method="post" action="orderdata.html">
                 {% csrf_token %}
                 <div class="set">
-                    <select class="model">
+                    <select id="set" class="model" onchange= changeRadioBtn(value)>
                         <option>----常用模式選擇----</option>
-                        {% for ListName in ListName_list %}
-                        <option>{{ ListName }}</option>
+                        {% for item in UserMode_items %}
+                        <option value= {{ item.sListName }}>{{ item.sListName }}</option>
                         {% endfor %}
                     </select>
                     <h4>洗滌模式</h4>

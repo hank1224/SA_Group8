@@ -128,9 +128,9 @@ def wash1_page(request):
     
     if login_check(request) == True:
         UserMode_data = UserMode.objects.filter(sUserID="a1").values()
-        ListName_list=[]
+        UserMode_items = []
         for usermode in UserMode_data:
-            ListName_list.append(usermode['sListName'])
+            UserMode_items.append(usermode)
         page = render(request, 'wash1.html', locals())
     else:
         page = login_check(request)
