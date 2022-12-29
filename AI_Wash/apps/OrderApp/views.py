@@ -39,24 +39,24 @@ def orderdata_page(request):
             Dry = data.get('dry')
             Fold = data.get('fold')
 
-        ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
-        Wash_time = ModeMenu_wash[0]['sTime']
-        Wash_price = float(ModeMenu_wash[0]['sPrice'])
-        Wash_ppoint = float(ModeMenu_wash[0]['sPPoint'])
+            ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
+            Wash_time = ModeMenu_wash[0]['sTime']
+            Wash_price = float(ModeMenu_wash[0]['sPrice'])
+            Wash_ppoint = float(ModeMenu_wash[0]['sPPoint'])
 
-        ModeMenu_dry = ModeMenu.objects.filter(sModeName= Dry).values()
-        Dry_time = ModeMenu_dry[0]['sTime']
-        Dry_price = float(ModeMenu_dry[0]['sPrice'])
-        Dry_ppoint = float(ModeMenu_dry[0]['sPPoint'])
+            ModeMenu_dry = ModeMenu.objects.filter(sModeName= Dry).values()
+            Dry_time = ModeMenu_dry[0]['sTime']
+            Dry_price = float(ModeMenu_dry[0]['sPrice'])
+            Dry_ppoint = float(ModeMenu_dry[0]['sPPoint'])
 
-        ModeMenu_fold = ModeMenu.objects.filter(sModeName= Fold).values()
-        Fold_time = ModeMenu_wash[0]['sTime']
-        Fold_price = float(ModeMenu_fold[0]['sPrice'])
-        Fold_ppoint = float(ModeMenu_fold[0]['sPPoint'])
+            ModeMenu_fold = ModeMenu.objects.filter(sModeName= Fold).values()
+            Fold_time = ModeMenu_wash[0]['sTime']
+            Fold_price = float(ModeMenu_fold[0]['sPrice'])
+            Fold_ppoint = float(ModeMenu_fold[0]['sPPoint'])
 
-        sumTime = (Wash_time + Dry_time + Fold_time)
-        sumPrice = int(Wash_price + Dry_price + Fold_price)
-        sumPPoint = int(Wash_ppoint + Dry_ppoint + Fold_ppoint)
+            sumTime = (Wash_time + Dry_time + Fold_time)
+            sumPrice = int(50 + Wash_price + Dry_price + Fold_price)
+            sumPPoint = int(20 + Wash_ppoint + Dry_ppoint + Fold_ppoint)
 
         page = render(request, 'orderdata.html', locals())
     else:

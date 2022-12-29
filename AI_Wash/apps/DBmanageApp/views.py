@@ -107,9 +107,7 @@ def create_washMode(request):
                 'sPrice': 5,
                 'sPPoint': 0,
                 'sCarbon': 1,
-            }
-            
-            ]
+            }]
         }
         
         for mode in Modes['mode']:
@@ -117,13 +115,14 @@ def create_washMode(request):
             Time = mode['sTime']
             Price = mode['sPrice']
             PPoint = mode['sPPoint']
-            ModeMenu.objects.create(sModeName=ModeName, sTime=Time, sPrice=Price, sPPoint=PPoint)
+            Carbon = mode['sCarbon']
+            ModeMenu.objects.create(sModeName=ModeName, sTime=Time, sPrice=Price, sPPoint=PPoint, sCarbon=Carbon)
 
         # daya = (datetime.now() + delta).strftime("%Y-%m-%d %H:%M:%S")
         # 時間加法範例，可預估完成時間
 
-        return HttpResponse("Success")
+        return HttpResponse("<h1>Success</h1>")
     except:
-       return HttpResponse("create Data err")
+       return HttpResponse("<h1>create Data err 請檢查是否已存在</h1>")
 
 # Create your views here.
