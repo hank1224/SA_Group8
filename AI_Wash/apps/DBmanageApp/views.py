@@ -9,39 +9,104 @@ def create_washMode(request):
     try:
 
         # 都是選填的， = 0 的可以去除
-        delta = timedelta(
+        deltaA_1 = timedelta(
             days=0,
             seconds=0,
             microseconds=0,
             milliseconds=0,
             minutes=30,
-            hours=1,
-            weeks=5
+            hours=0,
+            weeks=0
         )
-        
+        deltaA_2 = timedelta(
+            minutes=50
+        )
+        deltaA_3 = timedelta(
+            minutes=40
+        )
+        deltaA_4 = timedelta(
+            minutes=20
+        )
+        deltaB_1 = timedelta(
+            days=1
+        )
+        deltaB_2 = timedelta(
+            hours=3
+        )
+        deltaB_3 = timedelta(
+            hours=2
+        )
+        deltaB_4 = timedelta(
+            hours=1
+        )
+        deltaC_1 = timedelta(
+            hours=0
+        )
+        deltaC_2 = timedelta(
+            minutes=20,
+        )
 
         Modes = {
             'mode':[{
                 'ModeName': '標準',
-                'sTime': delta,
-                'sPrice': 100,
-                'sPPoint': 20,
-                'sCarbon': 0,
+                'sTime': deltaA_1,
+                'sPrice': 50,
+                'sPPoint': 25,
+                'sCarbon': 1,
             },{
                 'ModeName': '精緻洗',
-                'sTime': delta,
-                'sPrice': 200,
-                'sPPoint': 10,
+                'sTime': deltaA_2,
+                'sPrice': 55,
+                'sPPoint': 20,
+                'sCarbon': 2,
             },{
                 'ModeName': '柔洗',
-                'sTime': delta,
-                'sPrice': 150,
-                'sPPoint': 8,
+                'sTime': deltaA_3,
+                'sPrice': 55,
+                'sPPoint': 20,
+                'sCarbon': 2,
             },{
                 'ModeName': '快洗',
-                'sTime': delta,
-                'sPrice': 80,
-                'sPPoint': 15,
+                'sTime': deltaA_4,
+                'sPrice': 50,
+                'sPPoint': 25,
+                'sCarbon': 2,
+            },{
+                'ModeName': '日曬',
+                'sTime': deltaB_1,
+                'sPrice': 0,
+                'sPPoint': 5,
+                'sCarbon': 0,
+            },{
+                'ModeName': '低溫烘乾',
+                'sTime': deltaB_2,
+                'sPrice': 5,
+                'sPPoint': 0,
+                'sCarbon': 3,
+            },{
+                'ModeName': '中溫烘乾',
+                'sTime': deltaB_3,
+                'sPrice': 5,
+                'sPPoint': 0,
+                'sCarbon': 3,
+            },{
+                'ModeName': '高溫烘乾',
+                'sTime': deltaB_4,
+                'sPrice': 5,
+                'sPPoint': 0,
+                'sCarbon': 3,
+            },{
+                'ModeName': '不折',
+                'sTime': deltaC_1,
+                'sPrice': 0,
+                'sPPoint': 5,
+                'sCarbon': 0,
+            },{
+                'ModeName': '機器摺衣',
+                'sTime': deltaC_2,
+                'sPrice': 5,
+                'sPPoint': 0,
+                'sCarbon': 1,
             }
             
             ]
