@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib import messages
 
 from datetime import datetime, timedelta
 
@@ -32,10 +33,11 @@ def order_finish_page(request):
 
 def orderdata_page(request):
     if login_check(request) == True:
-
-        Wash = request.GET.get('wash')
-        Dry = request.GET.get('dry')
-        Fold = request.GET.get('fold')
+        if request.method == "POST":
+            data = request.POST
+            Wash = data.get('wash')
+            Dry = data.get('dry')
+            Fold = data.get('fold')
 
         ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
         Wash_time = ModeMenu_wash[0]['sTime']
@@ -58,7 +60,7 @@ def orderdata_page(request):
 
         page = render(request, 'orderdata.html', locals())
     else:
-        page = login_check(request)    
+        page = login_check(request)
     return page
 
 
@@ -66,7 +68,12 @@ def pay_finish_page(request):
     return render(request, template_name='pay_finish.html')
 
 def payNO_page(request):
-    return render(request, template_name='payNO.html')
+    print('你爸')
+    messages.error(request, '你是臭甲')
+    print('你媽')
+    # return render(request, 'payOK.html',locals())
+    return HttpResponseRedirect("payOK.html")
+    # return render(request, template_name='payNO.html')
 
 def payOK_page(request):
     return render(request, template_name='payOK.html')
@@ -80,55 +87,63 @@ def record_page(request):
 def satisfaction_page(request):
     return render(request, template_name='satisfaction.html')
 
-def upload_satisfaction_page(request):
+def upload_satisfaction(request):
+    if login_check(request) == True:
 
-    wServe = request.GET.get('radio')
-    wRate = request.GET.get('radio_2')
-    wSatisfy = request.GET.get('radio_3')
+        if request.method == "POST":
+            data = request.POST
+            wServe = data.get('radio')
+            wRate = data.get('radio_2')
+            wSatisfy = data.get('radio_3')
 
-    if wServe == "F":
-        wServe = False
-    elif wServe == "T":
-        wServe = True
+        if wServe == "F":
+            wServe = False
+        elif wServe == "T":
+            wServe = True
+        else:
+            wServe = None
+
+        if wRate == "F":
+            wRate = False
+        elif wRate == "T":
+            wRate = True
+        else:
+            wRate = None
+
+        if wSatisfy == "F":
+            wSatisfy = False
+        elif wSatisfy == "T":
+            wSatisfy = True
+        else:
+            wSatisfy = None
+
+        Satisfy.objects.create(sOrderID="a2", sServe= wServe, sRate= wRate, sSatisfy= wSatisfy)
     else:
-        wServe = None
+        return login_check(request)
 
-    if wRate == "F":
-        wRate = False
-    elif wRate == "T":
-        wRate = True
-    else:
-        wRate = None
+    return render(request ,"satisfaction_result.html")
 
-    if wSatisfy == "F":
-        wSatisfy = False
-    elif wSatisfy == "T":
-        wSatisfy = True
-    else:
-        wSatisfy = None
-    
-    Satisfy.objects.create(sOrderID="a1", sServe= wServe, sRate= wRate, sSatisfy= wSatisfy)
-    return render(request, 'upload_satisfaction.html', locals())
 
 def wash1_page(request):
     
     if login_check(request) == True:
         UserMode_data = UserMode.objects.filter(sUserID="a1").values()
-
         ListName_list=[]
         for usermode in UserMode_data:
             ListName_list.append(usermode['sListName'])
-
         page = render(request, 'wash1.html', locals())
     else:
         page = login_check(request)
-    
     return page
 
 def wash2_page(request):
     return render(request, template_name='wash2.html')
 
 
+
+def new_session_check(request):
+    if request.user.is_authenticated:
+        account = request.user
 
 
 def session_check(request):
@@ -157,6 +172,5 @@ def login_check(request):
     else:
         check_return = HttpResponse("check_login err")
     return check_return
-
 
 # Create your views here.

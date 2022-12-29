@@ -12,7 +12,8 @@
     <div class="container">
         <div class="flex-col flex-cent">
             <div class="title"><a href="index.html"><img src="{% static 'assets/image/back.png' %}" height="30rem" style="margin: 0 0.5rem;"></a><h1>洗衣設定</h1></div>
-            <form method="get" action="orderdata.html">
+            <form method="post" action="orderdata.html">
+                {% csrf_token %}
                 <div class="set">
                     <select class="model">
                         <option>----常用模式選擇----</option>
