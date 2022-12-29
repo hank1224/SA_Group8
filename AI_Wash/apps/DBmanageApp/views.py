@@ -26,6 +26,7 @@ def create_washMode(request):
                 'sTime': delta,
                 'sPrice': 100,
                 'sPPoint': 20,
+                'sCarbon': 0,
             },{
                 'ModeName': '精緻洗',
                 'sTime': delta,
@@ -42,6 +43,7 @@ def create_washMode(request):
                 'sPrice': 80,
                 'sPPoint': 15,
             }
+            
             ]
         }
         

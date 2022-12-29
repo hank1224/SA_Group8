@@ -3,7 +3,7 @@ from DBmanageApp.models import ModeMenu, Store
 
 
 class ModeMenuMain(admin.ModelAdmin):
-    list_display=('sModeName','sTime','sPrice','sPPoint')
+    list_display=('sModeName','sTime','sPrice','sPPoint','sCarbon')
 
 class StoreMain(admin.ModelAdmin):
     list_display=('sStoreID','sStoreName','sStoreAdd')
