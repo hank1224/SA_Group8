@@ -14,24 +14,26 @@
             <h1>
                 目前訂單
             </h1>
+            {% for OrderRecord in currentOrder%}
                 <a href="currentOrderInner.html">
                     <table>
                         <tr>
-                            <th colspan="2">訂單編號 {{001}}</th>
-                            <th class="situation">{{作業中}}</th>
+                            <th colspan="2">訂單編號 {{OrderRecord.sOrderID}}</th>
+                            <th class="situation">{{state}}</th>
                         </tr>
                         <tr>
-                            <td colspan="3">{{標準}}</td>
+                            <td colspan="3">{{OrderRecord.sWash}}</td>
                         </tr>
                         <tr>
-                            <td colspan="3">{{日曬}}</td>
+                            <td colspan="3">{{OrderRecord.sDry}}</td>
                         </tr>
                         <tr>
-                            <td colspan="3">{{機器人}}</td>
+                            <td colspan="3">{{OrderRecord.sFold}}</td>
                         </tr>
                     </table>
-                    <p>總計{{100}}元，獲取點數 {{100}}點</p>
-                </a>
+                    <p>總計{{OrderRecord.sSum}}元，獲取點數 {{OrderRecord.sPoint}}點</p>
+                </a><br>
+            {% endfor %}
                 <a href="index.html"><input class="btn" type="button" value="返回"></a>
         </div>
     </div>
