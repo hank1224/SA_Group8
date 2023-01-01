@@ -12,27 +12,29 @@
     <div class="container">
         <div class="flex-col flex-cent">
             <h1>歷史紀錄</h1>
+            {% for OrderRecord in OrderRecords%}
             <table>
                 <tr>
-                    <td colspan="4">訂單編號 {{ 5 }}</td>
+                    <td colspan="4">訂單編號 {{OrderRecord.sOrderID}}</td>
                 </tr>
                 <tr>
                     
                 </tr>
                 <tr>
                     <td rowspan="3">模式細節</td>
-                    <td class="table-right" colspan="2">{{標準}}</td>
+                    <td class="table-right" colspan="2">{{OrderRecord.sWash}}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">{{日曬}}</td>
+                    <td colspan="2">{{OrderRecord.sDry}}</td>
                 </tr>
-                    <td colspan="2">{{機器人}}</td>
+                    <td colspan="2">{{OrderRecord.sFold}}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">總計{{200}}元，獲取點數 {{200}}點</td>
+                    <td colspan="4">總計{{OrderRecord.sSum}}元，獲取點數 {{OrderRecord.sPoint}}點</td>
                 </tr>
             </table>
-            <input class="btn-problem" type="button" value="回報此單問題">
+            <input class="btn-problem" type="button" value="回報此單問題"><br>
+            {% endfor %}
             <a href="index.html"><input class="btn" type="button" value="返回"></a>
         </div>
     </div>

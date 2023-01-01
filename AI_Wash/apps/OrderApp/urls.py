@@ -23,6 +23,7 @@ urlpatterns = [
     path('currentOrder.html', views.currentOrder_page),
     path('index.html', views.index_page),
     path('member.html', views.member_page),
+    path('Add_UserMode', views.Add_UserMode),
     path('new.html', views.new_page),
     path('order_finish.html', views.order_finish_page),
     path('orderdata.html', views.orderdata_page),

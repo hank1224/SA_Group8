@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib import messages
+from django.utils import timezone
 
 from datetime import datetime, timedelta
 
-from OrderApp.models import UserData, UserMode, Satisfy
+from OrderApp.models import UserData, UserMode, Satisfy, OrderRecord
 from DBmanageApp.models import ModeMenu
 
 
@@ -13,7 +15,15 @@ def creditcard_page(request):
     return render(request, template_name='creditcard.html')
 
 def currentOrder_page(request):
-    return render(request, template_name='currentOrder.html')
+    currentOrder=OrderRecord.objects.filter(sUserID="a1")
+    for time in currentOrder:
+        if time.sFinishTime > timezone.now():
+            state="作業中"
+        else :
+            state="可領取"
+
+    page=render(request,'currentOrder.html', locals())
+    return page
 
 def currentOrderInner_page(request):
     return render(request, template_name='currentOrderInner.html')
@@ -23,7 +33,38 @@ def index_page(request):
     return page if login_check(request) == True else login_check(request)
 
 def member_page(request):
-    return render(request, template_name='member.html')
+    if login_check(request) == True:
+        UserMode_data = UserMode.objects.filter(sUserID="a1").values()
+        UserMode_items = []
+        for usermode in UserMode_data:
+            UserMode_items.append(usermode)
+        
+        page = render(request, 'member.html', locals())
+    else:
+        page = login_check(request)
+    return page
+
+def Add_UserMode(request):
+    if request.method == "POST":
+        data = request.POST
+        Wash = data.get('wash')
+        Dry = data.get('dry')
+        Fold = data.get('fold')
+        ListName = data.get('modelname')
+
+        try:
+            UserMode.objects.get(sUserID=UserData('a1'), sListName=ListName)
+            try:
+                UserMode.objects.filter(sUserID=UserData('a1'), sListName=ListName).update(sWash=Wash, sDry=Dry, sFold=Fold)
+            except:
+                HttpResponse("Updata err")
+        except MultipleObjectsReturned:
+            pass
+        except ObjectDoesNotExist:
+            UserMode.objects.create(sUserID=UserData("a1"), sListName=ListName, sWash=Wash, sDry=Dry, sFold=Fold)
+
+        return HttpResponse("Su")
+
 
 def new_page(request):
     return render(request, template_name='new.html')
@@ -82,7 +123,9 @@ def plzLogin_page(request):
     return render(request, template_name='plzLogin.html')
 
 def record_page(request):
-    return render(request, template_name='record.html')
+    OrderRecords=OrderRecord.objects.filter(sUserID="a1")
+    page=render(request, 'record.html', locals())
+    return  page
 
 def satisfaction_page(request):
     return render(request, template_name='satisfaction.html')

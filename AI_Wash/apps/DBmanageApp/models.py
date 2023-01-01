@@ -2,7 +2,7 @@ from django.db import models
 
 
 class ModeMenu(models.Model):
-    sModeName=models.CharField(max_length=10,blank=False, null=False ,unique=True)
+    sModeName=models.CharField(max_length=6,blank=False, null=False ,unique=True)
     sTime=models.DurationField(blank=False, null=True)
     sPrice=models.FloatField(blank=False, null=True)
     sPPoint=models.FloatField(blank=False, null=True)
