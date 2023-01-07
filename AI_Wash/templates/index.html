@@ -14,8 +14,12 @@
             <h1>
                 AI智慧喜
             </h1>
-            <a href="member.html" class="img-place"><img src="{% static 'assets/image/earth-removebg-preview.png' %}" class="home-img"></a>
-            <p class="user-name">敝姓謝</p>
+            {% if loginState == True %}
+            <a href="member.html" class="img-place"><img src="{{ sPictureUrl }}" class="home-img" id="home-img"></a>
+            {% else %}
+            <a href="member.html" class="img-place"><img src="{% static 'assets/image/earth-removebg-preview.png' %}" class="home-img" id="home-img"></a>
+            {% endif %}
+            <p class="user-name" id="mname">{{ 好醜 }}</p>
             <ul class="home-opi-inner">
                 <a href="wash1.html"><li>洗衣</li></a>
                 <a href="wash2.html"><li>寵物專區</li></a>

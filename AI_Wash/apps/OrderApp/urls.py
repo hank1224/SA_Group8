@@ -21,7 +21,11 @@ urlpatterns = [
     path('creditcard.html', views.creditcard_page),
     path('currentOrderInner.html', views.currentOrderInner_page),
     path('currentOrder.html', views.currentOrder_page),
+
     path('index.html', views.index_page),
+    path('SACC_LineLoginURL', views.SACC_LineLoginURL),
+    path('lineback', views.lineback),
+
     path('member.html', views.member_page),
     path('Add_UserMode', views.Add_UserMode),
     path('new.html', views.new_page),
@@ -39,7 +43,7 @@ urlpatterns = [
     path('wash1.html', views.wash1_page),
     path('wash2.html', views.wash2_page),
 
-    path('S/', views.session_check),
-    path('delS/', views.del_session),
+    path('login.html', views.login_page),
+    path('test', views.test),
 
 ]

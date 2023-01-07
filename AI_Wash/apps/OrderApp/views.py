@@ -3,10 +3,12 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib import messages
 from django.utils import timezone
+from django.conf import settings
+import requests
 
 from datetime import datetime, timedelta
 
-from OrderApp.models import UserData, UserMode, Satisfy, OrderRecord
+from OrderApp.models import *
 from DBmanageApp.models import ModeMenu
 
 
@@ -15,14 +17,15 @@ def creditcard_page(request):
     return render(request, template_name='creditcard.html')
 
 def currentOrder_page(request):
-    currentOrder=OrderRecord.objects.filter(sUserID="a1")
+    currentOrder=OrderRecord.objects.filter(sUserID="a1",sFinishTime__isnull=True)
+
     for time in currentOrder:
         if time.sFinishTime > timezone.now():
-            state="作業中"
+            state= "作業中"
         else :
-            state="可領取"
+            state= "可領取"
 
-    page=render(request,'currentOrder.html', locals())
+    page = render(request,'currentOrder.html', locals())
     return page
 
 def currentOrderInner_page(request):
@@ -31,6 +34,49 @@ def currentOrderInner_page(request):
 def index_page(request):
     page = render(request, template_name='index.html')
     return page if login_check(request) == True else login_check(request)
+
+def login_page(request):
+    return render(request, '1.html')
+
+def SACC_LineLoginURL(request):
+    new_LineLogin = LineLogin.objects.create()
+    sstate = new_LineLogin.sState
+    backurl = settings.NGROK+"/OrderApp/lineback?sState="+sstate
+
+    rurl=settings.SACC_NGROK+"/RESTapiApp/Line_1"
+    param={'Rbackurl':backurl}
+    header={
+        'Authorization': 'Token '+settings.RESTAPI_TOKEN,
+        'ngrok-skip-browser-warning': '7414'
+        }
+    resb=requests.get(rurl,param,headers=header)
+    rstate = resb.json()['Rstate']
+    LineLogin.objects.filter(sState=sstate).update(Rstate=rstate)
+    url="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657781063&"+\
+        "redirect_uri="+settings.SACC_NGROK+"/LineLoginApp/callback&state="+rstate+\
+            "&scope=profile%20openid%20email&promot=consent&ui_locales=zh-TW"
+
+    return HttpResponseRedirect(url)
+
+def lineback(request):
+    sstate = request.GET.get('sState')
+    get_Rstate = LineLogin.objects.get(sState=sstate)
+    rstate = get_Rstate.Rstate
+
+    rurl=settings.SACC_NGROK+"/RESTapiApp/Line_2"
+    param={'Rstate': rstate}
+    header={
+        'Authorization': 'Token '+settings.RESTAPI_TOKEN,
+        'ngrok-skip-browser-warning': '7414'
+        }
+    resb=requests.get(rurl,param,headers=header)
+
+    ruserid = resb.json()['RuserID']
+    raccess_code = resb.json()['Raccess_code']
+    LineLogin.objects.filter(sState=sstate ,Rstate=rstate).update(Raccess_code=raccess_code, RuserID=ruserid)
+    return Login_and_AddSession(request, ruserid, raccess_code)
+
+
 
 def member_page(request):
     if login_check(request) == True:
@@ -190,10 +236,10 @@ def new_session_check(request):
 
 
 def session_check(request):
-    if not "AIwash8" in request.session:
-        request.session["AIwash8"] = True
-        request.session.set_expiry(60*20) #存在20分鐘
-        msg = "掛入AIwash8 session 效期20分鐘"
+    if not "Raccess_code" in request.session:
+        request.session["Raccess_code"] = True
+        request.session.set_expiry(60*10) #存在10分鐘
+        msg = "掛入Raccess_code session 效期10分鐘"
         respone = HttpResponse(msg + "<a href='/OrderApp/index.html'><h1>home</h1></a>")
     else:
         msg = "已存在session"
@@ -202,7 +248,7 @@ def session_check(request):
 
 def del_session(request):
     try:
-        del request.session["AIwash8"]
+        del request.session["Raccess_code"]
         return HttpResponse("Success del session")
     except:
         return HttpResponse("err")
@@ -216,4 +262,30 @@ def login_check(request):
         check_return = HttpResponse("check_login err")
     return check_return
 
+
+def Login_and_AddSession(request, userid, raccess_code):
+    if 'AIwash8' in request.session:
+        try:
+            del request.session['AIwash8']
+            del request.session['Raccess_code']
+        except:
+            pass
+    request.session['AIwash8'] = userid
+    request.session['Raccess_code'] = raccess_code
+    request.session.modified = True
+    request.session.set_expiry(20) #存在10分鐘
+    return HttpResponseRedirect('index.html')
+
+def test(request):
+    a="N"
+    b="N"
+    try:
+        a = request.session['AIwash8']
+    except:
+        pass
+    try:
+        b = request.session['Raccess_code']
+    except:
+        pass
+    return HttpResponse("AIwash8: "+a+", Raccess_code: "+b)
 # Create your views here.

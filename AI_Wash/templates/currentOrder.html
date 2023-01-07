@@ -14,24 +14,24 @@
             <h1>
                 目前訂單
             </h1>
-            {% for OrderRecord in currentOrder%}
+            {% for OrderRecord in currentOrder %}
                 <a href="currentOrderInner.html">
                     <table>
                         <tr>
-                            <th colspan="2">訂單編號 {{OrderRecord.sOrderID}}</th>
-                            <th class="situation">{{state}}</th>
+                            <th colspan="2">訂單編號 {{ OrderRecord.sOrderID }}</th>
+                            <th class="situation">{{ state }}</th>
                         </tr>
                         <tr>
-                            <td colspan="3">{{OrderRecord.sWash}}</td>
+                            <td colspan="3">{{ OrderRecord.sWash }}</td>
                         </tr>
                         <tr>
-                            <td colspan="3">{{OrderRecord.sDry}}</td>
+                            <td colspan="3">{{ OrderRecord.sDry }}</td>
                         </tr>
                         <tr>
-                            <td colspan="3">{{OrderRecord.sFold}}</td>
+                            <td colspan="3">{{ OrderRecord.sFold }}</td>
                         </tr>
                     </table>
-                    <p>總計{{OrderRecord.sSum}}元，獲取點數 {{OrderRecord.sPoint}}點</p>
+                    <p>總計{{OrderRecord.sSum}}元，獲取點數 {{ OrderRecord.sPoint }}點</p>
                 </a><br>
             {% endfor %}
                 <a href="index.html"><input class="btn" type="button" value="返回"></a>

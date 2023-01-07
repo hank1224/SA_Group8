@@ -1,5 +1,8 @@
 from django.db import models
 from datetime import datetime
+from uuid import uuid4
+def wStateUUID():
+    return "wState-"+str(uuid4())
 
 class OrderRecord(models.Model):
     sOrderID=models.CharField(max_length=32, null=False, primary_key=True)
@@ -94,3 +97,14 @@ class Satisfy(models.Model):
     #讓object預設回傳
 
 # Create your models here.
+
+class LineLogin(models.Model):
+    sState=models.CharField(max_length=43, primary_key=True, default=wStateUUID)
+    Rstate=models.CharField(max_length=42)
+    RuserID=models.CharField(max_length=43)
+    Raccess_code=models.CharField(max_length=43)
+    sTime=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name=u"lineLogin紀錄"
+        verbose_name_plural = verbose_name

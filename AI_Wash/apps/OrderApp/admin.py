@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from OrderApp.models import OrderRecord, UserData, UserMode, QRcode, Problem, Satisfy
+from OrderApp.models import *
 
 class OrderRecordMain(admin.ModelAdmin):
     list_display=('sOrderID','sUserID','sSum','sPoint','sWash','sDry','sFold','sCreateTime','sFinishTime','sStoreName')
@@ -31,6 +31,11 @@ class SatisfyMain(admin.ModelAdmin):
     search_fields=('sOrderID',)
     ordering=('sOrderID',)
 
+class LineLoginMain(admin.ModelAdmin):
+    list_display=('sState','Rstate','RuserID','Raccess_code',)
+    search_fields=('sState',)
+    ordering=('-sTime',)
+
     
 
 admin.site.register(OrderRecord, OrderRecordMain)
@@ -39,3 +44,4 @@ admin.site.register(UserMode, UserModeMain)
 admin.site.register(QRcode, QRcodeMain)
 admin.site.register(Problem, ProblemMain)
 admin.site.register(Satisfy, SatisfyMain)
+admin.site.register(LineLogin, LineLoginMain)
