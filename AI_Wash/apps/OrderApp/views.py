@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib import messages
 from django.utils import timezone
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+
 import requests
 
 from datetime import datetime, timedelta
@@ -36,11 +38,70 @@ def index_page(request):
     return page if login_check(request) == True else login_check(request)
 
 def login_page(request):
-    return render(request, '1.html')
+    return render(request, 'login.html')
+
+def login_SMS1_page(request):
+    return render(request, 'login_SMS1.html')
+
+@csrf_exempt
+def login_SMS2_page(request):
+    if request.method == 'POST':
+        data = request.POST
+        sphone = data.get('sPhone')
+
+        # 欠重整判斷
+
+        rurl = settings.SACC_NGROK+"/RESTapiApp/SMS_1"
+        header = {
+            'Authorization': 'Token '+settings.RESTAPI_TOKEN,
+            'ngrok-skip-browser-warning': '7414'
+        }
+        param = {'Rphone':sphone}
+        resb=requests.get(rurl,param,headers=header)
+
+        if resb.status_code == 404:
+            SMS_Auth_404 = True
+            return render('login_SMS2.html', locals())
+
+        rsmsid = resb.json()['RSMSid']
+        print(resb.status_code)
+        Logindb.objects.create(RSMSid=rsmsid, sPhone=sphone)
+
+        return render(request, 'login_SMS2.html', locals())
+
+@csrf_exempt
+def login_SMS3(request):
+    if request.method == 'POST':
+        data = request.POST
+        rsmsid = data.get('RSMSid')
+        rcode = data.get('RSMS_code')
+        sphone = data.get('sPhone')
+
+        rurl = settings.SACC_NGROK+"/RESTapiApp/SMS_2"
+        header = {
+            'Authorization': 'Token '+settings.RESTAPI_TOKEN,
+            'ngrok-skip-browser-warning': '7414'
+        }
+        param = {
+            'RSMS_code': rcode,
+            'RSMSid': rsmsid,
+            }
+        resb=requests.get(rurl,param,headers=header)
+        print(resb.status_code)
+
+        if resb.status_code != 200:
+            SMS_Auth = False
+            return render(request, 'login_SMS2.html', locals())
+        
+
+        ruserid = resb.json()['RuserID']
+        raccess_code = resb.json()['Raccess_code']
+        Logindb.objects.filter(RSMSid=rsmsid ,sPhone=sphone).update(Raccess_code=raccess_code, RuserID=ruserid)
+        return Login_and_AddSession(request, ruserid, raccess_code)
 
 def SACC_LineLoginURL(request):
-    new_LineLogin = LineLogin.objects.create()
-    sstate = new_LineLogin.sState
+    new_Logindb = Logindb.objects.create()
+    sstate = new_Logindb.sState
     backurl = settings.NGROK+"/OrderApp/lineback?sState="+sstate
 
     rurl=settings.SACC_NGROK+"/RESTapiApp/Line_1"
@@ -51,7 +112,7 @@ def SACC_LineLoginURL(request):
         }
     resb=requests.get(rurl,param,headers=header)
     rstate = resb.json()['Rstate']
-    LineLogin.objects.filter(sState=sstate).update(Rstate=rstate)
+    Logindb.objects.filter(sState=sstate).update(Rstate=rstate)
     url="https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657781063&"+\
         "redirect_uri="+settings.SACC_NGROK+"/LineLoginApp/callback&state="+rstate+\
             "&scope=profile%20openid%20email&promot=consent&ui_locales=zh-TW"
@@ -60,7 +121,7 @@ def SACC_LineLoginURL(request):
 
 def lineback(request):
     sstate = request.GET.get('sState')
-    get_Rstate = LineLogin.objects.get(sState=sstate)
+    get_Rstate = Logindb.objects.get(sState=sstate)
     rstate = get_Rstate.Rstate
 
     rurl=settings.SACC_NGROK+"/RESTapiApp/Line_2"
@@ -73,7 +134,7 @@ def lineback(request):
 
     ruserid = resb.json()['RuserID']
     raccess_code = resb.json()['Raccess_code']
-    LineLogin.objects.filter(sState=sstate ,Rstate=rstate).update(Raccess_code=raccess_code, RuserID=ruserid)
+    Logindb.objects.filter(sState=sstate ,Rstate=rstate).update(Raccess_code=raccess_code, RuserID=ruserid)
     return Login_and_AddSession(request, ruserid, raccess_code)
 
 
@@ -171,7 +232,7 @@ def plzLogin_page(request):
 def record_page(request):
     OrderRecords=OrderRecord.objects.filter(sUserID="a1")
     page=render(request, 'record.html', locals())
-    return  page
+    return page
 
 def satisfaction_page(request):
     return render(request, template_name='satisfaction.html')
@@ -229,12 +290,6 @@ def wash2_page(request):
     return render(request, template_name='wash2.html')
 
 
-
-def new_session_check(request):
-    if request.user.is_authenticated:
-        account = request.user
-
-
 def session_check(request):
     if not "Raccess_code" in request.session:
         request.session["Raccess_code"] = True
@@ -263,6 +318,35 @@ def login_check(request):
     return check_return
 
 
+def Access_API(request):
+    raccess_code = request.session['Raccess_code']
+    rurl=settings.SACC_NGROK+"/RESTapiApp/Access"
+    param={'Raccess_code': raccess_code}
+    header={
+        'Authorization': 'Token '+settings.RESTAPI_TOKEN,
+        'ngrok-skip-browser-warning': '7414'
+        }
+    resb=requests.get(rurl,param,headers=header)
+    if resb.status_code == 409:
+        return redirect('login.html', permanent=True, args={'logout' : True})
+    elif resb.status_code != 200:
+        return HttpResponse(resb.json())
+    sUser = resb.json()['sUser']
+    sLineID = resb.json()['sLineID']
+    sName = resb.json()['sName']
+    sPhone = resb.json()['sPhone']
+    sPhone_Auth = resb.json()['sPhone_Auth']
+    sAddress = resb.json()['sAddress']
+    sEmail = resb.json()['sEmail']
+    sPictureUrl = resb.json()['sPictureUrl']
+
+    personal_data = {
+        'ruser':sUser
+    }
+
+    return(sUser,sLineID,sName,sPhone,sPhone_Auth,sAddress,sEmail,sPictureUrl)
+    
+
 def Login_and_AddSession(request, userid, raccess_code):
     if 'AIwash8' in request.session:
         try:
@@ -273,7 +357,7 @@ def Login_and_AddSession(request, userid, raccess_code):
     request.session['AIwash8'] = userid
     request.session['Raccess_code'] = raccess_code
     request.session.modified = True
-    request.session.set_expiry(20) #存在10分鐘
+    request.session.set_expiry(60*10) #存在10分鐘
     return HttpResponseRedirect('index.html')
 
 def test(request):

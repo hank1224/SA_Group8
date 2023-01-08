@@ -44,6 +44,9 @@ urlpatterns = [
     path('wash2.html', views.wash2_page),
 
     path('login.html', views.login_page),
+    path('login_SMS1.html', views.login_SMS1_page),
+    path('login_SMS2.html', views.login_SMS2_page),
+    path('login_SMS3', views.login_SMS3),
     path('test', views.test),
 
 ]

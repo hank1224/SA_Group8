@@ -98,10 +98,12 @@ class Satisfy(models.Model):
 
 # Create your models here.
 
-class LineLogin(models.Model):
+class Logindb(models.Model):
     sState=models.CharField(max_length=43, primary_key=True, default=wStateUUID)
     Rstate=models.CharField(max_length=42)
     RuserID=models.CharField(max_length=43)
+    RSMSid=models.CharField(max_length=42)
+    sPhone=models.CharField(max_length=10)
     Raccess_code=models.CharField(max_length=43)
     sTime=models.DateTimeField(auto_now_add=True)
 

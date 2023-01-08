@@ -1,35 +1,47 @@
 table{
     text-align: center;
-    background-color: rgb(134,157,157);
+    background-color: rgb(131,196,140);
     margin-bottom: 4rem;
     border-radius: 0.5rem 0.5rem 0.2rem 0.2rem;
-    border: 0.2rem solid rgb(134,157,157);
+    border: 0.2rem solid rgb(131,196,140);
 }
 
 th{
     text-align: center;
-    border: 3px solid rgb(134,157,157);
+    border: 3px solid rgb(131,196,140);
     font-size: 3.6rem;
-    background-color: rgb(134,157,157);
-    color: rgba(255, 255, 255, 0.8);
+    background-color: rgb(131,196,140);
+    color: rgba(244, 240, 236);
     padding: 1.5rem 1.5rem;
 }
 
 td{
     text-align: center;
     font-size: 2.4rem;
-    background-color: rgb(199,210,212);
-    color: rgb(134,157,157);
-    border: 3px solid rgb(199,210,212);
+    background-color: rgb(244, 240, 236);
+    color: rgb(131,196,140);
+    border: 3px solid rgb(244, 240, 236);
     line-height: 4rem;
     font-weight: 700;
 }
 
 p{
-    font-size: 3.6rem;
-    color: rgb(134,157,157);
+    font-size: 2.4rem;
+    color: rgb(131,196,140);
     font-weight: 700;
     text-align: center;
+}
+
+label{
+    color: rgb(131,196,140);
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+.time{
+    border: 1px solid rgb(131,196,140);
+    color: rgba(19, 94, 29,0.8);
+    font-size: 2rem;
 }
 
 .total-place{
@@ -39,10 +51,10 @@ p{
 .button-cancel{
     font-size: 2.4rem;
     padding: 1.5rem 1.5rem;
-    background-color: rgb(216,227,231);
+    background-color: rgba(131,196,140,0.3);
     cursor: pointer;
     border: none;
-    color: rgba(134, 157, 157, 0.8);
+    color: rgb(19, 94, 29,0.8);
     border-radius: 1rem 1rem 1rem 1rem;   
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     margin-right: 2rem;
@@ -52,10 +64,10 @@ p{
 .button-pay{
     font-size: 2.4rem;
     padding: 1.5rem 1.5rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255);
     cursor: pointer;
     border: none;
-    background-color: rgb(134,157,157);
+    background-color: rgba(131,196,140);
     border-radius: 1rem 1rem 1rem 1rem;   
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     margin-left: 2rem;

@@ -31,7 +31,7 @@ SACC_NGROK = "https://10eb-1-34-54-152.jp.ngrok.io"
 
 RESTAPI_TOKEN = "bab3725a8d3570f8cc72a96d1ba5897c4858d132"
 
-NGROK = "https://4148-1-34-54-152.jp.ngrok.io"
+NGROK = "https://5846-1-34-54-152.jp.ngrok.io"
 
 ALLOWED_HOSTS = ['*']
 

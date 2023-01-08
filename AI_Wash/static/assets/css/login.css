@@ -1,0 +1,57 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 50%;
+}
+
+:root{
+    background: #F4F0EC;
+}
+
+/* 整個外框框 */
+
+.container{
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 2rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 7px;
+    background: rgba(131,196,140,0.5);
+}
+.justify-center {
+    justify-content: center;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-cent{
+    justify-content: center;
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+header{
+  font-size: 5.4rem;
+  
+}
