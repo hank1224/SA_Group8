@@ -45,6 +45,21 @@ def create_washMode(request):
         deltaC_2 = timedelta(
             minutes=20,
         )
+        deltaD_1 = timedelta(
+            minutes=20
+        )
+        deltaD_2 = timedelta(
+            minutes=25
+        )
+        deltaD_3 = timedelta(
+            minutes=30
+        )
+        deltaF_1 = timedelta(
+            hours=1
+        )
+        deltaF_2 = timedelta(
+            hours=0
+        )
 
         Modes = {
             'mode':[{
@@ -107,6 +122,36 @@ def create_washMode(request):
                 'sPrice': 5,
                 'sPPoint': 0,
                 'sCarbon': 1,
+            },{
+                'ModeName': '一般洗淨',
+                'sTime': deltaD_1,
+                'sPrice': 0,
+                'sPPoint': 5,
+                'sCarbon': 1,
+            },{
+                'ModeName': '抗過敏洗淨',
+                'sTime': deltaD_2,
+                'sPrice': 10,
+                'sPPoint': 0,
+                'sCarbon': 1,
+            },{
+                'ModeName': '驅蟲洗淨',
+                'sTime': deltaD_3,
+                'sPrice': 15,
+                'sPPoint': 0,
+                'sCarbon': 2,
+            },{
+                'ModeName': '毛絮處理',
+                'sTime': deltaF_1,
+                'sPrice': 5,
+                'sPPoint': 0,
+                'sCarbon': 1,
+            },{
+                'ModeName': '無毛絮處理',
+                'sTime': deltaF_2,
+                'sPrice': 0,
+                'sPPoint': 5,
+                'sCarbon': 0,
             }]
         }
         

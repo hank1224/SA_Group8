@@ -43,6 +43,7 @@ urlpatterns = [
     path('wash1.html', views.wash1_page),
     path('wash2.html', views.wash2_page),
 
+    path('logout', views.logout),
     path('login.html', views.login_page),
     path('login_SMS1.html', views.login_SMS1_page),
     path('login_SMS2.html', views.login_SMS2_page),

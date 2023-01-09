@@ -19,7 +19,7 @@ def creditcard_page(request):
     return render(request, template_name='creditcard.html')
 
 def currentOrder_page(request):
-    currentOrder=OrderRecord.objects.filter(sUserID="a1",sFinishTime__isnull=True)
+    currentOrder=OrderRecord.objects.filter(sUserID=request.session['Raccess_code'], sFinishTime__isnull=True)
 
     for time in currentOrder:
         if time.sFinishTime > timezone.now():
@@ -31,11 +31,18 @@ def currentOrder_page(request):
     return page
 
 def currentOrderInner_page(request):
-    return render(request, template_name='currentOrderInner.html')
+    if login_check(request) == False:
+        return render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        personal_data = Access_API(request)
+        return render(request, 'currentOrderInner.html', locals())
 
 def index_page(request):
-    page = render(request, template_name='index.html')
-    return page if login_check(request) == True else login_check(request)
+    if login_check(request) == False:
+        return render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        personal_data = Access_API(request)
+        return render(request, 'index.html', locals())
 
 def login_page(request):
     return render(request, 'login.html')
@@ -48,6 +55,9 @@ def login_SMS2_page(request):
     if request.method == 'POST':
         data = request.POST
         sphone = data.get('sPhone')
+        if len(sphone) != 10 or sphone.startswith('09') != True:
+            SMS_Auth_400 = True
+            return render(request, 'login_SMS1.html', locals())
 
         # 欠重整判斷
 
@@ -61,7 +71,7 @@ def login_SMS2_page(request):
 
         if resb.status_code == 404:
             SMS_Auth_404 = True
-            return render('login_SMS2.html', locals())
+            return render(request, 'login_SMS1.html', locals())
 
         rsmsid = resb.json()['RSMSid']
         print(resb.status_code)
@@ -91,9 +101,8 @@ def login_SMS3(request):
 
         if resb.status_code != 200:
             SMS_Auth = False
-            return render(request, 'login_SMS2.html', locals())
+            return render(request, 'login_SMS1.html', locals())
         
-
         ruserid = resb.json()['RuserID']
         raccess_code = resb.json()['Raccess_code']
         Logindb.objects.filter(RSMSid=rsmsid ,sPhone=sphone).update(Raccess_code=raccess_code, RuserID=ruserid)
@@ -141,7 +150,7 @@ def lineback(request):
 
 def member_page(request):
     if login_check(request) == True:
-        UserMode_data = UserMode.objects.filter(sUserID="a1").values()
+        UserMode_data = UserMode.objects.filter(sUserID=request.session['AIwash8']).values()
         UserMode_items = []
         for usermode in UserMode_data:
             UserMode_items.append(usermode)
@@ -153,25 +162,29 @@ def member_page(request):
     
 @csrf_exempt
 def Add_UserMode(request):
-    if request.method == "POST":
-        data = request.POST
-        Wash = data.get('wash')
-        Dry = data.get('dry')
-        Fold = data.get('fold')
-        ListName = data.get('modelname')
+    if login_check(request) == False:
+        return render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        if request.method == "POST":
+            data = request.POST
+            Wash = data.get('wash')
+            Dry = data.get('dry')
+            Fold = data.get('fold')
+            ListName = data.get('modelname')
+            suserid = str(request.session['AIwash8'])
 
-        try:
-            UserMode.objects.get(sUserID=UserData('a1'), sListName=ListName)
             try:
-                UserMode.objects.filter(sUserID=UserData('a1'), sListName=ListName).update(sWash=Wash, sDry=Dry, sFold=Fold)
-            except:
-                HttpResponse("Updata err")
-        except MultipleObjectsReturned:
-            pass
-        except ObjectDoesNotExist:
-            UserMode.objects.create(sUserID=UserData("a1"), sListName=ListName, sWash=Wash, sDry=Dry, sFold=Fold)
+                UserMode.objects.get(sUserID=UserData(suserid), sListName=ListName)
+                try:
+                    UserMode.objects.filter(sUserID=UserData(suserid), sListName=ListName).update(sWash=Wash, sDry=Dry, sFold=Fold)
+                except:
+                    HttpResponse("Updata err")
+            except MultipleObjectsReturned:
+                pass
+            except ObjectDoesNotExist:
+                UserMode.objects.create(sUserID=UserData(suserid), sListName=ListName, sWash=Wash, sDry=Dry, sFold=Fold)
 
-        return HttpResponse("Su")
+            return redirect('member.html', permanent=True)
 
 
 def new_page(request):
@@ -218,12 +231,7 @@ def pay_finish_page(request):
     return render(request, template_name='pay_finish.html')
 
 def payNO_page(request):
-    print('你爸')
-    messages.error(request, '你是臭甲')
-    print('你媽')
-    # return render(request, 'payOK.html',locals())
-    return HttpResponseRedirect("payOK.html")
-    # return render(request, template_name='payNO.html')
+    return render(request, template_name='payNO.html')
 
 def payOK_page(request):
     return render(request, template_name='payOK.html')
@@ -232,7 +240,7 @@ def plzLogin_page(request):
     return render(request, template_name='plzLogin.html')
 
 def record_page(request):
-    OrderRecords=OrderRecord.objects.filter(sUserID="a1")
+    OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'])
     page=render(request, 'record.html', locals())
     return page
 
@@ -279,7 +287,7 @@ def upload_satisfaction(request):
 def wash1_page(request):
     
     if login_check(request) == True:
-        UserMode_data = UserMode.objects.filter(sUserID="a1").values()
+        UserMode_data = UserMode.objects.filter(sUserID=request.session['Raccess_code']).values()
         UserMode_items = []
         for usermode in UserMode_data:
             UserMode_items.append(usermode)
@@ -303,22 +311,19 @@ def session_check(request):
         respone = HttpResponse(msg + "<a href='/OrderApp/index.html'><h1>home</h1></a>")
     return respone
 
-def del_session(request):
+def logout(request):
     try:
-        del request.session["Raccess_code"]
-        return HttpResponse("Success del session")
+        del request.session['AIwash8']
+        del request.session['Raccess_code']
     except:
-        return HttpResponse("err")
+        pass
+    return HttpResponseRedirect('index.html')
 
 def login_check(request):
     if not 'AIwash8' in request.session:
-        check_return = render(request, template_name='plzLogin.html')
+        return False
     elif 'AIwash8' in request.session:
-        check_return = True
-    else:
-        check_return = HttpResponse("check_login err")
-    return check_return
-
+        return True
 
 def Access_API(request):
     raccess_code = request.session['Raccess_code']
@@ -330,25 +335,34 @@ def Access_API(request):
         }
     resb=requests.get(rurl,param,headers=header)
     if resb.status_code == 409:
-        return redirect('login.html', permanent=True, args={'logout' : True})
+        print(resb.json())
+        return False
     elif resb.status_code != 200:
-        return HttpResponse(resb.json())
+        print(resb.json())
+        return False
     sUser = resb.json()['sUser']
     sLineID = resb.json()['sLineID']
     sName = resb.json()['sName']
+    sNickName = resb.json()['sNickName']
     sPhone = resb.json()['sPhone']
-    sPhone_Auth = resb.json()['sPhone_Auth']
+    sPhoneAuth = resb.json()['sPhoneAuth']
     sAddress = resb.json()['sAddress']
     sEmail = resb.json()['sEmail']
     sPictureUrl = resb.json()['sPictureUrl']
-
+    print(resb.json())
     personal_data = {
-        'ruser':sUser
+        'Ruser':sUser,
+        'Rlineid':sLineID,
+        'Rname':sName,
+        'Rnickname':sNickName,
+        'Rphone':sPhone,
+        'Rphoneauth':sPhoneAuth,
+        'Raddress':sAddress,
+        'Remail':sEmail,
+        'Rpictureurl':sPictureUrl
     }
-
-    return(sUser,sLineID,sName,sPhone,sPhone_Auth,sAddress,sEmail,sPictureUrl)
+    return(personal_data)
     
-
 def Login_and_AddSession(request, userid, raccess_code):
     if 'AIwash8' in request.session:
         try:
@@ -360,18 +374,16 @@ def Login_and_AddSession(request, userid, raccess_code):
     request.session['Raccess_code'] = raccess_code
     request.session.modified = True
     request.session.set_expiry(60*10) #存在10分鐘
+    try:
+        UserData.objects.get(sUserID=request.session['AIwash8'])
+    except ObjectDoesNotExist:
+        UserData.objects.create(sUserID=request.session['AIwash8'])
+        return HttpResponseRedirect('new.html')
     return HttpResponseRedirect('index.html')
 
 def test(request):
-    a="N"
-    b="N"
-    try:
-        a = request.session['AIwash8']
-    except:
-        pass
-    try:
-        b = request.session['Raccess_code']
-    except:
-        pass
-    return HttpResponse("AIwash8: "+a+", Raccess_code: "+b)
+    a = UserData.objects.all()
+    b = UserMode.objects.all()
+    
+    HttpResponse(str(a.union(b)))
 # Create your views here.

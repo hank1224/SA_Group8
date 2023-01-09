@@ -10,6 +10,24 @@
 </head>
 <body>
 
+    {% if SMS_Auth == False %}
+    <script type="text/javascript">
+        alert("驗證失敗！")
+    </script>
+    {% endif %}
+    
+    {% if SMS_Auth_404 == True %}
+    <script type="text/javascript">
+        alert("此電話尚未在個資系統註冊！")
+    </script>
+    {% endif %}
+    
+    {% if SMS_Auth_400 == True %}
+    <script type="text/javascript">
+        alert("請輸入有效的電話號碼！")
+    </script>
+    {% endif %}
+
     <div class="container">
         <div class="flex-col flex-cent">
             <div>

@@ -7,17 +7,8 @@
     <title>Document</title>
 </head>
 
-{% if SMS_Auth == False %}
-<script type="text/javascript">
-    alert("驗證失敗！")
-</script>
-{% endif %}
 
-{% if SMS_Auth_404 == True %}
-<script type="text/javascript">
-    alert("此電話尚未在個資系統註冊！")
-</script>
-{% endif %}
+
 
 <body>
     <p>此次驗證編號： {{ rsmsid|slice:"-5:" }}</p>

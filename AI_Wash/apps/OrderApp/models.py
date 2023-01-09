@@ -6,10 +6,10 @@ def wStateUUID():
 
 class OrderRecord(models.Model):
     sOrderID=models.CharField(max_length=32, null=False, primary_key=True)
-    sUserID=models.CharField(max_length=32, null=False)
+    sUserID=models.CharField(max_length=43, null=False)
     sSum=models.FloatField(blank=False, null=False)
     sPoint=models.FloatField(blank=False, null=False)
-    sWash=models.CharField(max_length=4, null=False)
+    sWash=models.CharField(max_length=5, null=False)
     sDry=models.CharField(max_length=4, null=False)
     sFold=models.CharField(max_length=4, null=False)
     sCreateTime=models.DateTimeField(default=datetime.now, blank=False, null=False)
@@ -26,7 +26,7 @@ class OrderRecord(models.Model):
 
 
 class UserData(models.Model):
-    sUserID=models.CharField(max_length=32, null=False, primary_key=True)
+    sUserID=models.CharField(max_length=43, null=False, primary_key=True)
     sBag=models.PositiveIntegerField(blank=False ,null=False, default=0)
 
     class Meta:
