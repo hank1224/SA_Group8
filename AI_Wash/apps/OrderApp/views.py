@@ -19,30 +19,35 @@ def creditcard_page(request):
     return render(request, template_name='creditcard.html')
 
 def currentOrder_page(request):
-    currentOrder=OrderRecord.objects.filter(sUserID=request.session['Raccess_code'], sFinishTime__isnull=True)
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        personal_data = Access_API(request)
+        currentOrder=OrderRecord.objects.filter(sUserID=request.session['Raccess_code'], sFinishTime__isnull=True)
 
-    for time in currentOrder:
-        if time.sFinishTime > timezone.now():
-            state= "作業中"
-        else :
-            state= "可領取"
-
-    page = render(request,'currentOrder.html', locals())
+        for time in currentOrder:
+            if time.sFinishTime > timezone.now():
+                state= "作業中"
+            else :
+                state= "可領取"
+        page = render(request,'currentOrder.html', locals())
     return page
 
 def currentOrderInner_page(request):
     if login_check(request) == False:
-        return render(request, 'plzLogin.html')
+        page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
         personal_data = Access_API(request)
-        return render(request, 'currentOrderInner.html', locals())
+        page = render(request, 'currentOrderInner.html', locals())
+    return page
 
 def index_page(request):
     if login_check(request) == False:
-        return render(request, 'plzLogin.html')
+        page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
         personal_data = Access_API(request)
-        return render(request, 'index.html', locals())
+        page = render(request, 'index.html', locals())
+    return page
 
 def login_page(request):
     return render(request, 'login.html')
@@ -223,7 +228,7 @@ def orderdata_page(request):
 
         page = render(request, 'orderdata.html', locals())
     else:
-        page = login_check(request)
+        page = render(request, template_name='plzLogin.html')
     return page
 
 
@@ -240,8 +245,11 @@ def plzLogin_page(request):
     return render(request, template_name='plzLogin.html')
 
 def record_page(request):
-    OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'])
-    page=render(request, 'record.html', locals())
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'])
+        page = render(request, 'record.html', locals())
     return page
 
 def satisfaction_page(request):
@@ -249,7 +257,6 @@ def satisfaction_page(request):
 
 def upload_satisfaction(request):
     if login_check(request) == True:
-
         if request.method == "POST":
             data = request.POST
             wServe = data.get('radio')
@@ -285,7 +292,6 @@ def upload_satisfaction(request):
 
 
 def wash1_page(request):
-    
     if login_check(request) == True:
         UserMode_data = UserMode.objects.filter(sUserID=request.session['Raccess_code']).values()
         UserMode_items = []
@@ -293,23 +299,11 @@ def wash1_page(request):
             UserMode_items.append(usermode)
         page = render(request, 'wash1.html', locals())
     else:
-        page = login_check(request)
+        page = render(request, template_name='plzLogin.html')
     return page
 
 def wash2_page(request):
     return render(request, template_name='wash2.html')
-
-
-def session_check(request):
-    if not "Raccess_code" in request.session:
-        request.session["Raccess_code"] = True
-        request.session.set_expiry(60*10) #存在10分鐘
-        msg = "掛入Raccess_code session 效期10分鐘"
-        respone = HttpResponse(msg + "<a href='/OrderApp/index.html'><h1>home</h1></a>")
-    else:
-        msg = "已存在session"
-        respone = HttpResponse(msg + "<a href='/OrderApp/index.html'><h1>home</h1></a>")
-    return respone
 
 def logout(request):
     try:
@@ -373,7 +367,7 @@ def Login_and_AddSession(request, userid, raccess_code):
     request.session['AIwash8'] = userid
     request.session['Raccess_code'] = raccess_code
     request.session.modified = True
-    request.session.set_expiry(60*10) #存在10分鐘
+    request.session.set_expiry(60*30) #存在30分鐘
     try:
         UserData.objects.get(sUserID=request.session['AIwash8'])
     except ObjectDoesNotExist:
