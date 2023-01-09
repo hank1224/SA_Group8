@@ -108,5 +108,5 @@ class Logindb(models.Model):
     sTime=models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name=u"lineLogin紀錄"
+        verbose_name=u"Login紀錄"
         verbose_name_plural = verbose_name

@@ -114,14 +114,15 @@ p{
 }
 
 .btn-problem{
-    margin-top: 1rem;
-    font-size: 2.4rem;
-    padding: 1rem 1rem;
+    font-size: 2rem;
+    padding: 0.5rem;
     background-color: rgb(19, 94, 29,0.8);
     cursor: pointer;
     border: none;
     color: rgba(244, 240, 236);
     font-weight: 700;
+    margin-left: 7rem;
+    border-radius: 10%;
 }
 
 
@@ -139,9 +140,10 @@ p{
     counter-reset: step;
   }
   .progressbar li {
+    
     list-style: none;
     display: inline-block;
-    width: 49%;
+    width: 32.33%;
     position: relative;
     text-align: center;
     cursor: pointer;

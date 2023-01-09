@@ -150,7 +150,8 @@ def member_page(request):
     else:
         page = login_check(request)
     return page
-
+    
+@csrf_exempt
 def Add_UserMode(request):
     if request.method == "POST":
         data = request.POST
@@ -179,6 +180,7 @@ def new_page(request):
 def order_finish_page(request):
     return render(request, template_name='order_finish.html')
 
+@csrf_exempt
 def orderdata_page(request):
     if login_check(request) == True:
         if request.method == "POST":

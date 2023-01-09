@@ -14,9 +14,9 @@
         switch(value){
             {% for item in UserMode_items %}
                 case '{{ item.sListName }}':
-                    document.querySelector('input[name="wash"][value="'+'{{ item.sWash}}'+'"]').checked=true;
-                    document.querySelector('input[name="dry"][value="'+'{{ item.sDry}}'+'"]').checked=true;
-                    document.querySelector('input[name="fold"][value="'+'{{ item.sFold}}'+'"]').checked=true;
+                    document.querySelector('input[name="wash"][value="'+'{{ item.sWash }}'+'"]').checked=true;
+                    document.querySelector('input[name="dry"][value="'+'{{ item.sDry }}'+'"]').checked=true;
+                    document.querySelector('input[name="fold"][value="'+'{{ item.sFold }}'+'"]').checked=true;
                     break;
             {% endfor %}
         }
@@ -49,9 +49,6 @@
                     <h4>摺衣模式</h4>
                     <input type="radio" id="no" name="fold" value="不折" checked><label for="no">不折</label>
                     <input type="radio" id="robot" name="fold" value="機器摺衣" ><label for="robot">機器摺衣</label><br>
-                    <h4>是否外送</h4>
-                    <input type="radio" id="NO" name="delivery" value="否" checked><label for="NO">否</label>
-                    <input type="radio" id="YES" name="delivery" value="是" ><label for="YES">是</label><br>
                     <input class="btn-re" type="reset" value="重設">
                     <input class="btn-next" type="submit" value="下一步">
                 </div> 

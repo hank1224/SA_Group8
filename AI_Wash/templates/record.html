@@ -11,30 +11,30 @@
 <body>
     <div class="container">
         <div class="flex-col flex-cent">
-            <h1>歷史紀錄</h1>
-            {% for OrderRecord in OrderRecords%}
+            <h1>
+                <a href="index.html"><img src="{% static 'assets/image/backto.png' %}" height="30rem" ></a>
+                歷史紀錄</h1>
             <table>
                 <tr>
-                    <td colspan="4">訂單編號 {{OrderRecord.sOrderID}}</td>
-                </tr>
-                <tr>
+                    <th colspan="4">訂單編號 {{001}}<input class="btn-problem" type="button" value="回報"></th>
                     
                 </tr>
                 <tr>
+                </tr>
+                <tr>
                     <td rowspan="3">模式細節</td>
-                    <td class="table-right" colspan="2">{{OrderRecord.sWash}}</td>
+                    <td class="table-right" colspan="2">{{標準}}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">{{OrderRecord.sDry}}</td>
+                    <td colspan="2">{{日曬}}</td>
                 </tr>
-                    <td colspan="2">{{OrderRecord.sFold}}</td>
+                    <td colspan="2">{{機器人}}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">總計{{OrderRecord.sSum}}元，獲取點數 {{OrderRecord.sPoint}}點</td>
+                    <td colspan="4" style="padding: 1rem;">碳排{{10}}kg<br>點數{{10}}點<br>總計{{10}}元</td>
                 </tr>
             </table>
-            <input class="btn-problem" type="button" value="回報此單問題"><br>
-            {% endfor %}
+
             <a href="index.html"><input class="btn" type="button" value="返回"></a>
         </div>
     </div>
