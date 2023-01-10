@@ -15,24 +15,28 @@
                 <a href="index.html"><img src="{% static 'assets/image/backto.png' %}" height="30rem" ></a>
                 歷史紀錄</h1>
             <table>
+                {% for record in OrderRecords %}
                 <tr>
-                    <th colspan="4">訂單編號 {{001}}<input class="btn-problem" type="button" value="回報"></th>
-                    
+                    <th colspan="4">訂單編號 {{ record.sOrderID|slice"-5" }}<input class="btn-problem" type="button" value="回報"></th>
                 </tr>
                 <tr>
                 </tr>
                 <tr>
                     <td rowspan="3">模式細節</td>
-                    <td class="table-right" colspan="2">{{標準}}</td>
+                    <td class="table-right" colspan="2">{{ record.sWash }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">{{日曬}}</td>
+                    <td colspan="2">{{ record.sDry }}</td>
                 </tr>
-                    <td colspan="2">{{機器人}}</td>
+                    <td colspan="2">{{ record.Fold }}</td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="padding: 1rem;">碳排{{10}}kg<br>點數{{10}}點<br>總計{{10}}元</td>
+                    <td colspan="4" style="padding: 1rem;">碳排{{ record.sCarbon }}kg<br>點數{{ record.sPPoint }}點<br>總計{{ record.sSum }}元</td>
                 </tr>
+                {% empty %}
+                <h4>你沒有紀錄!
+                </h4>
+                {% endfor %}
             </table>
 
             <a href="index.html"><input class="btn" type="button" value="返回"></a>

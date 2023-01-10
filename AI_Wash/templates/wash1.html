@@ -37,6 +37,7 @@
             </tr>
             <form method="post" action="orderdata.html">
                 {% csrf_token %}
+                <input type="hidden" name="orderType" value="normal">
                     <tr>
                         <td>
                             <h2 id="sUserID"></h2>
@@ -48,9 +49,6 @@
                             </select>
                         </td>
                     </tr>
-
-
-
                     <tr>
                         <td>
                             <div class="title_1">
@@ -121,5 +119,4 @@
         </table>
     </div>
 </body>
-
 </html>

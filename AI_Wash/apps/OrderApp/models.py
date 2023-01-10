@@ -3,15 +3,19 @@ from datetime import datetime
 from uuid import uuid4
 def wStateUUID():
     return "wState-"+str(uuid4())
+def sOrderIDUUID():
+    return "Order-"+str(uuid4())
 
 class OrderRecord(models.Model):
-    sOrderID=models.CharField(max_length=32, null=False, primary_key=True)
+    sOrderID=models.CharField(max_length=42, primary_key=True ,default=sOrderIDUUID)
     sUserID=models.CharField(max_length=43, null=False)
     sSum=models.FloatField(blank=False, null=False)
     sPoint=models.FloatField(blank=False, null=False)
+    sCarbon=models.FloatField(blank=False, null=False)
     sWash=models.CharField(max_length=5, null=False)
     sDry=models.CharField(max_length=4, null=False)
-    sFold=models.CharField(max_length=4, null=False)
+    sFold=models.CharField(max_length=5, null=False)
+    sOrderType=models.CharField(max_length=6, null=False)
     sCreateTime=models.DateTimeField(default=datetime.now, blank=False, null=False)
     sFinishTime=models.DateTimeField(blank=False, null=True)
     sStoreName=models.CharField(max_length=10,blank=False, null=False)

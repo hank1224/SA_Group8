@@ -198,11 +198,26 @@ def new_page(request):
 def order_finish_page(request):
     return render(request, template_name='order_finish.html')
 
+def wash1_page(request):
+    if login_check(request) == True:
+        UserMode_data = UserMode.objects.filter(sUserID=request.session['AIwash8'])
+        UserMode_items = []
+        for usermode in UserMode_data:
+            UserMode_items.append(usermode)
+        page = render(request, 'wash1.html', locals())
+    else:
+        page = render(request, template_name='plzLogin.html')
+    return page
+
+def wash2_page(request):
+    return render(request, template_name='wash2.html')
+
 @csrf_exempt
 def orderdata_page(request):
     if login_check(request) == True:
         if request.method == "POST":
             data = request.POST
+            orderType = data.get('orderType')
             Wash = data.get('wash')
             Dry = data.get('dry')
             Fold = data.get('fold')
@@ -211,22 +226,25 @@ def orderdata_page(request):
             Wash_time = ModeMenu_wash[0]['sTime']
             Wash_price = float(ModeMenu_wash[0]['sPrice'])
             Wash_ppoint = float(ModeMenu_wash[0]['sPPoint'])
+            Wash_carbon = float(ModeMenu_wash[0]['sCarbon'])
 
             ModeMenu_dry = ModeMenu.objects.filter(sModeName= Dry).values()
             Dry_time = ModeMenu_dry[0]['sTime']
             Dry_price = float(ModeMenu_dry[0]['sPrice'])
             Dry_ppoint = float(ModeMenu_dry[0]['sPPoint'])
+            Dry_carbon = float(ModeMenu_dry[0]['sCarbon'])
 
             ModeMenu_fold = ModeMenu.objects.filter(sModeName= Fold).values()
             Fold_time = ModeMenu_wash[0]['sTime']
             Fold_price = float(ModeMenu_fold[0]['sPrice'])
             Fold_ppoint = float(ModeMenu_fold[0]['sPPoint'])
+            Fold_carbon = float(ModeMenu_fold[0]['sCarbon'])
 
             sumTime = (Wash_time + Dry_time + Fold_time)
             sumPrice = int(50 + Wash_price + Dry_price + Fold_price)
             sumPPoint = int(20 + Wash_ppoint + Dry_ppoint + Fold_ppoint)
-
-        page = render(request, 'orderdata.html', locals())
+            sumCarbon = int(Wash_carbon + Dry_carbon + Fold_carbon)
+            page = render(request, 'orderdata.html', locals())
     else:
         page = render(request, template_name='plzLogin.html')
     return page
@@ -289,21 +307,6 @@ def upload_satisfaction(request):
         return login_check(request)
 
     return render(request ,"satisfaction_result.html")
-
-
-def wash1_page(request):
-    if login_check(request) == True:
-        UserMode_data = UserMode.objects.filter(sUserID=request.session['AIwash8'])
-        UserMode_items = []
-        for usermode in UserMode_data:
-            UserMode_items.append(usermode)
-        page = render(request, 'wash1.html', locals())
-    else:
-        page = render(request, template_name='plzLogin.html')
-    return page
-
-def wash2_page(request):
-    return render(request, template_name='wash2.html')
 
 def logout(request):
     try:

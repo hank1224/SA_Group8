@@ -22,6 +22,7 @@
             </tr>
             <form method="post" action="orderdata.html">
                 {% csrf_token %}
+                <input type="hidden" name="orderType" value="pet">
                 <div class="set">
                     <tr>
                         <td>

@@ -13,20 +13,21 @@
     <div class="container">
         <div class="flex-col flex-cent">
             <h1>
-                {{一般/寵物洗衣訂單}}
+                {%if orderType == 'normal' %} {{ '一般洗' }} {% else %} {{ '寵物洗' }} {% endif %}
             </h1>
+            <input type="hidden" name="orderType" value="{{ orderType }}">
             <table>
                 <tr>
                     <td rowspan="3">洗衣模式</td>
-                    <td class="table-right" colspan="2">{{標準}}</td>
+                    <td class="table-right" colspan="2">{{ Wash }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2">{{日曬}}</td>
+                    <td colspan="2">{{ Dry }}</td>
                 </tr>
-                    <td colspan="2">{{機器人}}</td>
+                    <td colspan="2">{{ Fold }}</td>
                 </tr>
                 <tr>
-                    <td colspan="4">洗衣所需時間：{{time}}</td>
+                    <td colspan="4">洗衣所需時間：{{ sumTime }}</td>
                 </tr>
             </table>
             <form action="#" style="margin-bottom: 3rem;">
@@ -38,9 +39,9 @@
                 </select>
             </form> 
             <div class="total-place">
-                <p>碳排{{ 10 }}kg</p>
-                <p>總計{{ 10 }}元</p>
-                <p>點數{{ 10 }}點</p>
+                <p>碳排{{ sumCarbon }}噸</p>
+                <p>總計{{ sumPrice }}元</p>
+                <p>點數{{ sumPPoint }}點</p>
             </div>
             <div>
             <a href="index.html"><input type="button" class="button-cancel" value="取消"></a>
