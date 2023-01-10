@@ -3,73 +3,37 @@
     margin: 0;
     padding: 0;
     line-height: 30px;
-}
-h1{
-    font-size: 2.7rem;
-    margin-bottom: 2.5rem;
-    color: rgba(131,196,140);
-    font-weight: 900;
-}
-h2{
-    font-size: 1.7rem;
-    margin-bottom: 0.5rem;
-    color: rgba(131,196,140);
-    font-weight: 900;
-}
-:root{
-    background: rgb(244, 240, 236);
+    
 }
 
-/* 整個外框框 */
-.container{
+.container__2,.container__1{
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 2rem;
-}
-.justify-center {
-    justify-content: center;
-}
-
-.flex-col{
-    display: flex;
-    flex-direction: column;
-}
-
-.flex-cent{
-    justify-content: center;
     align-items: center;
 }
-
-.text-center {
-    text-align: center;
+.container__2{
+    background: #f2f7f5;
+}
+.container__1{
+    background: #e3f6f5;
 }
 
-.hidden {
-    display: none;
+
+h1{
+    font-size: 2.7rem;
+    margin: 2.5rem 0 0 0;
+    color: #272343;
+    font-weight: bolder;
 }
 
-/* 模式設定 */
-.set{
-    text-align: center;
-    line-height: 4rem;
-    color: rgba(131,196,140);
-    font-weight: 700;
-}
-h4{
-    font-size: 25px;
-    color: rgba(131,196,140);
-    font-weight: 700;
+:root{
+    background: #e3f6f5;
 }
 
-/* 下拉清單 */
-.set select{
+.model{
     font-size: 20px;
-    background-color: rgba(131,196,140,0.3);
+    background-color: #bae8e8de;
     height: 38px;
     padding: 8px;
     border-radius: 5px;
@@ -79,44 +43,103 @@ h4{
     font-weight: 700;
 }
 
-label{
-    font-size: 20px;
+.title , .title_1{
+    display: flex;
+    flex-direction: row;
 }
 
+tbody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table{
+    margin:auto; 
+    
+}
+
+td{
+    text-align: center;
+}
+
+h4{
+    font-size: 25px;
+    color: #00473e;
+    font-weight: 700;
+    margin: 1rem;
+}
+
+
+.radio{
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 2px solid #222222;
+    width: 22rem;
+    
+}
+
+.radio__input {
+    display: none;
+    width: 22rem;
+}
+
+.radio__label , .radio__label_1{
+    font-weight: bolder;
+    padding: .5rem ;
+    margin: .2rem;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.1s;
+    width: 22rem;
+}
+
+.radio__label{
+    color: #272343;
+    background: #f2f7f5;
+}
+
+.radio__label_1{
+    color: #272343;
+    background: #e3f6f5;
+}
+
+
+
+.radio__input:checked + .radio__label {
+    background: #faae2b;
+    color:#272343;
+    border-radius: 15px;
+}
+
+.radio__input:checked + .radio__label_1 {
+    background: #ffd803;
+    color:#272343;
+    border-radius: 15px;
+}
+
+
 /* 按鈕 */
-.btn-re{
+.btn-re,.btn-next{
     font-size: 1.2rem;
-    padding: 0.5rem 0.5rem;
-    background-color: rgba(131,196,140,0.3);
+    padding: 0.5rem;
     cursor: pointer;
     border: none;
-    color: rgb(19, 94, 29,0.8);
     border-radius: 0.5rem;   
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    margin-right: 1rem;
+    margin:1.5rem 1rem;
     font-weight: 700;
+    width: 6rem;
+
+}
+.btn-re{
+    background-color: rgba(216,227,231);
+    color: rgb(134,157,157,0.8);
 }
 .btn-next{
-    font-size: 1.2rem;
-    padding: 0.5rem 0.5rem;
-    background-color: rgba(131,196,140);
-    cursor: pointer;
-    border: none;
-    color: rgba(255, 255, 255);
-    border-radius: 0.5rem;   
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    margin-left: 1rem;
-    font-weight: 700;  
+    background-color: rgba(134,157,157);
+    color: rgba(255, 255, 255,0.8);
 }
-/* 返回鈕 */
-.title{
-    display: flex;
-    text-align:justify;
-}
-.modelname{
-    background-color: rgba(131,196,140,0.3);
-    font-size: 1rem;
-    border: none;
-    text-align: center;
-    color: rgba(19, 94, 29,0.8);
-}
+
+

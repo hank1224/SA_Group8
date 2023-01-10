@@ -293,7 +293,7 @@ def upload_satisfaction(request):
 
 def wash1_page(request):
     if login_check(request) == True:
-        UserMode_data = UserMode.objects.filter(sUserID=request.session['Raccess_code']).values()
+        UserMode_data = UserMode.objects.filter(sUserID=request.session['AIwash8'])
         UserMode_items = []
         for usermode in UserMode_data:
             UserMode_items.append(usermode)
