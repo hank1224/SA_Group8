@@ -19,7 +19,6 @@
     background: #e3f6f5;
 }
 
-
 h1{
     font-size: 2.7rem;
     margin: 2.5rem 0 0 0;
@@ -41,6 +40,15 @@ h1{
     margin-bottom: 15px;
     color: rgba(19, 94, 29,0.8);
     font-weight: 700;
+}
+
+.modelname{
+    background-color: rgba(216,227,231);
+    font-size: 1.5rem;
+    border: none;
+    text-align: center;
+    color: rgba(19, 94, 29,0.8);
+    font-weight: bolder;
 }
 
 .title , .title_1{

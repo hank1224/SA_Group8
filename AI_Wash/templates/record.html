@@ -17,7 +17,7 @@
             <table>
                 {% for record in OrderRecords %}
                 <tr>
-                    <th colspan="4">訂單編號 {{ record.sOrderID|slice"-5" }}<input class="btn-problem" type="button" value="回報"></th>
+                    <th colspan="4">訂單編號 {{ record.sOrderID|slice:"-5:" }}<input class="btn-problem" type="button" value="回報"></th>
                 </tr>
                 <tr>
                 </tr>
@@ -34,8 +34,7 @@
                     <td colspan="4" style="padding: 1rem;">碳排{{ record.sCarbon }}kg<br>點數{{ record.sPPoint }}點<br>總計{{ record.sSum }}元</td>
                 </tr>
                 {% empty %}
-                <h4>你沒有紀錄!
-                </h4>
+                <h4>你沒有紀錄!</h4>
                 {% endfor %}
             </table>
 

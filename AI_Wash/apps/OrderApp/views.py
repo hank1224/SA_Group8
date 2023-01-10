@@ -175,8 +175,8 @@ def Add_UserMode(request):
             Wash = data.get('wash')
             Dry = data.get('dry')
             Fold = data.get('fold')
-            ListName = data.get('modelname')
-            suserid = str(request.session['AIwash8'])
+            ListName = data.get('listname')
+            suserid = request.session['AIwash8']
 
             try:
                 UserMode.objects.get(sUserID=UserData(suserid), sListName=ListName)

@@ -8,56 +8,123 @@
     <title>MemberData</title>
     <link rel="stylesheet" href="{% static 'assets/css/wash.css' %}">
 </head>
-
-<script>
-    function changeRadioBtn(value){
-        switch(value){
-            {% for item in UserMode_items %}
-                case '{{ item.sListName }}':
-                    document.querySelector('input[name="wash"][value="'+'{{ item.sWash}}'+'"]').checked=true;
-                    document.querySelector('input[name="dry"][value="'+'{{ item.sDry}}'+'"]').checked=true;
-                    document.querySelector('input[name="fold"][value="'+'{{ item.sFold}}'+'"]').checked=true;
-                    break;
-            {% endfor %}
-        }
-    }
-</script>
-
 <body>
-    <div class="container">
-        <div class="flex-col flex-cent">
-            <div class="title"><a href="index.html"><img src="{% static 'assets/image/backto.png' %}" height="30rem" style="margin: 0 0.5rem;"></a><h1>會員資料</h1></div>
-            <h2>常用洗衣模式清單</h2>
+
+    <script>
+        function changeRadioBtn(value){
+            switch(value){
+                {% for item in UserMode_items %}
+                    case '{{ item.sListName }}':
+                        document.querySelector('input[name="wash"][value="'+'{{ item.sWash}}'+'"]').checked=true;
+                        document.querySelector('input[name="dry"][value="'+'{{ item.sDry}}'+'"]').checked=true;
+                        document.querySelector('input[name="fold"][value="'+'{{ item.sFold}}'+'"]').checked=true;
+                        break;
+                {% endfor %}
+            }
+        }
+    </script>
+    
+    <div class="container__1">
+        <table class="radio__all">
+            <tr>
+                <td>
+                    <div class="title">
+                        <a href="index.html"><img src="{% static 'assets/image/backto.png' %}" height="30rem"
+                                style="margin: 2.5rem 0.5rem;"></a>
+                        <h1>常用洗衣模式清單</h1>
+                    </div>
+                </td>
+            </tr>
             <form method="POST" action="Add_UserMode">
                 {% csrf_token %}
-                <h2 id="sUserID"></h2>
-                <div class="set">
-                    <select id="set" class="model" onchange= changeRadioBtn(value)>
-                        <option>----常用模式選擇----</option>
-                        {% for item in UserMode_items %}
-                        <option value= {{ item.sListName }}>{{ item.sListName }}</option>
-                        {% endfor %}
-                    </select>
-                    <br>
-                    <input class="modelname" id="modelname" name="modelname" type="text" required  placeholder="設定名稱📝" > 
-                    <h4>洗滌模式</h4>
-                    <input type="radio" id="standard" name="wash" value="標準" checked><label for="standard">標準</label>
-                    <input type="radio" id="delicate" name="wash" value="精緻洗" ><label for="delicate">精緻洗</label>
-                    <input type="radio" id="soft" name="wash" value="柔洗" ><label for="soft">柔洗</label>
-                    <input type="radio" id="fast" name="wash" value="快洗" ><label for="fast">快洗</label>
-                    <h4>乾燥模式</h4>
-                    <input type="radio" id="sunny" name="dry" value="日曬" checked><label for="sunny">日曬</label>
-                    <input type="radio" id="low" name="dry" value="低溫烘乾" ><label for="low">低溫烘乾</label>
-                    <input type="radio" id="mid" name="dry" value="中溫烘乾" ><label for="mid">中溫烘乾</label>
-                    <input type="radio" id="high" name="dry" value="高溫烘乾" ><label for="high">高溫烘乾</label>
-                    <h4>摺衣模式</h4>
-                    <input type="radio" id="no" name="fold" value="不折" checked><label for="no">不折</label>
-                    <input type="radio" id="robot" name="fold" value="機器摺衣" ><label for="robot">機器摺衣</label><br>
-                    <input class="btn-re" type="reset" value="重設">
-                    <input class="btn-next" type="submit" value="儲存">
-                </div> 
+                    <tr>
+                        <td>
+                            <h2 id="sUserID"></h2>
+                            <div class="set">
+                                <select id="set" class="model" onchange= changeRadioBtn(value)>
+                                    <option>----常用模式選擇----</option>
+                                    {% for item in UserMode_items %}
+                                    <option value= {{ item.sListName }}>{{ item.sListName }}</option>
+                                    {% endfor %}
+                                </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="modelname" id="modelname" type="text" name="listname" value="" required placeholder="設定名稱📝" >
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                            <div class="title_1">
+                                <img src="{% static 'assets/image/wash.png' %}" height="30rem" style="margin:1rem 0 ;">
+                                <h4>洗滌模式</h4>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <input class="radio__input" type="radio" id="standard" name="wash" value="標準" checked>
+                                <label class="radio__label_1" for="standard">標準 +$50</label>
+                                <input class="radio__input" type="radio" id="delicate" name="wash" value="精緻洗">
+                                <label class="radio__label_1" for="delicate">精緻洗 +$50</label>
+                                <input class="radio__input" type="radio" id="soft" name="wash" value="柔洗">
+                                <label class="radio__label_1" for="soft">柔洗 +$50</label>
+                                <input class="radio__input" type="radio" id="fast" name="wash" value="快洗">
+                                <label class="radio__label_1" for="fast">快洗 +$50</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title_1">
+                                <img src="{% static 'assets/image/dry.png' %}" height="30rem" style="margin:1rem 0 ;">
+                                <h4>乾燥模式</h4>
+                            </div>
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <input class="radio__input" type="radio" id="sunny" name="dry" value="日曬" checked>
+                                <label class="radio__label_1" for="sunny">日曬 +$50</label>
+                                <input class="radio__input" type="radio" id="low" name="dry" value="低溫烘乾">
+                                <label class="radio__label_1" for="low">低溫烘乾 +$50</label>
+                                <input class="radio__input" type="radio" id="mid" name="dry" value="中溫烘乾">
+                                <label class="radio__label_1" for="mid">中溫烘乾 +$50</label>
+                                <input class="radio__input" type="radio" id="high" name="dry" value="高溫烘乾">
+                                <label class="radio__label_1" for="high">高溫烘乾 +$50</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="title_1">
+                                <img src="{% static 'assets/image/laundry.png' %}" height="30rem" style="margin:1rem 0 ;">
+                                <h4>摺衣模式</h4>
+                            </div>
+                    <tr>
+                        <td>
+                            <div class="radio">
+                                <input class="radio__input" type="radio" id="no" name="fold" value="不折" checked>
+                                <label class="radio__label_1" for="no">不折 +$0</label>
+                                <input class="radio__input" type="radio" id="robot" name="fold" value="機器摺衣">
+                                <label class="radio__label_1" for="robot">機器摺衣 +$50</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <input class="btn-re" type="reset" value="重設">
+                                <input class="btn-next" type="submit" value="下一步">
+                            </div>
+                        </td>
+                    </tr>
             </form>
-        </div>
+        </table>
     </div>
 </body>
 </html>
