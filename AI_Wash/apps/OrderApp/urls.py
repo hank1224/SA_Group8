@@ -19,8 +19,8 @@ from OrderApp import views
 urlpatterns = [
 
     path('creditcard.html', views.creditcard_page),
-    path('currentOrderInner.html', views.currentOrderInner_page),
-    path('currentOrder.html', views.currentOrder_page),
+    path('payNO.html', views.payNO_page),
+    path('payOK.html', views.payOK_page),
 
     path('index.html', views.index_page),
     path('SACC_LineLoginURL', views.SACC_LineLoginURL),
@@ -30,20 +30,12 @@ urlpatterns = [
     path('login_SMS1.html', views.login_SMS1_page),
     path('login_SMS2.html', views.login_SMS2_page),
     path('login_SMS3', views.login_SMS3),
-
+    path('new.html', views.new_page),
+    
     path('member.html', views.member_page),
     path('Add_UserMode', views.Add_UserMode),
-    path('new.html', views.new_page),
-    path('order_finish.html', views.order_finish_page),
 
-    
-    path('payNO.html', views.payNO_page),
-    path('payOK.html', views.payOK_page),
     path('plzLogin.html', views.plzLogin_page),
-    path('record.html', views.record_page),
-
-    path('satisfaction.html', views.satisfaction_page),
-    path('upload_satisfaction', views.upload_satisfaction),
     
     path('wash1.html', views.wash1_page),
     path('wash2.html', views.wash2_page),
@@ -51,6 +43,19 @@ urlpatterns = [
     path('orderdata.html', views.orderdata_page),
     path('make_order', views.make_order),
     path('pay_finish.html', views.pay_finish_page),
+
+    path('currentOrderInner.html', views.currentOrderInner_page),
+    path('currentOrder.html', views.currentOrder_page),
+    path('finish_order', views.finish_order),
+    path('order_finish.html', views.order_finish_page),
+    
+    path('record.html', views.record_page),
+    path('QA.html', views.QA_page),
+
+    path('satisfaction.html', views.satisfaction_page),
+    path('upload_satisfaction', views.upload_satisfaction),
+    path('after_add_mode', views.after_add_mode),
+
 
 
 ]

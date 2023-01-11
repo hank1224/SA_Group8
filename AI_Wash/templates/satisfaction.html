@@ -19,6 +19,7 @@
             <h5 style="font-size: 1.2rem; color: rgba(134,157,157);"><b>讓我們知道您的想法！</b></h5>
             <form class="QA" method="post" action="upload_satisfaction">
                 {% csrf_token %}
+                <input type="hidden" name="orderid" value="{{ OrderID }}">
                 <div class="Q1">
                     <h4 style="font-size: 1.4rem; color: rgba(134,157,157); font-weight: 700;">服務品質：</h4> 
                     <div class="radio-tile-group">

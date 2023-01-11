@@ -3,7 +3,7 @@ from django.contrib import admin
 from OrderApp.models import *
 
 class OrderRecordMain(admin.ModelAdmin):
-    list_display=('sOrderID','sUserID','sSum','sPoint','sCarbon','sWash','sDry','sFold','sCreateTime','sFinishTime','sStoreName')
+    list_display=('sOrderID','sUserID','sSum','sPoint','sCarbon','sWash','sDry','sFold','sCreateTime','sFinishTime','sFinish','sStoreName')
     search_fields=('sOrderID',)
     ordering=('-sCreateTime',)
 

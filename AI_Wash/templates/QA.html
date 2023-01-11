@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -104,10 +105,18 @@
 <body>
     <div class="container">
         <div class="title">
-            <div style="display: flex; text-align:justify;"><a href="index.html"><img src="assets/image/back.png"></a><h1>問題回報</h1></div> 
-            <form>
+            <div style="display: flex; text-align:justify;"><a href="index.html"><img src="{% static 'assets/image/back.png' %}"></a>
+                <h1>問題回報</h1>
+            </div> 
+            <form action="Send_QA" method='POST'>
                 <h5>問題類別</h5>
                 <div style="text-align: center; margin: 1rem;">
+
+
+                    訂單編號{{ OrderID }}
+
+
+                    
                     <select>
                         <option>訂單相關(衣物、延遲…)</option>
                         <option>系統相關(操作…)</option>
@@ -119,7 +128,6 @@
                         <h5>詳細說明</h5>
                         <textarea name="deail" id="deail" rows="5"  cols="10"></textarea>
                     </div>
-
 
                 <div style="text-align: center; margin: 2rem;">
                     <input  type="reset" value="重設" class="reset">

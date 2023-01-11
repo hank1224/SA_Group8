@@ -17,7 +17,7 @@
                 {% for record in OrderRecords %}
             <table>
                 <tr>
-                    <th colspan="4">訂單編號 {{ record.sOrderID|slice:"-5:" }}<input class="btn-problem" type="button" value="回報"></th>
+                    <th colspan="4">訂單編號 {{ record.sOrderID|slice:"-5:" }}<a href="QA.html?OrderID={{ record.sOrderID }}"><input class="btn-problem" type="button" value="回報"></a></th>
                 </tr>
                 <tr>
                 </tr>

@@ -28,24 +28,33 @@
             訂單編號：{{ OrderData.sOrderID }}<br>
             此訂單為：{% if OrderData.sOrderType == pet %} 寵物洗 {% else %} 一般洗 {% endif %}<br>
             模式： {{ OrderData.sWash }} / {{ OrderData.sDry }} / {{ OrderData.sFold }}<br>
-            訂單狀態：<br>
+            訂單種類：
             {% if OrderData.sDelivery == False %}
-            自送：<br>
+            自送<br>
+            目前狀態：{% if sFinishTime_done == False %}正在洗衣{% else %}完成洗衣{% endif %} <br>
             請記得於 {{ OrderData.sTakeTime }} 期間到店領取<br>
             {% elif OrderData.sDelivery == True %}
-            外送：<br>
+            外送<br>
             目前狀態：{{ cline_display }}<br>
             預約外送員取件時間：{{ DeliveryData.sTakeTime }}<br>
             預約外送員送回時間：{{ DeliveryData.sReciveTime }}<br>
             {% endif %}
-            
-
             <div class="qrcode">
                 <p>
-                    QRcode－送洗 / 領取 <!--這要啥????圖片???網址????-->
+                    QRcode－{% if sFinishTime_done == False %}尚未開放領取{% elif sFinishTime_done == True %}等待領取{% else %}外送沒有{% endif %}
                 </p>
-                <img src="">
+                {% if sFinishTime_done == True %}
+                <a href="finish_order?OrderID={{ OrderData.sOrderID }}"><img src="{% static 'assets/image/qrcode.jpg' %}"></a>
+                {% elif sFinishTime_done == False %}
+                <img src="{% static 'assets/image/qrcodeNo.png' %}">
+                {% else %}
+                外送要顯示啥，QRcode流程危機<br>
+                    {% if DeliveryData.sDelivery_Finish == True %}
+                <a href="finish_order?OrderID={{ OrderData.sOrderID }}"><input class="btn" type="button" value="完成訂單"></a>
+                    {% endif %}
+                {% endif %}
             </div>
+            
             <a href="currentOrder.html"><input class="btn" type="button" value="返回"></a>
         </div>
     </div>   

@@ -368,8 +368,9 @@ def make_order(request):
                     sAddress=Address, sDelivery_code=Delivery_state('0'), sWashTime=WashTime)
             else:
                 TakeTime = data.get('orderTakeTime')
+                FinishTime = datetime.strptime(data.get('finishtime'),format("%Y年%m月%d日 %H:%M"))
                 OrderRecord.objects.create(sUserID=request.session['AIwash8'], sWash=Wash, sDry=Dry, sFold=Fold, sCarbon=Carbon, \
-                sSum=Price, sPoint=Point, sOrderType=OrderType, sTakeTime=TakeTime)
+                sSum=Price, sPoint=Point, sOrderType=OrderType, sTakeTime=TakeTime, sFinishTime=FinishTime)
 
             page = render(request, 'pay_finish.html', locals())
     else:
@@ -384,7 +385,7 @@ def currentOrder_page(request):
     if login_check(request) == False:
         page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
-        currentOrder=OrderRecord.objects.filter(sUserID=request.session['AIwash8'], sFinishTime__isnull=True)
+        currentOrder=OrderRecord.objects.filter(sUserID=request.session['AIwash8'], sFinish=False)
 
 
         page = render(request,'currentOrder.html', locals())
@@ -396,20 +397,124 @@ def currentOrderInner_page(request):
     elif login_check(request) == True:
         OrderID = request.GET.get('OrderID')
         OrderData = OrderRecord.objects.get(sOrderID=OrderID)
-        DeliveryData, cline_display = "", ""
+        DeliveryData, cline_display, sFinishTime= "", "", ""
         if OrderData.sDelivery == True:
             DeliveryData = Delivery.objects.get(sOrderID=OrderRecord(OrderID))
             cline_display = DeliveryData.sDelivery_code.cline_display
-
+        else:
+            sFinishTime_done = False if OrderData.sFinishTime.replace(tzinfo=None) > datetime.now() else True
         page = render(request, 'currentOrderInner.html', locals())
     return page
+
+def finish_order(request):
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        OrderID = request.GET.get('OrderID')
+        OrderRecord.objects.filter(sOrderID=OrderID).update(sFinish=True)
+        Order = OrderRecord.objects.get(sOrderID=OrderID)
+        UserID = request.session['AIwash8']
+        Point = Order.sPoint
+        Carbon = Order.sCarbon
+        Detail = "AIwash8訂單編號"+OrderID[-5:]
+        API(UserID, Point, Carbon, Detail)
+        if Order.sOrderType == 'pet':
+            return render(request, 'satisfaction.html', locals())
+        page = render(request, 'order_finish.html', locals())
+    return page
+
+def API(UserID, Point, Carbon, Detail):
+    curl = settings.CARBON_NGROK
+    resp = requests.post( curl + '/SA_ALL/news/history/', data = {
+        "USER_PHONE": UserID, #userID
+        "APP_ID": "AIwash8", #智慧喜＋之類的
+        "DATE": datetime.now(),
+        "POINT": Point,
+        "DETAIL": Detail, #隨便打
+        "TANPI": Carbon, #碳排放量（若你們沒有的話就一樣隨便打）
+    })
+    print(resp)
+    # print(resp.json())
+
+@csrf_exempt
+def after_add_mode(request):
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        OrderData=""
+        if request.method == 'POST':
+            data = request.POST
+            OrderID = data.get('orderid')
+            ModeName = data.get('modename')
+            OrderData = OrderRecord.objects.get(sOrderID=OrderID)
+        if request.method == 'GET':
+            OrderID = request.GET.get('OrderID')
+            OrderData = OrderRecord.objects.get(sOrderID=OrderID)
+        try:
+            UserMode.objects.get(sListName=ModeName)
+        except ObjectDoesNotExist:
+            UserMode.objects.create(sListName=ModeName, sWash=OrderData.sWash, sDry=OrderData.sDry, \
+                sFold=OrderData.sFold, sUserID=UserData(request.session['AIwash8']))
+        page = render(request, 'satisfaction.html', locals())
+    return page
+
+def satisfaction_page(request):
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        data = request.POST
+        OrderID = data.get('orderid')
+        page = render(request, 'satisfaction.html', locals())
+    return page
+
+@csrf_exempt
+def upload_satisfaction(request):
+    if request.method == "POST":
+        data = request.POST
+        wServe = data.get('radio')
+        wRate = data.get('radio_2')
+        wSatisfy = data.get('radio_3')
+        OrderID = data.get('orderid')
+
+    if wServe == "F":
+        wServe = False
+    elif wServe == "T":
+        wServe = True
+    else:
+        wServe = None
+
+    if wRate == "F":
+        wRate = False
+    elif wRate == "T":
+        wRate = True
+    else:
+        wRate = None
+
+    if wSatisfy == "F":
+        wSatisfy = False
+    elif wSatisfy == "T":
+        wSatisfy = True
+    else:
+        wSatisfy = None
+
+    Satisfy.objects.create(sOrderID=OrderID, sServe= wServe, sRate= wRate, sSatisfy= wSatisfy)
+    return render(request ,"satisfaction_result.html")
 
 def record_page(request):
     if login_check(request) == False:
         page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
-        OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'], sFinishTime__isnull=False)
+        OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'], sFinish=True)
         page = render(request, 'record.html', locals())
+    return page
+
+def QA_page(request):
+    OrderID = None
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        OrderID = request.GET.get('OrderID')
+        page = render(request, 'QA.html', locals())
     return page
 
 def payNO_page(request):
@@ -418,43 +523,7 @@ def payNO_page(request):
 def payOK_page(request):
     return render(request, template_name='payOK.html')
 
-def satisfaction_page(request):
-    return render(request, template_name='satisfaction.html')
 
-def upload_satisfaction(request):
-    if login_check(request) == True:
-        if request.method == "POST":
-            data = request.POST
-            wServe = data.get('radio')
-            wRate = data.get('radio_2')
-            wSatisfy = data.get('radio_3')
-
-        if wServe == "F":
-            wServe = False
-        elif wServe == "T":
-            wServe = True
-        else:
-            wServe = None
-
-        if wRate == "F":
-            wRate = False
-        elif wRate == "T":
-            wRate = True
-        else:
-            wRate = None
-
-        if wSatisfy == "F":
-            wSatisfy = False
-        elif wSatisfy == "T":
-            wSatisfy = True
-        else:
-            wSatisfy = None
-
-        Satisfy.objects.create(sOrderID="a2", sServe= wServe, sRate= wRate, sSatisfy= wSatisfy)
-    else:
-        return login_check(request)
-
-    return render(request ,"satisfaction_result.html")
 
 
 # Create your views here.

@@ -54,6 +54,7 @@
                 訂單地址: {{ Address }}
                 </p>
                 {% else %}
+                <input type="hidden" name="finishtime" value="{{ datetime_washfinish }}">
                 <label for="time">選擇領取時段：</label>
                 <select class="time" name="orderTakeTime">
                     {% for i in choose_time %}

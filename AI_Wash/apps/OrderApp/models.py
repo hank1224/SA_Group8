@@ -20,6 +20,7 @@ class OrderRecord(models.Model):
     sFinishTime=models.DateTimeField(blank=False, null=True, default=None)
     sTakeTime=models.CharField(max_length=20, null=True, default=None)
     sDelivery=models.BooleanField(null=False, default=False)
+    sFinish=models.BooleanField(default=False)
     sStoreName=models.CharField(max_length=10,blank=False, null=False)
     
     class Meta:
