@@ -20,7 +20,16 @@
     var nBtn=function(){
     document.querySelector('#uberdata').style.display=(document.querySelector('#uberdata').style.display=='block')?'none':'none';
     }
-    var startTime = document.getElementById("startTime"); 
+</script>
+<script>
+    function check(){
+        var startTime =new Date(document.getElementById("startTime").value);
+        var endTime =new Date(document.getElementById("endTime").value);
+        if (endTime < startTime ) {
+            alert('領取時間需晚於外送員送件時間至少兩小時!!!');
+            document.getElementById("endTime").value="";
+        }
+    }
 </script>
 
 <body>
@@ -60,7 +69,7 @@
 
                 <input class="udata" id="startTime" name="delivery_sent_time" type="datetime-local" min="{{ datetime_now }}" value="">
                 <h5 style=" color: rgba(131,196,140); text-emphasis: center;"><b>領取時間</b></h5>
-                <input class="udata" name="delivery_receive_time" type="datetime-local" min="{{ datetime_now }}" value="">
+                <input class="udata" id="endTime" name="delivery_receive_time" type="datetime-local" min="{{ datetime_now }}" onchange="check()" value="">
             </div>         
             <input id="" class="submit" type="submit" value="送出" style="border:none;margin-top: 2rem; font-size: 1.2rem;background-color: rgba(131,196,140); color:rgba(255, 255, 255, 0.8); box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; font-weight: 700; border-radius: 1rem; text-align: center;">
             </form>

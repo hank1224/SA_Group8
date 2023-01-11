@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA</title>
+
+    <style>        
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-size: 50%;
+        }
+        :root{
+            background: rgb(199,210,212);
+        }       
+        h1{
+            font-size: 5.4rem;
+            margin-bottom: 4rem;
+            color: rgba(134,157,157);
+            font-weight: 900;
+        }
+        .container{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .flex-col{
+            display: flex;
+            flex-direction: column;
+        }
+        .flex-cent{
+            justify-content: center;
+            align-items: center;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+
+        form h5{
+            font-size: 3rem;
+            text-align: center;
+            color: rgba(134,157,157);
+            text-shadow: whitesmoke 0.2rem 0.2rem 0.3rem;
+        }
+
+        select{
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
+        textarea{
+            margin-top: 1rem;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            resize: none;
+            width: 100%;
+            height: 30rem;
+            font-size: 1.5rem;
+            border-radius: 1rem;
+        }
+        .reset{
+            font-size: 2.4rem;
+            padding: 1rem 1rem;
+            background-color: rgb(216,227,231);
+            cursor: pointer;
+            border: none;
+            color: rgba(134, 157, 157, 0.8);
+            border-radius: 1rem 1rem 1rem 1rem;   
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            margin-right: 2rem;
+            font-weight: 700;
+        }
+
+        .send{
+            font-size: 2.4rem;
+            padding: 1rem 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            border: none;
+            background-color: rgb(134,157,157);
+            border-radius: 1rem 1rem 1rem 1rem;   
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            margin-left: 2rem;
+            font-weight: 700;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <div style="display: flex; text-align:justify;"><a href="index.html"><img src="assets/image/back.png"></a><h1>問題回報</h1></div> 
+            <form>
+                <h5>問題類別</h5>
+                <div style="text-align: center; margin: 1rem;">
+                    <select>
+                        <option>訂單相關(衣物、延遲…)</option>
+                        <option>系統相關(操作…)</option>
+                    </select>                    
+                </div>
+
+
+                    <div style="text-align: center; margin: 1rem;">
+                        <h5>詳細說明</h5>
+                        <textarea name="deail" id="deail" rows="5"  cols="10"></textarea>
+                    </div>
+
+
+                <div style="text-align: center; margin: 2rem;">
+                    <input  type="reset" value="重設" class="reset">
+                    <input  type="submit" value="送出" class="send">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -18,39 +18,11 @@ from DBmanageApp.models import ModeMenu
 def creditcard_page(request):
     return render(request, template_name='creditcard.html')
 
-def currentOrder_page(request):
-    if login_check(request) == False:
-        page = render(request, 'plzLogin.html')
-    elif login_check(request) == True:
-        personal_data = Access_API(request)
-        currentOrder=OrderRecord.objects.filter(sUserID=request.session['Raccess_code'], sFinishTime__isnull=True)
-
-        for time in currentOrder:
-            if time.sFinishTime > timezone.now():
-                state= "作業中"
-            else :
-                state= "可領取"
-        page = render(request,'currentOrder.html', locals())
-    return page
-
-def currentOrderInner_page(request):
-    if login_check(request) == False:
-        page = render(request, 'plzLogin.html')
-    elif login_check(request) == True:
-        personal_data = Access_API(request)
-        page = render(request, 'currentOrderInner.html', locals())
-    return page
-
-def index_page(request):
-    if login_check(request) == False:
-        page = render(request, 'plzLogin.html')
-    elif login_check(request) == True:
-        personal_data = Access_API(request)
-        page = render(request, 'index.html', locals())
-    return page
-
 def login_page(request):
     return render(request, 'login.html')
+
+def plzLogin_page(request):
+    return render(request, template_name='plzLogin.html')
 
 def login_SMS1_page(request):
     return render(request, 'login_SMS1.html')
@@ -151,7 +123,75 @@ def lineback(request):
     Logindb.objects.filter(sState=sstate ,Rstate=rstate).update(Raccess_code=raccess_code, RuserID=ruserid)
     return Login_and_AddSession(request, ruserid, raccess_code)
 
+def Login_and_AddSession(request, userid, raccess_code):
+    if 'AIwash8' in request.session:
+        try:
+            del request.session['AIwash8']
+            del request.session['Raccess_code']
+        except:
+            pass
+    request.session['AIwash8'] = userid
+    request.session['Raccess_code'] = raccess_code
+    request.session.modified = True
+    request.session.set_expiry(60*30) #存在30分鐘
+    try:
+        UserData.objects.get(sUserID=request.session['AIwash8'])
+    except ObjectDoesNotExist:
+        UserData.objects.create(sUserID=request.session['AIwash8'])
+        return HttpResponseRedirect('new.html')
+    return HttpResponseRedirect('index.html')
 
+def Access_API(request):
+    raccess_code = request.session['Raccess_code']
+    rurl=settings.SACC_NGROK+"/RESTapiApp/Access"
+    param={'Raccess_code': raccess_code}
+    header={
+        'Authorization': 'Token '+settings.RESTAPI_TOKEN,
+        'ngrok-skip-browser-warning': '7414'
+        }
+    resb=requests.get(rurl,param,headers=header)
+    if resb.status_code == 409:
+        print(resb.json())
+        return False
+    elif resb.status_code != 200:
+        print(resb.json())
+        return False
+    sUser = resb.json()['sUser']
+    sLineID = resb.json()['sLineID']
+    sName = resb.json()['sName']
+    sNickName = resb.json()['sNickName']
+    sPhone = resb.json()['sPhone']
+    sPhoneAuth = resb.json()['sPhoneAuth']
+    sAddress = resb.json()['sAddress']
+    sEmail = resb.json()['sEmail']
+    sPictureUrl = resb.json()['sPictureUrl']
+    print(resb.json())
+    personal_data = {
+        'Ruser':sUser,
+        'Rlineid':sLineID,
+        'Rname':sName,
+        'Rnickname':sNickName,
+        'Rphone':sPhone,
+        'Rphoneauth':sPhoneAuth,
+        'Raddress':sAddress,
+        'Remail':sEmail,
+        'Rpictureurl':sPictureUrl
+    }
+    return(personal_data)
+
+def logout(request):
+    try:
+        del request.session['AIwash8']
+        del request.session['Raccess_code']
+    except:
+        pass
+    return HttpResponseRedirect('index.html')
+
+def login_check(request):
+    if not 'AIwash8' in request.session:
+        return False
+    elif 'AIwash8' in request.session:
+        return True
 
 def member_page(request):
     if login_check(request) == True:
@@ -191,9 +231,17 @@ def Add_UserMode(request):
 
             return redirect('member.html', permanent=True)
 
-
 def new_page(request):
     return render(request, template_name='new.html')
+
+def index_page(request):
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        personal_data = Access_API(request)
+        page = render(request, 'index.html', locals())
+    return page
+
 
 def order_finish_page(request):
     return render(request, template_name='order_finish.html')
@@ -332,14 +380,28 @@ def make_order(request):
 def pay_finish_page(request):
     return render(request, template_name='pay_finish.html')
 
-def payNO_page(request):
-    return render(request, template_name='payNO.html')
+def currentOrder_page(request):
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        personal_data = Access_API(request)
+        currentOrder=OrderRecord.objects.filter(sUserID=request.session['Raccess_code'], sFinishTime__isnull=True)
 
-def payOK_page(request):
-    return render(request, template_name='payOK.html')
+        for time in currentOrder:
+            if time.sFinishTime > timezone.now():
+                state= "作業中"
+            else :
+                state= "可領取"
+        page = render(request,'currentOrder.html', locals())
+    return page
 
-def plzLogin_page(request):
-    return render(request, template_name='plzLogin.html')
+def currentOrderInner_page(request):
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
+        personal_data = Access_API(request)
+        page = render(request, 'currentOrderInner.html', locals())
+    return page
 
 def record_page(request):
     if login_check(request) == False:
@@ -348,6 +410,12 @@ def record_page(request):
         OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'])
         page = render(request, 'record.html', locals())
     return page
+
+def payNO_page(request):
+    return render(request, template_name='payNO.html')
+
+def payOK_page(request):
+    return render(request, template_name='payOK.html')
 
 def satisfaction_page(request):
     return render(request, template_name='satisfaction.html')
@@ -387,79 +455,5 @@ def upload_satisfaction(request):
 
     return render(request ,"satisfaction_result.html")
 
-def logout(request):
-    try:
-        del request.session['AIwash8']
-        del request.session['Raccess_code']
-    except:
-        pass
-    return HttpResponseRedirect('index.html')
 
-def login_check(request):
-    if not 'AIwash8' in request.session:
-        return False
-    elif 'AIwash8' in request.session:
-        return True
-
-def Access_API(request):
-    raccess_code = request.session['Raccess_code']
-    rurl=settings.SACC_NGROK+"/RESTapiApp/Access"
-    param={'Raccess_code': raccess_code}
-    header={
-        'Authorization': 'Token '+settings.RESTAPI_TOKEN,
-        'ngrok-skip-browser-warning': '7414'
-        }
-    resb=requests.get(rurl,param,headers=header)
-    if resb.status_code == 409:
-        print(resb.json())
-        return False
-    elif resb.status_code != 200:
-        print(resb.json())
-        return False
-    sUser = resb.json()['sUser']
-    sLineID = resb.json()['sLineID']
-    sName = resb.json()['sName']
-    sNickName = resb.json()['sNickName']
-    sPhone = resb.json()['sPhone']
-    sPhoneAuth = resb.json()['sPhoneAuth']
-    sAddress = resb.json()['sAddress']
-    sEmail = resb.json()['sEmail']
-    sPictureUrl = resb.json()['sPictureUrl']
-    print(resb.json())
-    personal_data = {
-        'Ruser':sUser,
-        'Rlineid':sLineID,
-        'Rname':sName,
-        'Rnickname':sNickName,
-        'Rphone':sPhone,
-        'Rphoneauth':sPhoneAuth,
-        'Raddress':sAddress,
-        'Remail':sEmail,
-        'Rpictureurl':sPictureUrl
-    }
-    return(personal_data)
-    
-def Login_and_AddSession(request, userid, raccess_code):
-    if 'AIwash8' in request.session:
-        try:
-            del request.session['AIwash8']
-            del request.session['Raccess_code']
-        except:
-            pass
-    request.session['AIwash8'] = userid
-    request.session['Raccess_code'] = raccess_code
-    request.session.modified = True
-    request.session.set_expiry(60*30) #存在30分鐘
-    try:
-        UserData.objects.get(sUserID=request.session['AIwash8'])
-    except ObjectDoesNotExist:
-        UserData.objects.create(sUserID=request.session['AIwash8'])
-        return HttpResponseRedirect('new.html')
-    return HttpResponseRedirect('index.html')
-
-def test(request):
-    a = UserData.objects.all()
-    b = UserMode.objects.all()
-    
-    HttpResponse(str(a.union(b)))
 # Create your views here.

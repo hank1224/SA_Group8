@@ -53,6 +53,4 @@ urlpatterns = [
     path('pay_finish.html', views.pay_finish_page),
 
 
-    path('test', views.test),
-
 ]
