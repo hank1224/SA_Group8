@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from datetime import datetime, timedelta
 from DBmanageApp.models import ModeMenu, Store
+from OrderApp.models import Delivery_state
 
 # 請幫我填上洗衣模式的 名稱、所需時間（timedelta）、價格、獲得點數
 
@@ -169,5 +170,38 @@ def create_washMode(request):
         return HttpResponse("<h1>Success</h1>")
     except:
        return HttpResponse("<h1>create Data err 請檢查是否已存在</h1>")
+
+def create_Delivery_code(requset):
+    state_codes={
+            'code':[
+                {
+                    'state_code': 0,
+                    'state_note': "尚未到達可接單時間",
+                    'cline_display': "等候客戶預定時間",
+                },{
+                    'state_code': 1,
+                    'state_note': "可接單",
+                    'cline_display': "正在派遣外送員",
+                },{
+                    'state_code': 2,
+                    'state_note': "已送達洗衣店",
+                    'cline_display': "正在洗衣中",
+                },{
+                    'state_code': 3,
+                    'state_note': "可接單",
+                    'cline_display': "正在派遣外送員",
+                },{
+                    'state_code': 4,
+                    'state_note': "訂單已送達",
+                    'cline_display': "訂單已送達",
+                }
+            ]
+    }
+    for code in state_codes['code']:
+            State_code = code['state_code']
+            State_note = code['state_note']
+            Cline_display = code['cline_display']
+            Delivery_state.objects.create(state_code=State_code, state_note=State_note, cline_display=Cline_display)
+    return HttpResponse("<h1>Success</h1>")
 
 # Create your views here.

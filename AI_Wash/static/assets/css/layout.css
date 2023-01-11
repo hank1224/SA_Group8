@@ -15,8 +15,8 @@ h1{
     color: rgb(134,157,157);
 }
 
-body{
-    background-image: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
+:root{
+    background: rgba(134,157,157,0.6);
 
 }
 
@@ -116,7 +116,6 @@ p{
     color: rgb(134,157,157);
     font-weight: 700;
     text-align: right;
-    color: rgb(234, 237, 238);
 }
 
 .word{

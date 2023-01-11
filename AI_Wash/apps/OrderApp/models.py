@@ -16,20 +16,37 @@ class OrderRecord(models.Model):
     sDry=models.CharField(max_length=4, null=False)
     sFold=models.CharField(max_length=5, null=False)
     sOrderType=models.CharField(max_length=6, null=False)
-    sCreateTime=models.DateTimeField(default=datetime.now, blank=False, null=False)
-    sFinishTime=models.DateTimeField(blank=False, null=True)
-    sTakeTime=models.DateTimeField(blank=False, null=True)
-    sDelivery=models.BooleanField(null=False)
+    sCreateTime=models.DateTimeField(auto_now_add=True)
+    sFinishTime=models.DateTimeField(blank=False, null=True, default=None)
+    sTakeTime=models.CharField(max_length=20, null=True, default=None)
+    sDelivery=models.BooleanField(null=False, default=False)
     sStoreName=models.CharField(max_length=10,blank=False, null=False)
     
     class Meta:
         verbose_name = u"訂單記錄"
         verbose_name_plural = verbose_name
 
-    #def __str__(self):
-        #return self.sLocationName
-    #讓object預設回傳
 
+class Delivery(models.Model):
+    sOrderID=models.ForeignKey("OrderRecord", on_delete=models.RESTRICT)
+    sDelivery_code=models.ForeignKey("delivery_state", on_delete=models.RESTRICT)
+    sAddress=models.CharField(max_length=100, null=False)
+    sTakeTime=models.DateTimeField(null=False)
+    sReciveTime=models.DateTimeField(null=False)
+    sDelivery_Finish=models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = u"外送訂單"
+        verbose_name_plural = verbose_name
+
+class Delivery_state(models.Model):
+    state_code=models.IntegerField(primary_key=True, null=False)
+    state_note=models.CharField(max_length=20)
+    cline_display=models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name = u"外送單代碼"
+        verbose_name_plural = verbose_name
 
 class UserData(models.Model):
     sUserID=models.CharField(max_length=43, null=False, primary_key=True)
@@ -42,7 +59,6 @@ class UserData(models.Model):
     #def __str__(self):
         #return self.sUserID
     #讓object預設回傳
-
 
 
 class UserMode(models.Model):

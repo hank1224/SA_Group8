@@ -19,5 +19,5 @@ from apps.DBmanageApp import views
 urlpatterns = [
 
     path('createMode', views.create_washMode),
-
+    path('create_Delivery_code', views.create_Delivery_code),
 ]

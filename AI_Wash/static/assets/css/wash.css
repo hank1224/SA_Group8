@@ -22,8 +22,8 @@ h1{
     font-weight: bolder;
 }
 
-body{
-    background-image: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
+:root{
+    background: rgba(134,157,157,0.6);
 
 }
 

@@ -35,8 +35,8 @@ urlpatterns = [
     path('Add_UserMode', views.Add_UserMode),
     path('new.html', views.new_page),
     path('order_finish.html', views.order_finish_page),
-    path('orderdata.html', views.orderdata_page),
-    path('pay_finish.html', views.pay_finish_page),
+
+    
     path('payNO.html', views.payNO_page),
     path('payOK.html', views.payOK_page),
     path('plzLogin.html', views.plzLogin_page),
@@ -48,6 +48,9 @@ urlpatterns = [
     path('wash1.html', views.wash1_page),
     path('wash2.html', views.wash2_page),
     path('uber.html', views.uber_page),
+    path('orderdata.html', views.orderdata_page),
+    path('make_order', views.make_order),
+    path('pay_finish.html', views.pay_finish_page),
 
 
     path('test', views.test),

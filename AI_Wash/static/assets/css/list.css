@@ -19,8 +19,8 @@ h1{
     font-weight: 900;
 }
 
-body{
-    background-image: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
+:root{
+    background: rgba(134,157,157,0.6);
 }
 
 
@@ -198,6 +198,7 @@ p{
 
 .qrcode p{
     text-align: center;
+    color: rgb(134,157,157);
 }
 
 .qrcode img{

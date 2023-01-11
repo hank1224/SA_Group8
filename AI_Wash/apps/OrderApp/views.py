@@ -223,18 +223,13 @@ def uber_page(request):
             Dry = data.get('dry')
             Fold = data.get('fold')
 
-
             datetime_now = (datetime.now()).strftime("%Y-%m-%dT%H:%M")
-
 
             ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
             ModeMenu_dry = ModeMenu.objects.filter(sModeName= Dry).values()
             ModeMenu_fold = ModeMenu.objects.filter(sModeName= Fold).values()
             sumTime = (ModeMenu_wash[0]['sTime'] + ModeMenu_dry[0]['sTime'] + ModeMenu_fold[0]['sTime'])
             datetime_washfinish = datetime.now() + sumTime
-
-            orderTakeTime=[]
-
 
             page = render(request, 'uber.html', locals())
     else:
@@ -247,10 +242,20 @@ def orderdata_page(request):
         if request.method == "POST":
             data = request.POST
             OrderType = data.get('orderType')
-            Delivery = data.get('delivery')
             Wash = data.get('wash')
             Dry = data.get('dry')
             Fold = data.get('fold')
+
+            
+            Delivery = data.get('delivery')
+            DTakeTime, DReciveTime, Address,TakeTime = "", "", "", ""
+            if Delivery == "外送":
+                DTakeTime=datetime.strptime(data.get('delivery_sent_time'), format("%Y-%m-%dT%H:%M"))
+                DReciveTime=datetime.strptime(data.get('delivery_receive_time'), format("%Y-%m-%dT%H:%M"))
+                Address=data.get('address')
+            else:
+                TakeTime=data.get('taketime')
+            
 
             ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
             Wash_time = ModeMenu_wash[0]['sTime']
@@ -283,6 +288,48 @@ def orderdata_page(request):
                 choose_time.append(a.strftime("%d日 %H:00～")+b.strftime("%d日 %H:00"))
 
             page = render(request, 'orderdata.html', locals())
+    else:
+        page = render(request, template_name='plzLogin.html')
+    return page
+
+@csrf_exempt
+def make_order(request):
+    if login_check(request) == True:
+        if request.method == "POST":
+            data = request.POST
+            OrderType = data.get('orderType')
+            Wash = data.get('wash')
+            Dry = data.get('dry')
+            Fold = data.get('fold')
+            Carbon=data.get('carbon')
+            Price=data.get('price')
+            Point=data.get('point')
+
+
+
+            sDelivery = data.get('delivery')
+
+            if sDelivery == "外送":
+                DTakeTime=datetime.strptime(data.get('delivery_sent_time'),format("%Y年%m月%d日 %H:%M"))
+                DReciveTime=datetime.strptime(data.get('delivery_receive_time'),format("%Y年%m月%d日 %H:%M"))
+                Address=data.get('address')
+
+                new_record = OrderRecord.objects.create(sUserID=request.session['AIwash8'], sWash=Wash, sDry=Dry, sFold=Fold, \
+                    sCarbon=Carbon, sSum=Price, sPoint=Point, sOrderType=OrderType, sDelivery=True)
+
+                sOrderID = new_record.sOrderID
+                Delivery.objects.create(sOrderID=OrderRecord(sOrderID), sTakeTime=DTakeTime, sReciveTime=DReciveTime, \
+                    sAddress=Address, sDelivery_code=Delivery_state('0'))
+            else:
+                TakeTime = data.get('takeTime')
+                OrderRecord.objects.create(sUserID=request.session['AIwash8'], sWash=Wash, sDry=Dry, sFold=Fold, sCarbon=Carbon, \
+                sSum=Price, sPoint=Point, sOrderType=OrderType, sTakeTime=TakeTime)
+
+            
+
+
+
+            page = render(request, 'pay_finish.html', locals())
     else:
         page = render(request, template_name='plzLogin.html')
     return page

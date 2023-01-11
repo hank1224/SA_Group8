@@ -13,7 +13,7 @@ h1{
 }
 
 :root{
-    background: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
+    background:  rgb(134,157,157,0.6);
 }
 
 /* 整個外框框 */

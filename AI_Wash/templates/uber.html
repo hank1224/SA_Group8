@@ -55,12 +55,12 @@
             <div id="uberdata" class="uberdata">
                 <h2 style="font-size: 2.7remrem; color: rgba(131,196,140); text-emphasis: center;"><b>外送資料</b></h2>
                 <h5 style="font-size: 2.7remrem; color: rgba(131,196,140); text-emphasis: center;"><b>地址</b></h5>
-                <input class="udata" name="add" type="text" value="{{ personal_data.Raddress }}">
+                <input class="udata" name="address" type="text" value="{{ personal_data.Raddress }}">
                 <h5 style="font-size: 2.7remrem; color: rgba(131,196,140); text-emphasis: center;"><b>外送員收件時間</b></h5>
 
-                <input class="udata" id="startTime" name="delivery_sent_time" type="datetime-local" min="{{ datetime_now }}">
+                <input class="udata" id="startTime" name="delivery_sent_time" type="datetime-local" min="{{ datetime_now }}" value="">
                 <h5 style=" color: rgba(131,196,140); text-emphasis: center;"><b>領取時間</b></h5>
-                <input class="udata" name="delivery_receive_time" type="datetime-local" min="{{ datetime_now }}">
+                <input class="udata" name="delivery_receive_time" type="datetime-local" min="{{ datetime_now }}" value="">
             </div>         
             <input id="" class="submit" type="submit" value="送出" style="border:none;margin-top: 2rem; font-size: 1.2rem;background-color: rgba(131,196,140); color:rgba(255, 255, 255, 0.8); box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; font-weight: 700; border-radius: 1rem; text-align: center;">
             </form>

@@ -3,9 +3,16 @@ from django.contrib import admin
 from OrderApp.models import *
 
 class OrderRecordMain(admin.ModelAdmin):
-    list_display=('sOrderID','sUserID','sSum','sPoint','sWash','sDry','sFold','sCreateTime','sFinishTime','sStoreName')
+    list_display=('sOrderID','sUserID','sSum','sPoint','sCarbon','sWash','sDry','sFold','sCreateTime','sFinishTime','sStoreName')
     search_fields=('sOrderID',)
-    ordering=('sOrderID',)
+    ordering=('-sCreateTime',)
+
+class DeliveryMain(admin.ModelAdmin):
+    list_display=('sOrderID','sDelivery_code','sTakeTime','sReciveTime','sAddress','sDelivery_Finish')
+    search_fields=('sOrderID',)
+
+class Delivery_stateMain(admin.ModelAdmin):
+    list_display=('state_code','state_note','cline_display')
 
 class UserDataMain(admin.ModelAdmin):
     list_display=('sUserID','sBag')
@@ -39,6 +46,8 @@ class LogindbMain(admin.ModelAdmin):
     
 
 admin.site.register(OrderRecord, OrderRecordMain)
+admin.site.register(Delivery, DeliveryMain)
+admin.site.register(Delivery_state, Delivery_stateMain)
 admin.site.register(UserData, UserDataMain)
 admin.site.register(UserMode, UserModeMain)
 admin.site.register(QRcode, QRcodeMain)

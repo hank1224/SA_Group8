@@ -29,23 +29,36 @@
                     <td colspan="4">洗衣所需時間：{{ sumTime }}</td>
                 </tr>
             </table>
-            <form action="#" style="margin-bottom: 3rem;">
+            <form action="make_order" method='POST' style="margin-bottom: 3rem;">
+                {% csrf_token %}
                 <input type="hidden" name="orderType" value="{{ OrderType }}">
                 <input type="hidden" name="wash" value="{{ Wash }}">
                 <input type="hidden" name="dry" value="{{ Dry }}">
                 <input type="hidden" name="fold" value="{{ Fold }}">
+
+                <input type="hidden" name="carbon" value="{{ sumCarbon }}">
+                <input type="hidden" name="price" value="{{ sumPrice }}">
+                <input type="hidden" name="point" value="{{ sumPPoint }}">
+
+
                 <input type="hidden" name="delivery" value="{{ Delivery }}">
                 {% if Delivery == '外送' %}
-                <input type="hidden" name="delivery_sent_time" value="{{ delivery_sent_time }}">
-                <input type="hidden" name="delivery_receive_time" value="{{ delivery_receive_time }}">
-                {% endif %}
+                <input type="hidden" name="delivery_sent_time" value="{{ DTakeTime }}">
+                <input type="hidden" name="delivery_receive_time" value="{{ DReciveTime }}">
+                <input type="hidden" name="address" value="{{ Address }}">
+                此單為外送單：<br>
+                預定外送員取衣時間:{{ DTakeTime }}<br>
+                預定外送員送衣時間:{{ DReciveTime }}<br>
+                訂單地址: {{ Address }}
+                {% else %}
                 <label for="time">選擇領取時段：</label>
                 <select class="time" name="orderTakeTime">
                     {% for i in choose_time %}
-                    <option value="{{ i }}">{{ i }}</option>
+                    <option name=taketime value="{{ i }}">{{ i }}</option>
                     {% endfor %}
                 </select>
-            </form> 
+                {% endif %}
+
             <div class="total-place">
                 <p>碳排 {{ sumCarbon }} 公斤</p>
                 <p>總計 {{ sumPrice }} 元</p>
@@ -53,7 +66,8 @@
             </div>
             <div>
             <a href="index.html"><input type="button" class="button-cancel" value="取消"></a>
-            <a href="creditcard.html"><input type="button" class="button-pay" value="付款"></a>
+            <input type="submit" class="button-pay" value="付款">
+            </form> 
             </div>
         </div>
     </div>
