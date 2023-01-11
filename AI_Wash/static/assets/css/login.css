@@ -55,23 +55,37 @@
 
 header{
   font-size: 5.4rem;
+  font-weight: 700;
+  color: rgb(134,157,157);
+  text-shadow: rgb(234, 237, 238) 0.1rem 0.1rem 0.2rem;
+  margin-bottom: 8rem;
 }
 
 p{
     font-size: 2rem;
     text-align: center;
-    color: rgb(234, 237, 238);
+    color: rgb(134,157,157);
+    text-shadow: rgb(197, 198, 199) 0.1rem 0.1rem 0.2rem;
+    font-weight: 700;
+
 }
 
 a{
     font-size: 2rem;
     color: rgb(234, 237, 238);
+    text-shadow: rgb(134,157,157) 0.1rem 0.1rem 0.2rem;
+    font-weight: 700;
 }
 
 .line{
     margin-top: 10rem;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
     font-size: 2rem;
+    letter-spacing: 0.3rem;
+}
+
+.line a{
+    text-decoration: none;
 }
 
 .line-container{
@@ -91,3 +105,58 @@ a{
 
 }
 
+.phone{
+    margin-bottom: 15rem;
+    text-align: center;
+}
+
+.phone_text{
+    font-size: 3rem;
+    width: 28rem;
+    padding: 0.5rem;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+
+.confirm_send{
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    padding: 0.5rem;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    cursor: pointer;
+}
+
+.return_box{
+    text-align: center;
+}
+
+.return{
+    font-size: 2rem;
+    padding: 0.5rem;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: rgb(134,157,157);
+    font-weight: 700;
+}
+
+.check_phone{
+    margin-bottom: 1rem;
+}
+
+.sphone{
+    font-size: 3rem;
+    width: 28rem;
+    padding: 0.5rem;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
+}
+
+.confirm_two{
+    font-size: 3rem;
+    text-shadow: rgb(236, 237, 238) 0.1rem 0.1rem 0.2rem;
+}

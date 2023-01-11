@@ -47,10 +47,12 @@
                 <input type="hidden" name="delivery_receive_time" value="{{ DReciveTime }}">
                 <input type="hidden" name="address" value="{{ Address }}">
                 <input type="hidden" name="washtime" value="{{ WashTime }}">
+                <p style="line-height: 1.5; text-align: left; margin-bottom: 2rem;">
                 此單為外送單：<br>
                 預定外送員取衣時間:{{ DTakeTime }}<br>
                 預定外送員送衣時間:{{ DReciveTime }}<br>
                 訂單地址: {{ Address }}
+                </p>
                 {% else %}
                 <label for="time">選擇領取時段：</label>
                 <select class="time" name="orderTakeTime">
@@ -65,7 +67,7 @@
                 <p>總計 {{ sumPrice }} 元</p>
                 <p>點數 {{ sumPPoint }} 點</p>
             </div>
-            <div>
+            <div style="text-align: center;">
             <a href="index.html"><input type="button" class="button-cancel" value="取消"></a>
             <input type="submit" class="button-pay" value="付款">
             </form> 
