@@ -321,13 +321,9 @@ def make_order(request):
                 Delivery.objects.create(sOrderID=OrderRecord(sOrderID), sTakeTime=DTakeTime, sReciveTime=DReciveTime, \
                     sAddress=Address, sDelivery_code=Delivery_state('0'))
             else:
-                TakeTime = data.get('takeTime')
+                TakeTime = data.get('orderTakeTime')
                 OrderRecord.objects.create(sUserID=request.session['AIwash8'], sWash=Wash, sDry=Dry, sFold=Fold, sCarbon=Carbon, \
                 sSum=Price, sPoint=Point, sOrderType=OrderType, sTakeTime=TakeTime)
-
-            
-
-
 
             page = render(request, 'pay_finish.html', locals())
     else:

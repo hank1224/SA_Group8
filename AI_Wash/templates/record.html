@@ -14,8 +14,8 @@
             <h1>
                 <a href="index.html"><img src="{% static 'assets/image/back.png' %}" height="30rem" ></a>
                 歷史紀錄</h1>
-            <table>
                 {% for record in OrderRecords %}
+            <table>
                 <tr>
                     <th colspan="4">訂單編號 {{ record.sOrderID|slice:"-5:" }}<input class="btn-problem" type="button" value="回報"></th>
                 </tr>
@@ -33,11 +33,10 @@
                 <tr>
                     <td colspan="4" style="padding: 1rem;">碳排{{ record.sCarbon }}kg<br>點數{{ record.sPPoint }}點<br>總計{{ record.sSum }}元</td>
                 </tr>
+            </table>
                 {% empty %}
                 <h4>你沒有紀錄!</h4>
                 {% endfor %}
-            </table>
-
             <a href="index.html"><input class="btn" type="button" value="返回"></a>
         </div>
     </div>

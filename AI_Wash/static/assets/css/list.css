@@ -61,6 +61,7 @@ h1{
 
 /* 表格 */
 table{
+    margin-bottom: 1.5rem;
     text-align: center;
     background-color: rgba(134,157,157);
     border-radius: 0.5rem 0.5rem 0.2rem 0.2rem;
