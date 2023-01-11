@@ -8,7 +8,7 @@ class OrderRecordMain(admin.ModelAdmin):
     ordering=('-sCreateTime',)
 
 class DeliveryMain(admin.ModelAdmin):
-    list_display=('sOrderID','sDelivery_code','sTakeTime','sReciveTime','sAddress','sDelivery_Finish')
+    list_display=('sOrderID','sDelivery_code','sTakeTime','sWashTime','sReciveTime','sAddress','sDelivery_Finish')
     search_fields=('sOrderID',)
 
 class Delivery_stateMain(admin.ModelAdmin):

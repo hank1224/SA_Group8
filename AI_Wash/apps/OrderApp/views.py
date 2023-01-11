@@ -246,17 +246,6 @@ def orderdata_page(request):
             Dry = data.get('dry')
             Fold = data.get('fold')
 
-            
-            Delivery = data.get('delivery')
-            DTakeTime, DReciveTime, Address,TakeTime = "", "", "", ""
-            if Delivery == "外送":
-                DTakeTime=datetime.strptime(data.get('delivery_sent_time'), format("%Y-%m-%dT%H:%M"))
-                DReciveTime=datetime.strptime(data.get('delivery_receive_time'), format("%Y-%m-%dT%H:%M"))
-                Address=data.get('address')
-            else:
-                TakeTime=data.get('taketime')
-            
-
             ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
             Wash_time = ModeMenu_wash[0]['sTime']
             Wash_price = float(ModeMenu_wash[0]['sPrice'])
@@ -287,6 +276,16 @@ def orderdata_page(request):
                 b = datetime_washfinish+timedelta(hours=(i+1)*4)
                 choose_time.append(a.strftime("%d日 %H:00～")+b.strftime("%d日 %H:00"))
 
+            Delivery = data.get('delivery')
+            DTakeTime, DReciveTime, Address,TakeTime = "", "", "", ""
+            if Delivery == "外送":
+                DTakeTime=datetime.strptime(data.get('delivery_sent_time'), format("%Y-%m-%dT%H:%M"))
+                DReciveTime=datetime.strptime(data.get('delivery_receive_time'), format("%Y-%m-%dT%H:%M"))
+                Address=data.get('address')
+                WashTime=DTakeTime + sumTime
+            else:
+                TakeTime=data.get('taketime')
+
             page = render(request, 'orderdata.html', locals())
     else:
         page = render(request, template_name='plzLogin.html')
@@ -305,21 +304,20 @@ def make_order(request):
             Price=data.get('price')
             Point=data.get('point')
 
-
-
             sDelivery = data.get('delivery')
 
             if sDelivery == "外送":
                 DTakeTime=datetime.strptime(data.get('delivery_sent_time'),format("%Y年%m月%d日 %H:%M"))
                 DReciveTime=datetime.strptime(data.get('delivery_receive_time'),format("%Y年%m月%d日 %H:%M"))
                 Address=data.get('address')
+                WashTime=datetime.strptime(data.get('washtime'), format("%Y年%m月%d日 %H:%M"))
 
                 new_record = OrderRecord.objects.create(sUserID=request.session['AIwash8'], sWash=Wash, sDry=Dry, sFold=Fold, \
                     sCarbon=Carbon, sSum=Price, sPoint=Point, sOrderType=OrderType, sDelivery=True)
 
                 sOrderID = new_record.sOrderID
                 Delivery.objects.create(sOrderID=OrderRecord(sOrderID), sTakeTime=DTakeTime, sReciveTime=DReciveTime, \
-                    sAddress=Address, sDelivery_code=Delivery_state('0'))
+                    sAddress=Address, sDelivery_code=Delivery_state('0'), sWashTime=WashTime)
             else:
                 TakeTime = data.get('orderTakeTime')
                 OrderRecord.objects.create(sUserID=request.session['AIwash8'], sWash=Wash, sDry=Dry, sFold=Fold, sCarbon=Carbon, \

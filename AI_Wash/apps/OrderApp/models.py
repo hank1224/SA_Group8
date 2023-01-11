@@ -29,9 +29,10 @@ class OrderRecord(models.Model):
 
 class Delivery(models.Model):
     sOrderID=models.ForeignKey("OrderRecord", on_delete=models.RESTRICT)
-    sDelivery_code=models.ForeignKey("delivery_state", on_delete=models.RESTRICT)
+    sDelivery_code=models.ForeignKey("Delivery_state", on_delete=models.RESTRICT, related_name='delivery_note')
     sAddress=models.CharField(max_length=100, null=False)
     sTakeTime=models.DateTimeField(null=False)
+    sWashTime=models.DateTimeField(null=False)
     sReciveTime=models.DateTimeField(null=False)
     sDelivery_Finish=models.BooleanField(default=False)
 

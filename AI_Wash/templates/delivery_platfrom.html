@@ -7,6 +7,36 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>NMSL</h1>
+
+    <h1>外送公布欄</h1>
+
+    {% for order in all_order %}
+    <p>
+        {% if order.sDelivery_code.state_code == 1 %}
+        <a href="{{ URL }}/updateto2?sOrderID={{ order.sOrderID.sOrderID }}"><input type="button" value="接單"></a>
+        {% elif order.sDelivery_code.state_code == 2 %}
+        <a href="{{ URL }}/updateto3?sOrderID={{ order.sOrderID.sOrderID }}"><input type="button" value="已送達"></a>
+        {% elif order.sDelivery_code.state_code == 5 %}
+        <a href="{{ URL }}/updateto6?sOrderID={{ order.sOrderID.sOrderID }}"><input type="button" value="接單"></a>
+        {% elif order.sDelivery_code.state_code == 6 %}
+        <a href="{{ URL }}/updatetodone?sOrderID={{ order.sOrderID.sOrderID }}"><input type="button" value="已送達"></a>
+        {% else %}
+        等待中
+        {% endif %}
+        
+        編號:{{ order.sOrderID.sOrderID }}、
+        狀態:<b>{{ order.sDelivery_code.state_note }}</b>、
+        {% if order.sDelivery_code.state_code == 0 %}
+        領取顧客訂單:{{ order.sTakeTime }}、
+        {% elif order.sDelivery_code.state_code == 3 %}
+        洗衣完成時間:{{ order.sWashTime }}、
+        {% elif order.sDelivery_code.state_code == 4 %}
+        洗衣完成回發:{{ order.sReciveTime }}、
+        {% endif %} 
+        地址:{{ order.sAddress }}
+    </p>
+    {% empty %}
+    <p>沒有訂單外送要倒了</p>
+    {% endfor %}
 </body>
 </html>

@@ -184,16 +184,28 @@ def create_Delivery_code(requset):
                     'cline_display': "正在派遣外送員",
                 },{
                     'state_code': 2,
+                    'state_note': "已接單配送中",
+                    'cline_display': "正在配送",
+                },{
+                    'state_code': 3,
                     'state_note': "已送達洗衣店",
                     'cline_display': "正在洗衣中",
                 },{
-                    'state_code': 3,
+                    'state_code': 4,
+                    'state_note': "尚未到達可接單時間",
+                    'cline_display': "等候客戶預定時間",
+                },{
+                    'state_code': 5,
                     'state_note': "可接單",
                     'cline_display': "正在派遣外送員",
                 },{
-                    'state_code': 4,
-                    'state_note': "訂單已送達",
-                    'cline_display': "訂單已送達",
+                    'state_code': 6,
+                    'state_note': "已接單配送中",
+                    'cline_display': "正在配送",
+                },{
+                    'state_code': 7,
+                    'state_note': "已送達客戶",
+                    'cline_display': "已送達",
                 }
             ]
     }

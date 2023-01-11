@@ -17,6 +17,10 @@ from django.urls import path, re_path
 from apps.DeliveryApp import views
 
 urlpatterns = [
-    path('delivery_platfrom', views.delivery_platfrom_page),
+    path('delivery_platfrom.html', views.delivery_platfrom_page),
+    path('updateto2', views.updateto2),
+    path('updateto3', views.updateto3),
+    path('updateto6', views.updateto6),
+    path('updatetodone', views.updatetodone),
 
 ]
