@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'OrderApp',
     'DBmanageApp',
+    'DeliveryApp',
 ]
 
 MIDDLEWARE = [
