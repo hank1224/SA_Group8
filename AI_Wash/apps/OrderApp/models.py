@@ -18,6 +18,8 @@ class OrderRecord(models.Model):
     sOrderType=models.CharField(max_length=6, null=False)
     sCreateTime=models.DateTimeField(default=datetime.now, blank=False, null=False)
     sFinishTime=models.DateTimeField(blank=False, null=True)
+    sTakeTime=models.DateTimeField(blank=False, null=True)
+    sDelivery=models.BooleanField(null=False)
     sStoreName=models.CharField(max_length=10,blank=False, null=False)
     
     class Meta:

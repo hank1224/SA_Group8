@@ -3,8 +3,7 @@
     margin: 0;
     padding: 0;
     line-height: 30px;
-    background: rgba(244, 240, 236); 
-    color: rgba(131,196,140); 
+    color: rgba(134,157,157); 
 }
 a {
     text-decoration:none;
@@ -13,6 +12,12 @@ a {
 h1{
     font-size: 2.7rem;
     margin-bottom: 2.5rem;
+    color: rgb(134,157,157);
+}
+
+body{
+    background-image: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
+
 }
 
 /* 整個外框框 */
@@ -25,6 +30,7 @@ h1{
     max-width: 80rem;
     margin: 0 auto;
     padding: 2rem;
+
 }
 .justify-center {
     justify-content: center;
@@ -50,8 +56,8 @@ h1{
 /* 按鈕 */
 .btn-reset{
     font-size: 20px;
-    background-color: rgba(131,196,140,0.3);
-    color: rgba(19, 94, 29,0.8); 
+    background-color: rgba(134, 157, 157, 0.3);
+    color: rgb(234, 237, 238);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
     border-radius: 1rem 1rem 1rem 1rem;  
     border: none;
@@ -63,8 +69,8 @@ h1{
 
 .btn-certain{
     font-size: 20px;
-    background-color: rgba(131,196,140);
-    color: rgba(255, 255, 255); 
+    background-color: rgba(134, 157, 157);
+    color: rgb(234, 237, 238);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
     border-radius: 1rem 1rem 1rem 1rem;  
     border: none;
@@ -76,8 +82,8 @@ h1{
 
 .btn-fail{
     font-size: 20px;
-    background-color: rgba(131,196,140,0.3);
-    color: rgba(19, 94, 29,0.8); 
+    background-color: rgba(216,227,231);
+    color: rgb(134,157,157,0.8);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
     border-radius: 1rem 1rem 1rem 1rem;  
     border: none;
@@ -89,8 +95,8 @@ h1{
 
 .btn-keep{
     font-size: 20px;
-    background-color: rgba(131,196,140);
-    color: rgba(255, 255, 255); 
+    background-color: rgba(134,157,157);
+    color: rgba(255, 255, 255,0.8);
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
     border-radius: 1rem 1rem 1rem 1rem;  
     border: none;
@@ -107,13 +113,15 @@ h1{
 
 p{
     font-size: 20px;
-    color: rgb(131,196,140);
+    color: rgb(134,157,157);
     font-weight: 700;
     text-align: right;
+    color: rgb(234, 237, 238);
 }
 
 .word{
     font-size: 20;
+    color: rgb(134,157,157);
 }
 
 /* 條款視窗 */
@@ -133,8 +141,8 @@ p{
 /* 關閉按鈕 */
 #close{
     font-size: 20px;
-    background-color: rgba(131,196,140,0.3);
-    color: rgba(19, 94, 29,0.8); 
+    background-color: rgba(234, 237, 238);
+    color: rgba(134,157,157); 
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
     height: 40px;
     width: 100px;
@@ -148,8 +156,8 @@ p{
 
 .btn{
     font-size: 20px;
-    background-color: rgba(131,196,140,0.3);
-    color: rgba(19, 94, 29,0.8); 
+    background-color: rgba(234, 237, 238);
+    color: rgba(134,157,157); 
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
     border-radius: 1rem 1rem 1rem 1rem;  
     border: none;
@@ -161,8 +169,8 @@ p{
 
 #show{
     font-size: 20px;
-    background-color: rgba(131,196,140,0.3);
-    color: rgba(19, 94, 29,0.8); 
+    background-color: rgba(234, 237, 238);
+    color: rgba(134,157,157); 
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; 
     border: none;
     padding: 0.6rem 0.6rem;

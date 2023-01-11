@@ -213,11 +213,41 @@ def wash2_page(request):
     return render(request, template_name='wash2.html')
 
 @csrf_exempt
+def uber_page(request):
+    if login_check(request) == True:
+        personal_data = Access_API(request)
+        if request.method == "POST":
+            data = request.POST
+            orderType = data.get('orderType')
+            Wash = data.get('wash')
+            Dry = data.get('dry')
+            Fold = data.get('fold')
+
+
+            datetime_now = (datetime.now()).strftime("%Y-%m-%dT%H:%M")
+
+
+            ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
+            ModeMenu_dry = ModeMenu.objects.filter(sModeName= Dry).values()
+            ModeMenu_fold = ModeMenu.objects.filter(sModeName= Fold).values()
+            sumTime = (ModeMenu_wash[0]['sTime'] + ModeMenu_dry[0]['sTime'] + ModeMenu_fold[0]['sTime'])
+            datetime_washfinish = datetime.now() + sumTime
+
+            orderTakeTime=[]
+
+
+            page = render(request, 'uber.html', locals())
+    else:
+        page = render(request, template_name='plzLogin.html')
+    return page
+
+@csrf_exempt
 def orderdata_page(request):
     if login_check(request) == True:
         if request.method == "POST":
             data = request.POST
-            orderType = data.get('orderType')
+            OrderType = data.get('orderType')
+            Delivery = data.get('delivery')
             Wash = data.get('wash')
             Dry = data.get('dry')
             Fold = data.get('fold')
@@ -235,7 +265,7 @@ def orderdata_page(request):
             Dry_carbon = float(ModeMenu_dry[0]['sCarbon'])
 
             ModeMenu_fold = ModeMenu.objects.filter(sModeName= Fold).values()
-            Fold_time = ModeMenu_wash[0]['sTime']
+            Fold_time = ModeMenu_fold[0]['sTime']
             Fold_price = float(ModeMenu_fold[0]['sPrice'])
             Fold_ppoint = float(ModeMenu_fold[0]['sPPoint'])
             Fold_carbon = float(ModeMenu_fold[0]['sCarbon'])
@@ -244,6 +274,14 @@ def orderdata_page(request):
             sumPrice = int(50 + Wash_price + Dry_price + Fold_price)
             sumPPoint = int(20 + Wash_ppoint + Dry_ppoint + Fold_ppoint)
             sumCarbon = int(Wash_carbon + Dry_carbon + Fold_carbon)
+
+            datetime_washfinish = datetime.now() + sumTime
+            choose_time = []
+            for i in range(5):
+                a = datetime_washfinish+timedelta(hours=i*4)
+                b = datetime_washfinish+timedelta(hours=(i+1)*4)
+                choose_time.append(a.strftime("%d日 %H:00～")+b.strftime("%d日 %H:00"))
+
             page = render(request, 'orderdata.html', locals())
     else:
         page = render(request, template_name='plzLogin.html')

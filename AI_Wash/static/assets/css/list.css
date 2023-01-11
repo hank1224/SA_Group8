@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     font-size: 50%;
+
 }
 
 a {
@@ -14,13 +15,14 @@ a {
 h1{
     font-size: 5.4rem;
     margin-bottom: 4rem;
-    color: rgba(131,196,140);
+    color: rgb(134,157,157);
     font-weight: 900;
 }
 
-:root{
-    background: rgb(244, 240, 236);
+body{
+    background-image: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
 }
+
 
 /* 整個外框框 */
 
@@ -33,6 +35,7 @@ h1{
     max-width: 80rem;
     margin: 0 auto;
     padding: 2rem;
+
 }
 .justify-center {
     justify-content: center;
@@ -59,42 +62,42 @@ h1{
 /* 表格 */
 table{
     text-align: center;
-    background-color: rgba(131,196,140);
+    background-color: rgba(134,157,157);
     border-radius: 0.5rem 0.5rem 0.2rem 0.2rem;
-    border: 0.2rem solid rgb(131,196,140);
+    border: 0.2rem solid rgb(134,157,157);
 }
 
 th{
     text-align: center;
     font-size: 3.6rem;
-    background-color: rgb(131,196,140);
-    color: rgba(244, 240, 236);
+    background-color: rgb(134,157,157);
+    color: rgba(234, 237, 238);
     padding: 1.5rem 1.5rem;
 }
 
 td{
     text-align: center;
     font-size: 2.4rem;
-    background-color: rgb(244, 240, 236);
-    color: rgb(131,196,140);
-    border: 3px solid rgb(244, 240, 236);
+    background-color: rgb(234, 237, 238);
+    color: rgb(134,157,157);
+    border: 3px solid rgb(234, 237, 238);
     line-height: 4rem;
     font-weight: 700;
 }
 
 p{
     font-size: 2.4rem;
-    color: rgb(131,196,140);
+    color: rgb(234, 237, 238);
     font-weight: 700;
     text-align: right;
 }
 
 .situation{
     text-align: center;
-    border: 3px solid rgb(131,196,140);
+    border: 3px solid rgb(134,157,157);
     font-size: 2rem;
-    background-color: rgb(131,196,140);
-    color: rgba(19, 94, 29);
+    background-color: rgb(134,157,157);
+    color: rgba(234, 237, 238);
     padding: 1.5rem 1.5rem;
 }
 
@@ -104,10 +107,10 @@ p{
     margin-top: 4rem;
     font-size: 2.4rem;
     padding: 1.5rem 1.5rem;
-    background-color: rgb(131,196,140,0.3);
+    background-color: rgba(134, 157, 157, 0.3);
     cursor: pointer;
     border: none;
-    color: rgba(19, 94, 29,0.8);
+    color: rgb(234, 237, 238);
     border-radius: 1rem 1rem 1rem 1rem;   
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     font-weight: 700;
@@ -116,10 +119,10 @@ p{
 .btn-problem{
     font-size: 2rem;
     padding: 0.5rem;
-    background-color: rgb(19, 94, 29,0.8);
+    background-color: rgba(64, 75, 75,0.6);
     cursor: pointer;
     border: none;
-    color: rgba(244, 240, 236);
+    color: rgba(234, 237, 238);
     font-weight: 700;
     margin-left: 7rem;
     border-radius: 10%;
@@ -148,7 +151,7 @@ p{
     text-align: center;
     cursor: pointer;
     font-size: 2rem;
-    color: rgba(131,196,140);
+    color: rgba(134,157,157);
     font-weight: 700;
   }
   .progressbar li:before {
@@ -157,19 +160,19 @@ p{
     width: 30px;
     height: 30px;
     line-height : 30px;
-    border: 1px solid rgba(244, 240, 236);
+    border: 1px solid rgba(234, 237, 238);
     border-radius: 100%;
     display: block;
     text-align: center;
     margin: 0 auto 10px auto;
-    background-color: rgba(244, 240, 236);
+    background-color: rgba(234, 237, 238);
   }
   .progressbar li:after {
     content: "";
     position: absolute;
     width: 100%;
     height: 1px;
-    background-color: rgba(244, 240, 236);
+    background-color: rgba(234, 237, 238);
     top: 15px;
     left: -50%;
     z-index : -1;
@@ -178,13 +181,13 @@ p{
     content: none;
   }
   .progressbar li.active {
-    color: rgb(19, 94, 29);
+    color: rgb(134,157,157);
   }
   .progressbar li.active:before {
-    border-color: rgb(19, 94, 29);
+    border-color: rgb(134,157,157);
   } 
   .progressbar li.active + li:after {
-    background-color: rgb(19, 94, 29);
+    background-color: rgb(134,157,157);
   }
 
 

@@ -7,8 +7,10 @@
 }
 
 :root{
-    background: #F4F0EC;
+    background: rgba(134,157,157,0.6);
 }
+
+
 
 /* 整個外框框 */
 
@@ -27,7 +29,7 @@
     position: absolute;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 7px;
-    background: rgba(131,196,140,0.5);
+    background: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
 }
 .justify-center {
     justify-content: center;
@@ -53,5 +55,39 @@
 
 header{
   font-size: 5.4rem;
-  
 }
+
+p{
+    font-size: 2rem;
+    text-align: center;
+    color: rgb(234, 237, 238);
+}
+
+a{
+    font-size: 2rem;
+    color: rgb(234, 237, 238);
+}
+
+.line{
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+    font-size: 2rem;
+}
+
+.line-container{
+    background-color: rgba(134, 157, 157, 0.74);
+    font-size: 3rem;
+    color: rgb(234, 237, 238);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    letter-spacing: 0.3rem;
+    text-align: center;
+}
+
+.message-container{
+    font-size: 3rem;
+    color: rgb(234, 237, 238);
+    padding: 1rem;
+
+}
+

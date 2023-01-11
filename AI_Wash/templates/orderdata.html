@@ -13,9 +13,8 @@
     <div class="container">
         <div class="flex-col flex-cent">
             <h1>
-                {%if orderType == 'normal' %} {{ '一般洗' }} {% else %} {{ '寵物洗' }} {% endif %}
+                {%if OrderType == 'normal' %} {{ '一般洗' }} {% else %} {{ '寵物洗' }} {% endif %}
             </h1>
-            <input type="hidden" name="orderType" value="{{ orderType }}">
             <table>
                 <tr>
                     <td rowspan="3">洗衣模式</td>
@@ -31,17 +30,26 @@
                 </tr>
             </table>
             <form action="#" style="margin-bottom: 3rem;">
-                <label for="time">選擇領取時間：</label>
-                <select class="time">
-                    <option>10:00～12:00</option>
-                    <option>12:00～14:00</option>
-                    <option>14:00～16:00</option>
+                <input type="hidden" name="orderType" value="{{ OrderType }}">
+                <input type="hidden" name="wash" value="{{ Wash }}">
+                <input type="hidden" name="dry" value="{{ Dry }}">
+                <input type="hidden" name="fold" value="{{ Fold }}">
+                <input type="hidden" name="delivery" value="{{ Delivery }}">
+                {% if Delivery == '外送' %}
+                <input type="hidden" name="delivery_sent_time" value="{{ delivery_sent_time }}">
+                <input type="hidden" name="delivery_receive_time" value="{{ delivery_receive_time }}">
+                {% endif %}
+                <label for="time">選擇領取時段：</label>
+                <select class="time" name="orderTakeTime">
+                    {% for i in choose_time %}
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
                 </select>
             </form> 
             <div class="total-place">
-                <p>碳排{{ sumCarbon }}噸</p>
-                <p>總計{{ sumPrice }}元</p>
-                <p>點數{{ sumPPoint }}點</p>
+                <p>碳排 {{ sumCarbon }} 公斤</p>
+                <p>總計 {{ sumPrice }} 元</p>
+                <p>點數 {{ sumPPoint }} 點</p>
             </div>
             <div>
             <a href="index.html"><input type="button" class="button-cancel" value="取消"></a>

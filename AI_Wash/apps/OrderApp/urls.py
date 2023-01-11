@@ -47,6 +47,7 @@ urlpatterns = [
     
     path('wash1.html', views.wash1_page),
     path('wash2.html', views.wash2_page),
+    path('uber.html', views.uber_page),
 
 
     path('test', views.test),

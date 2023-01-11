@@ -13,7 +13,7 @@ h1{
 }
 
 :root{
-    background: rgba(199,210,212);
+    background: linear-gradient(rgb(234, 237, 238), rgb(134,157,157));
 }
 
 /* 整個外框框 */
@@ -100,7 +100,7 @@ h1{
 .problem-text{
     font-size: 2.4rem;
     margin-top: 8rem;
-    color: rgba(134,157,157);
+    color: rgba(234, 237, 238);
     font-weight: 700;
 }
 
@@ -109,6 +109,6 @@ h1{
     text-decoration: underline;
     color: black;
     cursor: pointer;
-    color: rgba(134,157,157);
+    color: rgba(234, 237, 238);
     font-weight: 700;
 }
