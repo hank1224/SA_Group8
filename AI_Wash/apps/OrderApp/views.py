@@ -384,14 +384,9 @@ def currentOrder_page(request):
     if login_check(request) == False:
         page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
-        personal_data = Access_API(request)
-        currentOrder=OrderRecord.objects.filter(sUserID=request.session['Raccess_code'], sFinishTime__isnull=True)
+        currentOrder=OrderRecord.objects.filter(sUserID=request.session['AIwash8'], sFinishTime__isnull=True)
 
-        for time in currentOrder:
-            if time.sFinishTime > timezone.now():
-                state= "作業中"
-            else :
-                state= "可領取"
+
         page = render(request,'currentOrder.html', locals())
     return page
 
@@ -399,7 +394,13 @@ def currentOrderInner_page(request):
     if login_check(request) == False:
         page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
-        personal_data = Access_API(request)
+        OrderID = request.GET.get('OrderID')
+        OrderData = OrderRecord.objects.get(sOrderID=OrderID)
+        DeliveryData, cline_display = "", ""
+        if OrderData.sDelivery == True:
+            DeliveryData = Delivery.objects.get(sOrderID=OrderRecord(OrderID))
+            cline_display = DeliveryData.sDelivery_code.cline_display
+
         page = render(request, 'currentOrderInner.html', locals())
     return page
 
@@ -407,7 +408,7 @@ def record_page(request):
     if login_check(request) == False:
         page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
-        OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'])
+        OrderRecords=OrderRecord.objects.filter(sUserID=request.session['AIwash8'], sFinishTime__isnull=False)
         page = render(request, 'record.html', locals())
     return page
 

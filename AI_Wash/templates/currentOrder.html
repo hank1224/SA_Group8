@@ -16,10 +16,10 @@
                 目前訂單
             </h1>
             {% for OrderRecord in currentOrder %}
-            <a href="currentOrderInner.html">
+            <a href="currentOrderInner.html?OrderID={{ OrderRecord.sOrderID }}">
                     <table>
                         <tr>
-                            <th colspan="2">訂單編號 {{ OrderRecord.sOrderID }}</th>
+                            <th colspan="2">訂單編號 {{ OrderRecord.sOrderID|slice:"-5:" }}</th>
                             <th class="situation">{{ state }}</th>
                         </tr>
                         <tr>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,15 +18,28 @@
             <div class="inside">
                 <ul class="progressbar" id="progress-bar">
                     <li class="active">作業中<br>
-                    {{time}}
                     </li>
                     <li class="active">可領取<br>
-                    {{time}}
                     </li>
                     <li class="active">熊貓看<br>
-                    ???????</li>
+                    </li>
                 </ul>
             </div>
+            訂單編號：{{ OrderData.sOrderID }}<br>
+            此訂單為：{% if OrderData.sOrderType == pet %} 寵物洗 {% else %} 一般洗 {% endif %}<br>
+            模式： {{ OrderData.sWash }} / {{ OrderData.sDry }} / {{ OrderData.sFold }}<br>
+            訂單狀態：<br>
+            {% if OrderData.sDelivery == False %}
+            自送：<br>
+            請記得於 {{ OrderData.sTakeTime }} 期間到店領取<br>
+            {% elif OrderData.sDelivery == True %}
+            外送：<br>
+            目前狀態：{{ cline_display }}<br>
+            預約外送員取件時間：{{ DeliveryData.sTakeTime }}<br>
+            預約外送員送回時間：{{ DeliveryData.sReciveTime }}<br>
+            {% endif %}
+            
+
             <div class="qrcode">
                 <p>
                     QRcode－送洗 / 領取 <!--這要啥????圖片???網址????-->
