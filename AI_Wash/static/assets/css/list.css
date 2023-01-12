@@ -10,6 +10,7 @@
 a {
     text-decoration:none;
     color: black;
+    margin-bottom: 1.5rem;
 }
 
 h1{
@@ -17,6 +18,7 @@ h1{
     margin-bottom: 4rem;
     color: rgb(134,157,157);
     font-weight: 900;
+    text-shadow: rgb(234, 237, 238) 0.1rem 0.1rem 0.2rem;
 }
 
 :root{
@@ -61,7 +63,7 @@ h1{
 
 /* 表格 */
 table{
-    margin-bottom: 1.5rem;
+
     text-align: center;
     background-color: rgba(134,157,157);
     border-radius: 0.5rem 0.5rem 0.2rem 0.2rem;
@@ -200,10 +202,19 @@ p{
 .qrcode p{
     text-align: center;
     color: rgb(134,157,157);
+    text-shadow: rgb(234, 237, 238) 0.1rem 0.1rem 0.2rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .qrcode img{
     width: 200px;
     height: 200px;
     margin-top: 2rem;
+}
+
+.uberder{
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: rgb(134,157,157);
+    text-shadow: rgb(234, 237, 238) 0.1rem 0.1rem 0.2rem;
 }

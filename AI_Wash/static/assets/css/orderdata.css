@@ -30,6 +30,7 @@ p{
     color: rgb(134,157,157);
     font-weight: 700;
     text-align: center;
+    text-shadow: rgb(234, 237, 238) 0.1rem 0.1rem 0.2rem;
 }
 
 label{
@@ -42,6 +43,7 @@ label{
     border: 1px solid rgb(134,157,157);
     color: rgba(134,157,157);
     font-size: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .total-place{

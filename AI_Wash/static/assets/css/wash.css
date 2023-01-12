@@ -16,10 +16,11 @@
 }
 
 h1{
-    font-size: 2.7rem;
+    font-size: 2.5rem;
     margin: 2.5rem 0 0 0;
     color: rgb(134,157,157);
     font-weight: bolder;
+    text-shadow: rgba(234, 237, 238) 0.2rem 0.2rem 0.3rem;
 }
 
 :root{

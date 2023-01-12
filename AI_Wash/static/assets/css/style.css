@@ -10,6 +10,7 @@ h1{
     margin-bottom: 4rem;
     color: rgba(134,157,157);
     font-weight: 900;
+    text-shadow: rgba(234, 237, 238) 0.2rem 0.2rem 0.3rem;
 }
 
 :root{
