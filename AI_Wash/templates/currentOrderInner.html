@@ -17,28 +17,38 @@
             </h1>
             <div class="inside">
                 <ul class="progressbar" id="progress-bar">
-                    <li class="active">作業中<br>
+                    {% if OrderData.sDelivery == False %}
+                    <li class="active">訂單成立<br>{{ OrderData.sCreateTime|date:"m/d H:i" }}
                     </li>
-                    <li class="active">可領取<br>
+                    <li class="active">完成洗衣<br>{{ OrderData.sFinishTime|date:"m/d H:i" }}
                     </li>
-                    <li class="active">熊貓看<br>
+                    <li class="active">可領取<br>{{ OrderData.sTakeTime|slice:":9" }}
                     </li>
+                    {% elif OrderData.sDelivery == True %}
+                    <li class="active">預約外送取件<br>{{ DeliveryData.sTakeTime|date:"m/d H:i" }}
+                    </li>
+                    <li class="active">完成洗衣<br>{{ DeliveryData.sWashTime|date:"m/d H:i" }}
+                    </li>
+                    <li class="active">預約外送送回<br>{{ DeliveryData.sReciveTime|date:"m/d H:i" }}
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="uberder">
-                訂單編號：{{ OrderData.sOrderID }}<br>
-                此訂單為：{% if OrderData.sOrderType == pet %} 寵物洗 {% else %} 一般洗 {% endif %}<br>
-                模式： {{ OrderData.sWash }} / {{ OrderData.sDry }} / {{ OrderData.sFold }}<br>
-                訂單種類：
+                <strong>訂單編號：</strong>{{ OrderData.sOrderID }}<br>
+                
+                <strong>此訂單為：</strong>{% if OrderData.sOrderType == pet %} 寵物洗 {% else %} 一般洗 {% endif %}<br>
+                <strong>模式：</strong> {{ OrderData.sWash }} / {{ OrderData.sDry }} / {{ OrderData.sFold }}<br>
+                <strong>訂單種類：</strong>
                 {% if OrderData.sDelivery == False %}
                 自送<br>
-                目前狀態：{% if sFinishTime_done == False %}正在洗衣{% else %}完成洗衣{% endif %} <br>
-                請記得於 {{ OrderData.sTakeTime }} 期間到店領取<br>
+                <strong>目前狀態：</strong>{% if sFinishTime_done == False %}正在洗衣{% else %}完成洗衣{% endif %} <br>
+                <strong>請於 {{ OrderData.sTakeTime }} 期間到店領取<br>
                 {% elif OrderData.sDelivery == True %}
-                外送<br>
-                目前狀態：{{ cline_display }}<br>
-                預約外送員取件時間：{{ DeliveryData.sTakeTime }}<br>
-                預約外送員送回時間：{{ DeliveryData.sReciveTime }}<br>                
+                外送</strong><br>
+                <strong>目前狀態：</strong>{{ cline_display }}<br>
+                <!-- <strong>預約外送員取件時間：</strong>{{ DeliveryData.sTakeTime }}<br>
+                <strong>預約外送員送回時間：</strong>{{ DeliveryData.sReciveTime }}<br>-->
             </div>
 
             {% endif %}

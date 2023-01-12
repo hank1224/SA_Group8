@@ -25,8 +25,9 @@
     function check(){
         var startTime =new Date(document.getElementById("startTime").value);
         var endTime =new Date(document.getElementById("endTime").value);
-        if (endTime < startTime ) {
-            alert('領取時間需晚於外送員送件時間至少兩小時!!!');
+        const durationInSeconds = 1000 * {{ sumTime_second }}
+        if (endTime < (startTime.setTime(startTime.getTime() + durationInSeconds ))){
+            alert('這時候衣服還沒洗好喔！\n洗衣所需時間{{ sumTime }}\n您最早可選的時間是' + (startTime) );
             document.getElementById("endTime").value="";
         }
     }
@@ -71,7 +72,7 @@
                     <h5 style=" color: rgba(134,157,157); text-shadow: rgb(216,227,231) 0.1rem 0.1rem 0.2rem; text-emphasis: center;"><b>領取時間</b></h5>
                     <input class="udata" id="endTime" name="delivery_receive_time" type="datetime-local" min="{{ datetime_now }}" value="" onchange="check()">
                 </div>          
-            <input id="" class="submit" type="submit" value="送出" style="border:none;margin-top: 2rem; font-size: 1.2rem;background-color: rgba(234, 237, 238); color:rgba(134,157,157); box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; font-weight: 700; border-radius: 1rem; text-align: center;">
+            <input id="" class="submit" type="submit" value="送出" style="width:100%; border:none;margin-top: 2rem; font-size: 1.2rem;background-color: rgba(234, 237, 238); color:rgba(134,157,157); box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; font-weight: 700; border-radius: 1rem; text-align: center;">
             </form>
         </div>
     </div>

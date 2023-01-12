@@ -277,6 +277,7 @@ def uber_page(request):
             ModeMenu_dry = ModeMenu.objects.filter(sModeName= Dry).values()
             ModeMenu_fold = ModeMenu.objects.filter(sModeName= Fold).values()
             sumTime = (ModeMenu_wash[0]['sTime'] + ModeMenu_dry[0]['sTime'] + ModeMenu_fold[0]['sTime'])
+            sumTime_second = sumTime.total_seconds()
             datetime_washfinish = datetime.now() + sumTime
 
             page = render(request, 'uber.html', locals())

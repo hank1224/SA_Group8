@@ -105,25 +105,18 @@
 <body>
     <div class="container">
         <div class="title">
-            <div style="display: flex; text-align:justify;"><a href="index.html"> <img src="{% static 'assets/image/back.png' %}" height="30rem" style="margin:1rem 0 ;"></a>
+            <div style="display: flex; text-align:justify;"><a href="index.html"> <img src="{% static 'assets/image/back.png' %}" height="30rem" style="margin:1.8rem 0 ;"></a>
                 <h1>問題回報</h1>
             </div> 
             <form action="Send_QA" method='POST'>
                 <h5>問題類別</h5>
                 <div style="text-align: center; margin: 1rem;">
-
-
-                    訂單編號{{ OrderID }}
-
-
-                    
+                    訂單編號{{ OrderID }}                  
                     <select>
                         <option>訂單相關(衣物、延遲…)</option>
                         <option>系統相關(操作…)</option>
                     </select>                    
                 </div>
-
-
                     <div style="text-align: center; margin: 1rem;">
                         <h5>詳細說明</h5>
                         <textarea name="deail" id="deail" rows="5"  cols="10"></textarea>
