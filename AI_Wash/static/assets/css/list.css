@@ -214,7 +214,14 @@ p{
 
 .uberder{
     font-size: 1.5rem;
-    margin: 1rem;
+    margin-top: 2rem;
     color: rgb(134,157,157);
     text-shadow: rgb(234, 237, 238) 0.1rem 0.1rem 0.2rem;
+    font-weight: 700;
+}
+
+.uberder strong{
+    font-size: 2rem;
+    color: rgb(234, 237, 238);
+    text-shadow: rgb(134,157,157) 0.1rem 0.1rem 0.2rem;
 }
