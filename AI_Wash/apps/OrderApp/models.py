@@ -21,7 +21,6 @@ class OrderRecord(models.Model):
     sTakeTime=models.CharField(max_length=20, null=True, default=None)
     sDelivery=models.BooleanField(null=False, default=False)
     sFinish=models.BooleanField(default=False)
-    sStoreName=models.CharField(max_length=10,blank=False, null=False)
     
     class Meta:
         verbose_name = u"訂單記錄"

@@ -59,15 +59,20 @@
                 {% if sFinishTime_done == True %}
                 <a href="finish_order?OrderID={{ OrderData.sOrderID }}"><img src="{% static 'assets/image/qrcode.jpg' %}" style="text-align: center;"></a>
                 {% elif sFinishTime_done == False %}
-                <img src="{% static 'assets/image/washing.png' %}">
+                <img src="{% static 'assets/image/washing.png' %}" style="display: block; margin: auto;">
                 {% else %}
-                <img src="{% static 'assets/image/washing.png' %}">
+                <img src="{% static 'assets/image/washing.png' %}" style="display: block; margin: auto;">
                     {% if DeliveryData.sDelivery_Finish == True %}
-                <a href="finish_order?OrderID={{ OrderData.sOrderID }}"><input class="btn" type="button" value="完成訂單"></a>
+                <a href="finish_order?OrderID={{ OrderData.sOrderID }}"><input class="btn" type="button" value="完成訂單" style="text-align: center;";></a>
                     {% endif %}
-                {% endif %}
+                {% endif %}                    
+
             </div>
-            <a href="currentOrder.html"><input class="btn" type="button" value="返回" style="margin-left:16rem";></a>
+                <a href="currentOrder.html">
+                    <div style="text-align: center;">
+                        <input class="btn" type="button" value="返回" style="text-align: center;";>
+                    </div>
+                </a>
         </div>
     </div>   
 </body>
