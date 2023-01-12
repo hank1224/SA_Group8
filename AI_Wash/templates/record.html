@@ -31,7 +31,7 @@
                     <td colspan="2">{{ record.sFold }}</td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="padding: 1rem;">碳排{{ record.sCarbon }}kg<br>點數{{ record.sPoint }}點<br>總計{{ record.sSum }}元</td>
+                    <td colspan="4" style="padding: 1rem;">碳排{{ record.sCarbon|floatformat }}kg<br>點數{{ record.sPoint|floatformat }}點<br>總計{{ record.sSum|floatformat }}元</td>
                 </tr>
             </table>
                 {% empty %}

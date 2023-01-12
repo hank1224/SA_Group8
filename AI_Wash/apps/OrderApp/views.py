@@ -194,15 +194,15 @@ def login_check(request):
         return True
 
 def member_page(request):
-    if login_check(request) == True:
+    if login_check(request) == False:
+        page = render(request, 'plzLogin.html')
+    elif login_check(request) == True:
         UserMode_data = UserMode.objects.filter(sUserID=request.session['AIwash8']).values()
         UserMode_items = []
         for usermode in UserMode_data:
             UserMode_items.append(usermode)
         
         page = render(request, 'member.html', locals())
-    else:
-        page = login_check(request)
     return page
     
 @csrf_exempt
@@ -462,8 +462,12 @@ def satisfaction_page(request):
     if login_check(request) == False:
         page = render(request, 'plzLogin.html')
     elif login_check(request) == True:
-        data = request.POST
-        OrderID = data.get('orderid')
+        OrderID=""
+        if request.method == 'POST':
+            data = request.POST
+            OrderID = data.get('orderid')
+        elif request.method == 'GET':
+            OrderID = request.GET.get('OrderID')
         page = render(request, 'satisfaction.html', locals())
     return page
 
@@ -509,7 +513,7 @@ def record_page(request):
     return page
 
 def QA_page(request):
-    OrderID = None
+    OrderID = ""
     if login_check(request) == False:
         page = render(request, 'plzLogin.html')
     elif login_check(request) == True:

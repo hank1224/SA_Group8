@@ -25,19 +25,22 @@
                     </li>
                 </ul>
             </div>
-            訂單編號：{{ OrderData.sOrderID }}<br>
-            此訂單為：{% if OrderData.sOrderType == pet %} 寵物洗 {% else %} 一般洗 {% endif %}<br>
-            模式： {{ OrderData.sWash }} / {{ OrderData.sDry }} / {{ OrderData.sFold }}<br>
-            訂單種類：
-            {% if OrderData.sDelivery == False %}
-            自送<br>
-            目前狀態：{% if sFinishTime_done == False %}正在洗衣{% else %}完成洗衣{% endif %} <br>
-            請記得於 {{ OrderData.sTakeTime }} 期間到店領取<br>
-            {% elif OrderData.sDelivery == True %}
-            外送<br>
-            目前狀態：{{ cline_display }}<br>
-            預約外送員取件時間：{{ DeliveryData.sTakeTime }}<br>
-            預約外送員送回時間：{{ DeliveryData.sReciveTime }}<br>
+            <div class="uberder">
+                訂單編號：{{ OrderData.sOrderID }}<br>
+                此訂單為：{% if OrderData.sOrderType == pet %} 寵物洗 {% else %} 一般洗 {% endif %}<br>
+                模式： {{ OrderData.sWash }} / {{ OrderData.sDry }} / {{ OrderData.sFold }}<br>
+                訂單種類：
+                {% if OrderData.sDelivery == False %}
+                自送<br>
+                目前狀態：{% if sFinishTime_done == False %}正在洗衣{% else %}完成洗衣{% endif %} <br>
+                請記得於 {{ OrderData.sTakeTime }} 期間到店領取<br>
+                {% elif OrderData.sDelivery == True %}
+                外送<br>
+                目前狀態：{{ cline_display }}<br>
+                預約外送員取件時間：{{ DeliveryData.sTakeTime }}<br>
+                預約外送員送回時間：{{ DeliveryData.sReciveTime }}<br>                
+            </div>
+
             {% endif %}
             <div class="qrcode">
                 <p>

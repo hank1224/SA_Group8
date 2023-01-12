@@ -13,6 +13,7 @@ h1{
     font-size: 2.7rem;
     margin-bottom: 2.5rem;
     color: rgb(134,157,157);
+    text-shadow: rgb(234, 237, 238) 0.1rem 0.1rem 0.2rem;
 }
 
 :root{
@@ -136,6 +137,8 @@ p{
     border: 2px solid;
     display: none;
     border-radius: 5px;
+    color: rgb(234, 237, 238);
+    background-color: rgba(134,157,157,0.8);
 }
 /* 關閉按鈕 */
 #close{

@@ -32,7 +32,7 @@
                             <td colspan="3">{{ OrderRecord.sFold }}</td>
                         </tr>
                     </table>
-                    <p>總計{{OrderRecord.sSum}}元，獲取點數 {{ OrderRecord.sPoint }}點</p>
+                    <p>總計{{OrderRecord.sSum|floatformat }}元，獲取點數 {{ OrderRecord.sPoint|floatformat }}點</p>
                 </a>
                 {% endfor %}
                 <a href="index.html"><input class="btn" type="button" value="返回"></a>
