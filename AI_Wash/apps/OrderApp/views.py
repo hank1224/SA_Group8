@@ -403,7 +403,8 @@ def currentOrderInner_page(request):
             DeliveryData = Delivery.objects.get(sOrderID=OrderRecord(OrderID))
             cline_display = DeliveryData.sDelivery_code.cline_display
         else:
-            sFinishTime_done = False if OrderData.sFinishTime.replace(tzinfo=None) > datetime.now() else True
+            fixTime = timedelta(hours=8)
+            sFinishTime_done = False if (OrderData.sFinishTime.replace(tzinfo=None))+fixTime > datetime.now() else True
         page = render(request, 'currentOrderInner.html', locals())
     return page
 

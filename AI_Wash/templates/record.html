@@ -22,7 +22,7 @@
                 <tr>
                 </tr>
                 <tr>
-                    <td rowspan="3">模式細節</td>
+                    <td rowspan="3">{% if record.sOrderType == 'pet' %}寵物洗{% else %}一般洗衣{% endif %}</td>
                     <td class="table-right" colspan="2">{{ record.sWash }}</td>
                 </tr>
                 <tr>
@@ -31,7 +31,7 @@
                     <td colspan="2">{{ record.sFold }}</td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="padding: 1rem;">碳排{{ record.sCarbon|floatformat }}kg<br>點數{{ record.sPoint|floatformat }}點<br>總計{{ record.sSum|floatformat }}元</td>
+                    <td colspan="4" style="padding: 1rem;">碳排 {{ record.sCarbon|floatformat }} kg<br>點數 {{ record.sPoint|floatformat }} 點<br>總計 {{ record.sSum|floatformat }} 元</td>
                 </tr>
             </table>
                 {% empty %}

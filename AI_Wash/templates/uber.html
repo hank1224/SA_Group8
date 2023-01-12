@@ -36,7 +36,7 @@
 <body>
     <div class="container-fluid" style="background: rgba(199,210,212); ">
         <div class="title ">
-            <h2 style="font-size: 2.7rem;color: rgba(134,157,157); text-shadow: rgb(216,227,231) 0.1rem 0.1rem 0.2rem;"><b>送洗方式</b></h2>
+            <h1 style="font-size: 2.7rem;color: rgba(134,157,157); text-shadow: rgb(216,227,231) 0.1rem 0.1rem 0.2rem;"><a href="index.html"><img src="{% static 'assets/image/back.png' %}" height="30rem"></a><b>送洗方式</b></h1>
             <form class="method" method="post" action="orderdata.html">
                 {% csrf_token %}
                 <input type="hidden" name="orderType" value="{{ orderType }}">

@@ -126,25 +126,25 @@ def create_washMode(request):
             },{
                 'ModeName': '一般洗淨',
                 'sTime': deltaD_1,
-                'sPrice': 0,
+                'sPrice': 30,
                 'sPPoint': 5,
                 'sCarbon': 1,
             },{
                 'ModeName': '抗過敏洗淨',
                 'sTime': deltaD_2,
-                'sPrice': 10,
+                'sPrice': 40,
                 'sPPoint': 0,
                 'sCarbon': 1,
             },{
                 'ModeName': '驅蟲洗淨',
                 'sTime': deltaD_3,
-                'sPrice': 15,
+                'sPrice': 50,
                 'sPPoint': 0,
                 'sCarbon': 2,
             },{
                 'ModeName': '毛絮處理',
                 'sTime': deltaF_1,
-                'sPrice': 5,
+                'sPrice': 10,
                 'sPPoint': 0,
                 'sCarbon': 1,
             },{
