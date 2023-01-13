@@ -320,8 +320,8 @@ def orderdata_page(request):
             Fold_carbon = float(ModeMenu_fold[0]['sCarbon'])
 
             sumTime = (Wash_time + Dry_time + Fold_time)
-            sumPrice = int(50 + Wash_price + Dry_price + Fold_price)
-            sumPPoint = int(20 + Wash_ppoint + Dry_ppoint + Fold_ppoint)
+            sumPrice = int(Wash_price + Dry_price + Fold_price)
+            sumPPoint = int(Wash_ppoint + Dry_ppoint + Fold_ppoint)
             sumCarbon = int(Wash_carbon + Dry_carbon + Fold_carbon)
 
             datetime_washfinish = datetime.now() + sumTime
@@ -373,13 +373,13 @@ def make_order(request):
                 sOrderID = new_record.sOrderID
                 Delivery.objects.create(sOrderID=OrderRecord(sOrderID), sTakeTime=DTakeTime, sReciveTime=DReciveTime, \
                     sAddress=Address, sDelivery_code=Delivery_state('0'), sWashTime=WashTime)
+                page = render(request, 'uber_pay_finish.html', locals())
             else:
                 TakeTime = data.get('orderTakeTime')
                 FinishTime = datetime.strptime(data.get('finishtime'),format("%Y年%m月%d日 %H:%M"))
                 OrderRecord.objects.create(sUserID=request.session['AIwash8'], sWash=Wash, sDry=Dry, sFold=Fold, sCarbon=Carbon, \
                 sSum=Price, sPoint=Point, sOrderType=OrderType, sTakeTime=TakeTime, sFinishTime=FinishTime)
-
-            page = render(request, 'pay_finish.html', locals())
+                page = render(request, 'pay_finish.html', locals())
     else:
         page = render(request, template_name='plzLogin.html')
     return page
