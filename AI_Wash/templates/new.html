@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start</title>
     <link rel="stylesheet" href="{% static 'assets/css/layout.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <script>
     var dialog;
@@ -26,13 +27,39 @@
     //     start.disabled==false;
     // }
 </script>
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+    
+    function plusDivs(n) {
+      showDivs(slideIndex += n);
+    }
+    
+    function showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      if (n > x.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = x.length}
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+      }
+      x[slideIndex-1].style.display = "block";  
+    }
+    </script>
+    
 <body>
     <div class="container">
         <div class="flex-col flex-cent">
-            <h1>新手教學結束！</h1>
+            <h1>詳閱新手教學！</h1>
             <h3 class="sth">閱讀完服務條款並按下同意後即可開始洗衣。</h3>
-            <img src="{% static 'assets/image/congratuation.png' %}" height="250px" style="margin: 30px;">
-
+            <div class="w3-content w3-display-container">
+                <img class="mySlides" src="{% static 'assets/image/new1.png' %}" width="200px" style="margin: 30px;">
+                <img class="mySlides" src="{% static 'assets/image/new2.png' %}" width="200px" style="margin: 30px;">
+                <img class="mySlides" src="{% static 'assets/image/new3.png' %}" width="200px" style="margin: 30px;">
+                <img class="mySlides" src="{% static 'assets/image/congratuation.png' %}" width="250px" style="margin: 30px;">
+                <button class="w3-button w3-black w3-display-left" style="border-radius: 50%;" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" style="border-radius: 50%;" onclick="plusDivs(1)">&#10095;</button>
+            </div>
             <button id="show" onclick="showDialog();">智慧喜服務條款</button>
 
             <div class="agree" style="color: rgb(234, 237, 238); text-shadow: rgb(134,157,157) 0.1rem 0.1rem 0.2rem; font-weight: 700;"><input type="radio" id="agree" name="agree" value="yes" required>同意取用個人資料與智慧喜服務條款。</div>

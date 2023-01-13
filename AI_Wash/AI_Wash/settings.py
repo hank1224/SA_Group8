@@ -30,9 +30,9 @@ DEBUG = True
 SACC_NGROK = "https://10eb-1-34-54-152.jp.ngrok.io"
 RESTAPI_TOKEN = "bab3725a8d3570f8cc72a96d1ba5897c4858d132"
 
-NGROK = "https://2f29-2001-b400-e308-133c-5185-6b09-e1b2-6073.jp.ngrok.io"
+NGROK = "https://96aa-2001-b400-e335-19cc-b805-c930-6620-31e8.jp.ngrok.io"
 
-CARBON_NGROK = "https://6e36-1-171-118-240.ngrok.io"
+CARBON_NGROK = "https://f3e1-111-251-51-84.ngrok.io"
 
 CHAT_GPT_TOKEN = "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"
 LINE_CHANNEL_ACCESS_TOKEN ="NpIu4vCMGDZni71zDH5LkSDjB8DpezIWVEy2YD/A/ixK47ge7jefV0OPu4v2I0MTBf9JAdW3nooku86e4DT76kW0K2xVfizTzkeXLwlfM+azXbnwpc7fLYNeUj+gbqGGvXqWpxR0szfDUgK7RRitMQdB04t89/1O/w1cDnyilFU="

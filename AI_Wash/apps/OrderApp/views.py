@@ -270,8 +270,14 @@ def uber_page(request):
             Wash = data.get('wash')
             Dry = data.get('dry')
             Fold = data.get('fold')
-
+            
             datetime_now = (datetime.now()).strftime("%Y-%m-%dT%H:%M")
+        
+            a = OrderRecord.objects.filter(sUserID=request.session['AIwash8'])
+            b = 0
+            for i in a:
+                b = 1
+            First_wash = True if b == 0 else False
 
             ModeMenu_wash = ModeMenu.objects.filter(sModeName= Wash).values()
             ModeMenu_dry = ModeMenu.objects.filter(sModeName= Dry).values()
