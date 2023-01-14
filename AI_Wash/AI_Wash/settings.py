@@ -26,17 +26,17 @@ SECRET_KEY = 'django-insecure-x(u13m2h@cc+lq6=kk^a@fvr(-wsscg=i+d)jk^!++$qe!5iet
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#最後不用加/
+SACC_NGROK = "個資系統的ngrok"
+RESTAPI_TOKEN = "個資系統API token"
 
-SACC_NGROK = "https://10eb-1-34-54-152.jp.ngrok.io"
-RESTAPI_TOKEN = "bab3725a8d3570f8cc72a96d1ba5897c4858d132"
+NGROK = "本系統的ngrok"
 
-NGROK = "https://96aa-2001-b400-e335-19cc-b805-c930-6620-31e8.jp.ngrok.io"
+CARBON_NGROK = "炭治郎ngrok"
 
-CARBON_NGROK = "https://f3e1-111-251-51-84.ngrok.io"
-
-CHAT_GPT_TOKEN = "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"
-LINE_CHANNEL_ACCESS_TOKEN ="NpIu4vCMGDZni71zDH5LkSDjB8DpezIWVEy2YD/A/ixK47ge7jefV0OPu4v2I0MTBf9JAdW3nooku86e4DT76kW0K2xVfizTzkeXLwlfM+azXbnwpc7fLYNeUj+gbqGGvXqWpxR0szfDUgK7RRitMQdB04t89/1O/w1cDnyilFU="
-LINE_CHANNEL_SECRET ="ce9d7fcd730c966c0532512ed8f8ca00"
+CHAT_GPT_TOKEN = ""
+LINE_CHANNEL_ACCESS_TOKEN =""
+LINE_CHANNEL_SECRET =""
 
 
 ALLOWED_HOSTS = ['*']
